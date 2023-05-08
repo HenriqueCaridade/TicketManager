@@ -51,3 +51,4 @@ CREATE TABLE AgentInDepartment(
     agentUsername STRING NOT NULL REFERENCES User(username),
     department STRING NOT NULL REFERENCES Department(name)
 );
+INSERT INTO User(username, name, password, email, userType) VALUES ("igorcher", "Igor", "mypassword", "ola@gmail.com", "Client");
