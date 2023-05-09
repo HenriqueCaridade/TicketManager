@@ -7,13 +7,14 @@
     --primary-color: #262b2dff;
     --secondary-color: #4c6569ff;
     --accent-color: #1aa193ff;
+    --error-color: #ce5050ff;
 
     /* General Constants */
     --header-height: 5rem;
     --footer-height: 3rem;
 
     --sidebar-width: 14rem;
-    --sidebar-padding-top: 30px;
+    --sidebar-padding: 15px;
 }
 
 body {
@@ -54,14 +55,14 @@ footer {
 
 /* SIDE BAR STYLE */
 .sidebar {
-    height: calc(100% - var(--header-height) - var(--footer-height) - var(--sidebar-padding-top));
+    height: calc(100% - var(--header-height) - var(--footer-height) - 2 * var(--sidebar-padding));
     width: var(--sidebar-width);
     position: fixed;
     top: var(--header-height);
     left: 0;
     overflow-x: hidden;
     border-right: 2px solid var(--secondary-background-color);
-    padding-top: var(--sidebar-padding-top);
+    padding: var(--sidebar-padding) 0;
     z-index: 1;
 }
 .sidebar a {
@@ -83,6 +84,11 @@ footer {
 .sidebar a .text {
     position: relative;
     left: 30%;
+}
+.sidebar a:last-child .icon, .sidebar a:last-child .text{
+    position: absolute;
+    bottom: var(--sidebar-padding);
+    color: var(--error-color);
 }
 
 /* MAIN STYLE */

@@ -1,9 +1,5 @@
 <div class="sidebar">
     <a href="#">
-        <span class="icon"><i class="fa fa-house"></i></span>
-        <span class="text">Dashboard</span>
-    </a>
-    <a href="#">
         <span class="icon"><i class="fa fa-user"></i></span>
         <span class="text">Account</span>
     </a>
@@ -18,5 +14,9 @@
     <a href="#">
         <span class="icon"><i class="fa fa-question-circle"></i></span>
         <span class="text">About</span>
+    </a>
+    <a href="#">
+        <span class="icon"><i class="fa fa-right-from-bracket"></i></span>
+        <span class="text sign-out">Sign Out</span>
     </a>
 </div>

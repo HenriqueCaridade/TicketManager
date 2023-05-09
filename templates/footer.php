@@ -1,6 +1,5 @@
-
     <footer>
-        &copy; Copywrite
+        &copy; Copyright
     </footer>
     </body>
 </html>
