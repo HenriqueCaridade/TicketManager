@@ -1,12 +1,6 @@
 <?php
-    function getDatabaseConnection(){
+    function getDatabaseConnection() : PDO{
         return new PDO('sqlite:tables.db');
-    }
-    function getUser(string $username, PDO $db){
-        $stmt = $db->prepare('SELECT * FROM User WHERE username = :username');
-        $stmt->bindParam(':username', $username);
-        $stmt->execute();
-        return $stmt->fetch();
     }
     /*
   $stmt = $db->prepare('SELECT * FROM User');
