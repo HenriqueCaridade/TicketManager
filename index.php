@@ -11,6 +11,7 @@
     <?php include_once("templates/sidebar.php");?>  
     <div class = "main">
         <h1>Ticket Manager</h1>
+        <?php include("templates/registerForm.php"); ?>
     </div>
 </body>
 </html>
