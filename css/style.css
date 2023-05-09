@@ -1,26 +1,93 @@
-.sidebar {
-    height: 100%;
-    width: 200px;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    /* Color Pallete */
+    --primary-background-color: #dededeff;
+    --secondary-background-color: #c4c3c7ff;
+    --primary-color: #262b2dff;
+    --secondary-color: #4c6569ff;
+    --accent-color: #1aa193ff;
+
+    /* General Constants */
+    --header-height: 5rem;
+    --footer-height: 3rem;
+
+    --sidebar-width: 14rem;
+    --sidebar-padding-top: 30px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--primary-background-color);
+    color: var(--primary-color);
+}
+
+/* HEADER STYLE */
+header {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
-    overflow-x: hidden;
-    border-right: 2px solid rgb(184, 184, 184);
-    padding-top: 20px;
+    width: 100%;
+    height: var(--header-height);
+    font-size: 3em;
+    border-bottom: 2px solid var(--secondary-background-color);
+    z-index: 2;
+}
+header .logo {
+    position: absolute;
+    top: 1rem;
+    width: 100%;
+    text-align: center;
 }
 
+/* FOOTER STYLE */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--footer-height);
+    font-size: 1em;
+    border-top: 2px solid var(--secondary-background-color);
+    z-index: 2;
+}
+
+/* SIDE BAR STYLE */
+.sidebar {
+    height: calc(100% - var(--header-height) - var(--footer-height) - var(--sidebar-padding-top));
+    width: var(--sidebar-width);
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    overflow-x: hidden;
+    border-right: 2px solid var(--secondary-background-color);
+    padding-top: var(--sidebar-padding-top);
+    z-index: 1;
+}
 .sidebar a {
-    padding: 6px 6px 6px 32px;
-    color: rgb(43, 99, 99);
-    font-size: 35px;
+    display: block;
+    padding: 6px 10px;
+    color: var(--primary-color);
+    font-size: 1.4em;
     text-decoration: none;
 }
-
 .sidebar a:hover {
-  color: rgb(34, 147, 147);;
+  color: var(--accent-color);
+}
+.sidebar a .icon {
+    position: absolute;
+    right: 70%;
+    width: 30%;
+    text-align: center;
+}
+.sidebar a .text {
+    position: relative;
+    left: 30%;
 }
 
-.main {
-    margin-left: 200px;
+/* MAIN STYLE */
+main {
+    margin-top: var(--header-height);
+    margin-left: var(--sidebar-width);
+    margin-bottom: var(--footer-height);
 }

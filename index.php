@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/script.js" defer></script>
-    <link rel="stylesheet" href="css/style.css">
-    <title>Ticket Manager</title>
-</head>
-<body> 
-    <?php include_once("templates/sidebar.php");?>  
-    <div class = "main">
-        <h1>Ticket Manager</h1>
-        <?php include("templates/registerForm.php"); ?>
-    </div>
-</body>
-</html>
+<?php
+    include_once("templates/header.php");
+    include_once("templates/sidebar.php");
+
+    include_once("pages/dashboard.php");
+    
+    include_once("templates/footer.php");
+?>
