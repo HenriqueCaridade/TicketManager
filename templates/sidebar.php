@@ -1,8 +1,8 @@
 <div class="sidebar">
-        <a href="#">
-            <span class="icon"><i class="fa fa-qrcode"></i></span>
-            <span class="text">Home</span>
-        </a>
+    <a href="#">
+        <span class="icon"><i class="fa fa-qrcode"></i></span>
+        <span class="text">Home</span>
+    </a>
         <br>
         <a href="#">
             <span class="icon"><i class="fa fa-link"></i></span>

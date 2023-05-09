@@ -6,8 +6,21 @@
     left: 0;
     z-index: 1;
     overflow-x: hidden;
-    background-color:transparent;
+    border-right: 2px solid rgb(184, 184, 184);
+    padding-top: 20px;
 }
+
+.sidebar a {
+    padding: 6px 6px 6px 32px;
+    color: rgb(43, 99, 99);
+    font-size: 35px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+  color: rgb(34, 147, 147);;
+}
+
 .main {
     margin-left: 200px;
 }
