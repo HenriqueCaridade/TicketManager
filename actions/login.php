@@ -15,11 +15,8 @@
         else $session->addToast(Session::ERROR, 'Username doesn\'t exist.');
         die(header('Location: ../pages/login_page.php'));
     }
-    $_SESSION[Session::USERNAME] = $user->username;
-    $_SESSION[Session::NAME]     = $user->name;
-    $_SESSION[Session::EMAIL]    = $user->email;
-    $_SESSION[Session::USERTYPE] = $user->userType;
     
+    $session->logInUser($user);
     unset($_SESSION[Session::INPUT]);
     header('Location: ../pages/dashboard.php');
 ?>

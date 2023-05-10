@@ -1,5 +1,6 @@
 <?php
     declare(strict_types=1);
+    include_once('../classes/user.php');
     class Session {
         const TOAST = 'toast';
         const SUCCESS = 'success';
@@ -17,8 +18,8 @@
         const EMAIL = 'email';
         const USERTYPE = 'userType';
 
-
         static ?Session $instance = null;
+
         private array $pendingToasts;
         private function __construct() {
             session_start();
@@ -33,6 +34,24 @@
             if (static::$instance === null)
                 static::$instance = new Session();
             return static::$instance;
+        }
+
+        public function isLoggedIn() : bool {
+            return isset($_SESSION[Session::USERNAME]);
+        }
+
+        public function logInUser(User $user) : void {
+            $_SESSION[Session::USERNAME] = $user->username;
+            $_SESSION[Session::NAME]     = $user->name;
+            $_SESSION[Session::EMAIL]    = $user->email;
+            $_SESSION[Session::USERTYPE] = $user->userType;
+        }
+
+        public function logOut() : void {
+            unset($_SESSION[Session::USERNAME]);
+            unset($_SESSION[Session::NAME]);
+            unset($_SESSION[Session::EMAIL]);
+            unset($_SESSION[Session::USERTYPE]);
         }
 
         public function addToast(string $type, string $message) : void {

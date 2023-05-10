@@ -8,11 +8,18 @@
     include_once("../classes/user.php");
     include_once("../database/connection.php");
     $session = Session::getSession();
+
+    if (!$session->isLoggedIn()) {
+        $session->addToast(Session::ERROR, 'You are not logged in!');
+        die(header('Location: ../pages/login_page.php'));
+    }
+
     $db = getDatabaseConnection();
-    $account = User::getUserInfo($db, $_POST['username']);
+    $username = $_POST['username'] ?? $_SESSION['username'];
+    $user = User::getUserInfo($db, $username);
 
     // Draw Page
-    drawHeader();
+    drawHeader(true);
     drawSidebar();
 ?>
 <main class="main-sidebar">

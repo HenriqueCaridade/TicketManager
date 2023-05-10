@@ -13,18 +13,28 @@
         public string $username;
         public string $name;
         public string $email;
-        public string $password;
-        public string $hashedPassword;
+        private ?string $password;
+        private string $hashedPassword;
         public string $userType;
 
-        public function __construct(string $username, string $name, string $email, string $password, string $userType = 'Client') { 
+        public function __construct(string $username, string $name, string $email, string $password, string $userType = 'Client', ?bool $passwordIsHashed = false) { 
             $this->username = $username;
             $this->name = $name;
             $this->email = filter_var($email, FILTER_SANITIZE_EMAIL);
-            $this->password = $password;
-            $this->hashedPassword = User::passwordHash($password);
+            $this->setPassword($password, $passwordIsHashed);
             $this->userType = $userType;
         }
+
+        public function setPassword(string $password, ?bool $passwordIsHashed = false) {
+            if ($passwordIsHashed){
+                $this->password = null;
+                $this->hashedPassword = $password;
+            } else {
+                $this->password = $password;
+                $this->hashedPassword = User::passwordHash($password);
+            }
+        }
+
         public function updateUser(PDO $db) : void {
             $stmt = $db->prepare('UPDATE User SET name = ?, password = ?, email = ?, userType = ? WHERE username = ?');
             $stmt->execute(array($this->name, $this->hashedPassword, $this->email, $this->userType, $this->username));
@@ -46,14 +56,14 @@
             $stmt->execute(array($username));
             $user = $stmt->fetch();
             if ($user === false) return null;
-            return new User($user['username'], $user['name'], $user['email'], $user['password'], $user['userType']);
+            return new User($user['username'], $user['name'], $user['email'], $user['password'], $user['userType'], true);
         }
         public static function getUserWithPassword(PDO $db, string $username, string $password) : ?User {
             $stmt = $db->prepare('SELECT * FROM User WHERE username=? AND password=?');
             $stmt->execute(array($username, User::passwordHash($password)));
             $user = $stmt->fetch();
             if ($user === false) return null;
-            return new User($user['username'], $user['name'], $user['email'], $user['password'], $user['userType']);
+            return new User($user['username'], $user['name'], $user['email'], $password, $user['userType']);
         }
         public static function usernameExists(PDO $db, string $username) : bool {
             $stmt = $db->prepare('SELECT * FROM User WHERE username=?');
@@ -102,7 +112,8 @@
             return null;
         }
 
-        private static function validatorPassword (string $password) : ?string {
+        private static function validatorPassword (?string $password) : ?string {
+            if ($password === null) return 'Don\'t have password.';
             $length = strlen($password);
             $_SESSION['password received'] = $password;
             if ($length < User::MIN_PASSWORD_LENGTH)

@@ -41,11 +41,20 @@ header {
     border-bottom: 2px solid var(--secondary-background-color);
     z-index: 2;
 }
-header .logo {
+#logo {
     position: absolute;
     top: 1rem;
-    width: 100%;
-    text-align: center;
+    left: 1rem;
+    font-weight: 600;
+}
+#logo-highlight {
+    color: var(--accent-color);
+}
+
+#profile {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
 }
 
 /* FOOTER STYLE */
