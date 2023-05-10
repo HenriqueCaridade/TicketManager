@@ -28,7 +28,7 @@
             <input class="button" type="submit" value="Login">
         </div>
     </form>
-    <?php drawToasts($session, "login-item"); ?>
+    <?php drawToasts($session); ?>
 </main>
 <?php  
     drawFooter();
