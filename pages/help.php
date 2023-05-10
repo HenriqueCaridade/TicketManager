@@ -12,7 +12,7 @@
     drawSidebar();
 ?>
 <main class="main-sidebar">
-    <h1>DASHBOARD</h1>
+    <h1>HELP</h1>
 </main>
 <?php  
     drawFooter();

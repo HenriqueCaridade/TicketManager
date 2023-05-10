@@ -1,22 +1,24 @@
+<?php
+    function drawSidebar() {
+?>
 <div class="sidebar">
-    <a href="#">
-        <span class="icon"><i class="fa fa-ticket"></i></span>
+    <a href="../pages/dashboard.php">
+        <span class="icon"><i class="fa-solid fa-ticket"></i></span>
         <span class="text">Dashboard</span>
     </a>
-    <a href="#">
-        <span class="icon"><i class="fa fa-user"></i></span>
-        <span class="text">Account</span>
-    </a>
-    <a href="#">
-        <span class="icon"><i class="fa fa-gear"></i></span>
+    <a href="../pages/settings.php">
+        <span class="icon"><i class="fa-solid fa-gear"></i></span>
         <span class="text">Settings</span>
     </a>
-    <a href="#">
-        <span class="icon"><i class="fa fa-question-circle"></i></span>
-        <span class="text">About</span>
+    <a href="../pages/help.php">
+        <span class="icon"><i class="fa-solid fa-question-circle"></i></span>
+        <span class="text">HELP</span>
     </a>
-    <a href="../pages/register_page.php">
-        <span class="icon"><i class="fa fa-right-from-bracket"></i></span>
+    <a href="../actions/logout.php">
+        <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
         <span class="text sign-out">Sign Out</span>
     </a>
 </div>
+<?php
+    }
+?>

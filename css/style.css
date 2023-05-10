@@ -8,6 +8,7 @@
     --secondary-color: #4c6569ff;
     --accent-color: #1aa193ff;
     --error-color: #ce5050ff;
+    --success-color: #51d880ff;
 
     /* General Constants */
     --header-height: 5rem;
@@ -21,6 +22,12 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: var(--primary-background-color);
     color: var(--primary-color);
+}
+
+/* HYPERLINK STYLE */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
 }
 
 /* HEADER STYLE */
@@ -51,6 +58,12 @@ footer {
     font-size: 1em;
     border-top: 2px solid var(--secondary-background-color);
     z-index: 2;
+    text-align: center;
+}
+#footer-info {
+    position: relative;
+    top: 1em;
+    font-size: large;
 }
 
 /* SIDE BAR STYLE */
@@ -70,7 +83,6 @@ footer {
     padding: 6px 10px;
     color: var(--primary-color);
     font-size: 1.4em;
-    text-decoration: none;
 }
 .sidebar a:hover {
   color: var(--accent-color);
@@ -100,7 +112,55 @@ main.main-sidebar {
     margin-left: var(--sidebar-width);
 }
 
-/* REGISTER STYLE */
-.register-item, .login-item{
+/* LOGIN AND REGISTER STYLE */
+#register-title, #login-title {
+    text-align: center;
+    font-size: 50px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.register-label, .login-label {
+    padding: 2px 1em;
+}
+#register input, #login input{
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 2em;
+    font-size: 1em;
+    background-color: transparent;
+    border: 2px solid var(--secondary-background-color);
+}
+#register input.button, #login input.button {
+    padding: 0.8em;
+    color: var(--primary-background-color);
+    background-color: var(--accent-color);
+    border: none;
+}
+
+div.register-item, div.login-item {
+    padding-top: 1em;
+}
+a.register-item, a.login-item {
+    margin-top: 1em;
+    padding-left: 1em;
+}
+.register-item, .login-item, #toasts {
     display: block;
+    margin: auto;
+    width: 30rem;
+}
+/* TOAST STYLE */
+div#toasts {
+    margin-top: 2em;
+}
+div.toast {
+    padding: 0.5em;
+    font-size: medium;
+    border-radius: 2em;
+}
+div.toast.error {
+    background-color: var(--error-color);
+}
+div.toast.success {
+    background-color: var(--success-color);
 }

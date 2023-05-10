@@ -1,18 +1,35 @@
 <?php
-    include("../templates/header.php");
-    session_start();
-    $prevUsername = htmlentities($_SESSION['input']['login username'] ?? "");
-    $prevPassword = htmlentities($_SESSION['input']['login password'] ?? "");
+    // Templates
+    include_once("../templates/header.php");
+    include_once("../templates/footer.php");
+    include_once("../templates/toast.php");
+    // Session
+    include_once("../classes/session.php");
+    $session = Session::getSession();
+    $prevUsername = htmlentities($_SESSION[Session::INPUT][Session::L_USERNAME] ?? "");
+    $prevPassword = htmlentities($_SESSION[Session::INPUT][Session::L_PASSWORD] ?? "");
+    
+    // Draw Page
+    drawHeader();
 ?>
 <main>
-    <h1>Login</h1>
-    <form action="../actions/login.php" method="post">
-        <label class="login-item">Username: <input type="text"     name="username" required value="<?=$prevUsername?>"></label>
-        <label class="login-item">Password: <input type="password" name="password" required value="<?=$prevPassword?>"></label>
+    <h1 id="login-title" class="login">Login</h1>
+    <form id="login" action="../actions/login.php" method="post">
+        <div class="login-item">
+            <span class="login-label">Username</span>
+            <input type="text" name="username" required value="<?=$prevUsername?>">
+        </div>
+        <div class="login-item">
+            <span class="login-label">Password</span>
+            <input type="password" name="password" required value="<?=$prevPassword?>">
+        </div>
         <a class="login-item" href="register_page.php">I don't have an account.</a>
-        <input class="button login-item" type="submit" value="Login">
+        <div class="login-item">
+            <input class="button" type="submit" value="Login">
+        </div>
     </form>
+    <?php drawToasts($session, "login-item"); ?>
 </main>
 <?php  
-    include("../templates/footer.php");
+    drawFooter();
 ?>

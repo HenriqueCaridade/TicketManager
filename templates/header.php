@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+    function drawHeader() {
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,3 +14,6 @@
     <header>
         <span class="logo">Timan</span>
     </header>
+<?php
+    }
+?>
