@@ -12,6 +12,11 @@
         const R_PASSWORD2 = 'register password2';
         const L_USERNAME = 'login username';
         const L_PASSWORD = 'login password';
+        const N_USERNAME = 'new username';
+        const N_NAME = 'new name';
+        const N_EMAIL = 'new email';
+        const N_PASSWORD1 = 'new password 1';
+        const N_PASSWORD2 = 'new password 2';
         const USERNAME = 'username';
         const NAME = 'name';
         const EMAIL = 'email';

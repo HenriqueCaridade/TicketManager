@@ -25,12 +25,15 @@
             $this->hashedPassword = User::passwordHash($password);
             $this->userType = $userType;
         }
-        public function updateUser(PDO $db) : void {
-            $stmt = $db->prepare('UPDATE User SET name = ?, password = ?, email = ?, userType = ? WHERE username = ?');
-            $stmt->execute(array($this->name, $this->hashedPassword, $this->email, $this->userType, $this->username));
+        public function updateUserParameters(string $oldUsername, PDO $db) : void {
+            $stmt = $db->prepare('UPDATE User SET username = ?, name = ?, email = ? WHERE username = ?');
+            $stmt->execute(array($this->username, $this->name, $this->email, $oldUsername));
+        }
+        public function updateUserPassword(PDO $db) : void {
+            $stmt = $db->prepare('UPDATE User SET password = ? WHERE username = ?');
+            $stmt->execute(array($this->hashedPassword, $this->username));
         }
         public function createUser(PDO $db) : void {
-            $db = getDatabaseConnection();
             $stmt = $db->prepare('INSERT INTO User (username, name, password, email, userType) VALUES (?, ?, ?, ?, ?)');
             $stmt->execute(array($this->username, $this->name, $this->hashedPassword, $this->email, $this->userType));
         }
@@ -40,6 +43,17 @@
                    User::validatorName($this->name) ??
                    User::validatorEmail($this->email) ??
                    User::validatorPassword($this->password);
+        }
+        public function validateUpdateParameters(PDO $db) : ?string {
+            return 
+                User::validatorUsername($this->username, $db) ??
+                User::validatorName($this->name) ??
+                User::validatorEmail($this->email);
+        }
+        public function validateUpdatePassword (PDO $db) : ?string {
+            if($this->hashedPassword === User::getUserPassword($this->username, $db)) return 'Cannot change to password already in use!';
+            return User::validatorPassword($this->password);
+
         } 
         public static function getUserInfo(PDO $db, string $username) : ?User {
             $stmt = $db->prepare('SELECT * FROM User WHERE username=?');
@@ -47,6 +61,13 @@
             $user = $stmt->fetch();
             if ($user === false) return null;
             return new User($user['username'], $user['name'], $user['email'], $user['password'], $user['userType']);
+        }
+        public static function getUserPassword(string $username ,PDO $db) : ?string {
+            $stmt = $db->prepare('SELECT password FROM User WHERE username=?');
+            $stmt->execute(array($username));
+            $user = $stmt->fetch();
+            if ($user === false) return null;
+            return $user['password'];
         }
         public static function getUserWithPassword(PDO $db, string $username, string $password) : ?User {
             $stmt = $db->prepare('SELECT * FROM User WHERE username=? AND password=?');
@@ -104,7 +125,6 @@
 
         private static function validatorPassword (string $password) : ?string {
             $length = strlen($password);
-            $_SESSION['password received'] = $password;
             if ($length < User::MIN_PASSWORD_LENGTH)
                 return 'Password must be at least ' . User::MIN_PASSWORD_LENGTH . ' long.';
             if ($length > User::MAX_PASSWORD_LENGTH)
