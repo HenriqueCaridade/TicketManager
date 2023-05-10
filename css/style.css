@@ -94,6 +94,13 @@ footer {
 /* MAIN STYLE */
 main {
     margin-top: var(--header-height);
-    margin-left: var(--sidebar-width);
     margin-bottom: var(--footer-height);
+}
+main.main-sidebar {
+    margin-left: var(--sidebar-width);
+}
+
+/* REGISTER STYLE */
+.register-item, .login-item{
+    display: block;
 }

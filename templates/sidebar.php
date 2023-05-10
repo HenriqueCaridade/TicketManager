@@ -1,11 +1,11 @@
 <div class="sidebar">
     <a href="#">
-        <span class="icon"><i class="fa fa-user"></i></span>
-        <span class="text">Account</span>
+        <span class="icon"><i class="fa fa-ticket"></i></span>
+        <span class="text">Dashboard</span>
     </a>
     <a href="#">
-        <span class="icon"><i class="fa fa-ticket"></i></span>
-        <span class="text">Tickets</span>
+        <span class="icon"><i class="fa fa-user"></i></span>
+        <span class="text">Account</span>
     </a>
     <a href="#">
         <span class="icon"><i class="fa fa-gear"></i></span>
@@ -15,7 +15,7 @@
         <span class="icon"><i class="fa fa-question-circle"></i></span>
         <span class="text">About</span>
     </a>
-    <a href="#">
+    <a href="../pages/register_page.php">
         <span class="icon"><i class="fa fa-right-from-bracket"></i></span>
         <span class="text sign-out">Sign Out</span>
     </a>

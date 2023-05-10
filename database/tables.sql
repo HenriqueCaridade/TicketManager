@@ -9,8 +9,8 @@ DROP TABLE IF EXISTS User;
 CREATE TABLE User (
     username STRING PRIMARY KEY NOT NULL,
     name STRING NOT NULL,
-    password STRING NOT NULL, -- ??
-    email STRING NOT NULL,
+    password STRING NOT NULL,
+    email STRING UNIQUE NOT NULL,
     userType STRING NOT NULL CHECK (userType IN('Client', 'Agent', 'Admin'))
 );
 --------
@@ -51,4 +51,3 @@ CREATE TABLE AgentInDepartment(
     agentUsername STRING NOT NULL REFERENCES User(username),
     department STRING NOT NULL REFERENCES Department(name)
 );
-INSERT INTO User(username, name, password, email, userType) VALUES ("igorcher", "Igor", "mypassword", "ola@gmail.com", "Client");
