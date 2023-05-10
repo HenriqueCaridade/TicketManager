@@ -12,7 +12,7 @@
     </a>
     <a href="../pages/help.php">
         <span class="icon"><i class="fa-solid fa-question-circle"></i></span>
-        <span class="text">HELP</span>
+        <span class="text">Help</span>
     </a>
     <a href="../actions/logout.php">
         <span class="icon"><i class="fa-solid fa-right-from-bracket"></i></span>
