@@ -1,8 +1,5 @@
 <?php
-    include_once("templates/header.php");
-    include_once("templates/sidebar.php");
-
-    include_once("pages/dashboard.php");
-    
-    include_once("templates/footer.php");
+    // TODO: Verify if user is logged in and send them to the dashboard
+    // header("Location: ./pages/dashboard.php");
+    header("Location: ./pages/login_page.php");
 ?>
