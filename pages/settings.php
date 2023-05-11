@@ -22,47 +22,49 @@
     drawSidebar();
 ?>
 <main class="main-sidebar">
-    <h1 id="update-title" class="register settings-item">Manage personal information</h1>
-    <form id="update-info" class="settings-item" action="../actions/updateUserSettings.php" method="post">
-        <div class="update-item">
-            <span class="update-label">Change username</span>
-            <input type="text" name="username" value = "<?=htmlentities($_SESSION[Session::USERNAME])?>">
-        </div>
-        <div class="update-item">
-            <span class="update-label">Change name</span>
-            <input type="text" name="name" value="<?=htmlentities($_SESSION[Session::NAME])?>">
-        </div>
-        <div class="update-item">
-            <span class="update-label">Change e-mail</span>
-            <input type="email" name="email" value="<?=htmlentities($_SESSION[Session::EMAIL])?>">
-        </div>
-        <div class="update-item">
-            <input class="button" type="submit" value="Update">
-        </div>
-    </form>
-    <form id="update-password" class="settings-item" action = "../actions/updateUserPassword.php" method="post">
-        <div class="update-item">
-            <span class="update-label">Current password</span>
-            <input class="password" type="password" name="curr-password" value="<?=$prevCurrPassword?>">
-        </div>
-        <div class="update-item">
-            <span class="update-label">New password</span>
-            <input class="password" type="password" name="password1" value="<?=$prevPassword1?>">
-        </div>
-        <div class="update-item">
-            <span class="update-label">Confirm new password</span>
-            <input class="password" type="password" name="password2" value="<?=$prevPassword2?>">
-        </div>
-        <div class="update-item">
-            <input type="checkbox" onclick="toggleShowPasswords()">Show Passwords
-        </div>
-        <div class="update-item">
-            <input class="button" type="submit" value="Update Password">
-        </div>
-    </form>
-    <?php
-        drawToasts($session);
-    ?>
+    <div id="settings" class="page">
+        <h1 id="update-title" class="register title">Manage personal information</h1>
+        <form id="update-info" action="../actions/updateUserSettings.php" method="post">
+            <div class="update-item">
+                <span class="update-label">Change username</span>
+                <input type="text" name="username" value = "<?=htmlentities($_SESSION[Session::USERNAME])?>">
+            </div>
+            <div class="update-item">
+                <span class="update-label">Change name</span>
+                <input type="text" name="name" value="<?=htmlentities($_SESSION[Session::NAME])?>">
+            </div>
+            <div class="update-item">
+                <span class="update-label">Change e-mail</span>
+                <input type="email" name="email" value="<?=htmlentities($_SESSION[Session::EMAIL])?>">
+            </div>
+            <div class="update-item">
+                <input class="button" type="submit" value="Update">
+            </div>
+        </form>
+        <form id="update-password" action = "../actions/updateUserPassword.php" method="post">
+            <div class="update-item">
+                <span class="update-label">Current password</span>
+                <input class="password" type="password" name="curr-password" value="<?=$prevCurrPassword?>">
+            </div>
+            <div class="update-item">
+                <span class="update-label">New password</span>
+                <input class="password" type="password" name="password1" value="<?=$prevPassword1?>">
+            </div>
+            <div class="update-item">
+                <span class="update-label">Confirm new password</span>
+                <input class="password" type="password" name="password2" value="<?=$prevPassword2?>">
+            </div>
+            <div class="update-item">
+                <input type="checkbox" onclick="toggleShowPasswords()">Show Passwords
+            </div>
+            <div class="update-item">
+                <input class="button" type="submit" value="Update Password">
+            </div>
+        </form>
+        <?php
+            drawToasts($session);
+        ?>
+    </div>
 </main>
 <?php  
     drawFooter();

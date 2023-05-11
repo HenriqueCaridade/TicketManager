@@ -21,6 +21,21 @@
             $this->email = filter_var($email, FILTER_SANITIZE_EMAIL);
             $this->userType = $userType;
         }
+
+        public static function getUser(PDO $db, string $username) : ?User {
+            $stmt = $db->prepare('SELECT * FROM User WHERE username=?');
+            $stmt->execute(array($username));
+            $user = $stmt->fetch();
+            if ($user === false) return null;
+            return new User($user['username'], $user['name'], $user['email'], $user['userType']);
+        }
+        public static function getUserPassword(PDO $db, string $username) : ?string {
+            $stmt = $db->prepare('SELECT password FROM User WHERE username=?');
+            $stmt->execute(array($username));
+            $user = $stmt->fetch();
+            if ($user === false) return null;
+            return $user['password'];
+        }
         public static function updateUserParameters(PDO $db, string $currUsername, string $newUsername, string $newName, string $newEmail) : void {
             $newEmail = filter_var($newEmail, FILTER_SANITIZE_EMAIL);
             $stmt = $db->prepare('UPDATE User SET username = ?, name = ?, email = ? WHERE username = ?');
@@ -34,6 +49,17 @@
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
             $stmt = $db->prepare('INSERT INTO User (username, name, password, email, userType) VALUES (?, ?, ?, ?, ?)');
             $stmt->execute(array($username, $name, User::passwordHash($password), $email, $userType));
+        }
+
+        public static function usernameExists(PDO $db, string $username) : bool {
+            $stmt = $db->prepare('SELECT * FROM User WHERE username=?');
+            $stmt->execute(array($username));
+            return $stmt->fetch() !== false;
+        }
+        protected static function emailExists(PDO $db, string $email) : bool {
+            $stmt = $db->prepare('SELECT * FROM User WHERE email=?');
+            $stmt->execute(array($email));
+            return $stmt->fetch() !== false;
         }
 
         public static function validateParameters(PDO $db, string $username, string $name, string $password, string $email, string $userType = 'Client') : ?string {
@@ -53,41 +79,6 @@
                 return 'Cannot change to password already in use!';
             return User::validatorPassword($password);
         }
-        
-        public static function getUserInfo(PDO $db, string $username) : ?User {
-            $stmt = $db->prepare('SELECT * FROM User WHERE username=?');
-            $stmt->execute(array($username));
-            $user = $stmt->fetch();
-            if ($user === false) return null;
-            return new User($user['username'], $user['name'], $user['email'], $user['userType']);
-        }
-        public static function getUserPassword(PDO $db, string $username) : ?string {
-            $stmt = $db->prepare('SELECT password FROM User WHERE username=?');
-            $stmt->execute(array($username));
-            $user = $stmt->fetch();
-            if ($user === false) return null;
-            return $user['password'];
-        }
-
-        public static function usernameExists(PDO $db, string $username) : bool {
-            $stmt = $db->prepare('SELECT * FROM User WHERE username=?');
-            $stmt->execute(array($username));
-            return $stmt->fetch() !== false;
-        }
-        protected static function emailExists(PDO $db, string $email) : bool {
-            $stmt = $db->prepare('SELECT * FROM User WHERE email=?');
-            $stmt->execute(array($email));
-            return $stmt->fetch() !== false;
-        }
-
-        public static function passwordMatchesHash(string $password, string $hashedPassword) : bool {
-            return User::passwordHash($password) === $hashedPassword;
-        }
-
-        protected static function passwordHash(string $password) : string {
-            return sha1($password);
-        }
-
         protected static function validatorUsername(string $username, PDO $db = null) : ?string {
             $length = strlen($username);
             if ($length < User::MIN_USERNAME_LENGTH)
@@ -102,7 +93,6 @@
                 return 'Username already taken.';
             return null;
         }
-
         protected static function validatorName(string $name) : ?string {
             $length = strlen($name);
             if ($length < User::MIN_NAME_LENGTH)
@@ -111,7 +101,6 @@
                 return 'Name must be at most ' . User::MAX_NAME_LENGTH . ' long.';
             return null;
         }
-
         protected static function validatorEmail(string $email, PDO $db = null) : ?string {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL))
                 return 'E-mail is not valid.';
@@ -119,7 +108,6 @@
                 return 'E-mail already taken.';
             return null;
         }
-
         protected static function validatorPassword(string $password) : ?string {
             if ($password === null) return 'Don\'t have password.';
             $length = strlen($password);
@@ -137,11 +125,17 @@
                 return 'Password must have at least one digit.';
             return null;
         }
-
         protected static function validatorUserType(string $userType) : ?string {
             if (!in_array($userType, array('Client', 'Agent', 'Admin')))
                 return 'Invalid User Type.';
             return null;
+        }
+
+        public static function passwordMatchesHash(string $password, string $hashedPassword) : bool {
+            return User::passwordHash($password) === $hashedPassword;
+        }
+        protected static function passwordHash(string $password) : string {
+            return sha1($password);
         }
     }
 ?>

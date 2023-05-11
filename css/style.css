@@ -18,13 +18,18 @@
     --sidebar-width: 14rem;
     --sidebar-padding: 15px;
 
-    --settings-margin-sides: 10rem;
+    --margin-sides: 10rem;
 }
 
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--primary-background-color);
     color: var(--primary-color);
+}
+
+.page {
+    width: calc(100% - 2 * var(--margin-sides));
+    margin: 0 var(--margin-sides);
 }
 
 /* HYPERLINK STYLE */
@@ -135,7 +140,7 @@ main.main-sidebar {
 div.register-item, div.login-item, div.update-item {
     padding-top: 1em;
 }
-#register-title, #login-title, #update-title {
+.title {
     font-size: 50px;
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -148,7 +153,7 @@ div.register-item, div.login-item, div.update-item {
 .register-label, .login-label, .update-label {
     padding: 2px 1em;
 }
-#register input, #login input, #update-info input, #update-password input {
+#register input, #login input, #settings input {
     width: 100%;
     padding: 0.5em;
     border-radius: 2em;
@@ -156,14 +161,14 @@ div.register-item, div.login-item, div.update-item {
     background-color: transparent;
     border: 2px solid var(--secondary-background-color);
 }
-#register input.button, #login input.button, #update-info input.button, #update-password input.button {
+#register input.button, #login input.button, #settings input.button {
     padding: 0.8em;
     color: var(--primary-background-color);
     background-color: var(--accent-color);
     border: none;
 }
 
-#register input[type=checkbox], #login input[type=checkbox], #update-password input[type=checkbox] {
+#register input[type=checkbox], #login input[type=checkbox], #settings input[type=checkbox] {
     width: auto;
     color: var(--error-color);
     margin-right: 10px;
@@ -173,11 +178,6 @@ div.register-item, div.login-item, div.update-item {
 a.register-item, a.login-item {
     margin-top: 1em;
     padding-left: 1em;
-}
-
-/* SETTINGS(UPDATE) STYLE */
-.settings-item {
-    margin: 0 var(--settings-margin-sides);
 }
 
 /* TOAST STYLE */
@@ -201,4 +201,41 @@ div.toast.success {
 }
 #caps-warning {
     display: none;
+}
+
+
+/* TICKET SYLE */
+.ticket {
+    position: relative;
+    display: block;
+    padding: 1em;
+    border-radius: 2em;
+    border: 2px solid var(--secondary-background-color);
+    background-color: transparent;
+}
+.ticket > * {
+    display: inline;
+}
+.ticket > .profile {
+    position: relative;
+    font-size: 2rem;
+}
+.ticket > .profile > .username{
+    position: relative;
+    bottom: 0.2rem;
+    font-size: 1.3rem;
+}   
+
+/* ACCOUNT STYLE */
+#account .profile {
+    font-size: 8em;
+}
+
+#account {
+    font-size: 2em;
+}
+
+.account-item {
+    display: block;
+    padding-bottom: 1em;
 }

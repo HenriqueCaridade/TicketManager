@@ -25,26 +25,38 @@ CREATE TABLE Department(
 DROP TABLE IF EXISTS Ticket;
 
 CREATE TABLE Ticket(
-    ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     publisher STRING NOT NULL REFERENCES User(username),
     department STRING NOT NULL REFERENCES Department(username),
     publishDate DATETIME NOT NULL,
     priority STRING NOT NULL CHECK (priority IN('Normal', 'High', 'Urgent')),
-    hashtag STRING NOT NULL
+    text STRING NOT NULL
 );
+
 --------
 
 DROP TABLE IF EXISTS TicketStatus;
 
 CREATE TABLE TicketStatus(
-    ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    ticketID INTEGER NOT NULL REFERENCES Ticket(ID),
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    ticketId INTEGER NOT NULL REFERENCES Ticket(id),
+    agentUsername STRING REFERENCES User(username),
     date DATETIME NOT NULL,
-    status STRING NOT NULL CHECK (status IN('Unassigned', 'In progress', 'Done')),
-    prevStatus INTEGER REFERENCES TicketStatus(ID)
-
+    status STRING NOT NULL CHECK (status IN('Unassigned', 'In progress', 'Done'))
 );
+
 --------
+
+DROP TABLE IF EXISTS Hashtag;
+
+CREATE TABLE Hashtag (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    ticketId INTEGER NOT NULL REFERENCES Ticket(id),
+    hashtag STRING NOT NULL
+);
+
+--------
+
 DROP TABLE IF EXISTS AgentInDepartment;
 
 CREATE TABLE AgentInDepartment(

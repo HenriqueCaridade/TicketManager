@@ -18,7 +18,7 @@
         die(header('Location: ../pages/login_page.php'));
     }
     
-    $session->logInUser($user);
+    $session->logInUser(User::getUser($db, $_POST['username']));
     $session->clearInput();
     header('Location: ../pages/dashboard.php');
 ?>
