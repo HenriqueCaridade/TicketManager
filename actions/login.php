@@ -4,22 +4,21 @@
     require_once("../classes/session.php");
     $session = Session::getSession();
 
-    $_SESSION[Session::INPUT][Session::L_USERNAME] = $_POST['username'];
-    $_SESSION[Session::INPUT][Session::L_PASSWORD] = $_POST['password'];
+    $session->saveInput(Session::L_USERNAME, $_POST['username']);
+    $session->saveInput(Session::L_PASSWORD, $_POST['password']);
 
     $db = getDatabaseConnection();
-    $user = User::getUserWithPassword($db, $_POST['username'], $_POST['password']);
-    if ($user === null) {
-        if (User::usernameExists($db, $_POST['username']))
-            $session->addToast(Session::ERROR, 'Wrong password.');
-        else $session->addToast(Session::ERROR, 'Username doesn\'t exist.');
+    $password = User::getUserPassword($db, $_POST['username']);
+    if ($password === null) {
+        $session->addToast(Session::ERROR, 'Username doesn\'t exist.');
         die(header('Location: ../pages/login_page.php'));
     }
-    $_SESSION[Session::USERNAME] = $user->username;
-    $_SESSION[Session::NAME]     = $user->name;
-    $_SESSION[Session::EMAIL]    = $user->email;
-    $_SESSION[Session::USERTYPE] = $user->userType;
+    if (!User::passwordMatchesHash($_POST['password'], $password)) {
+        $session->addToast(Session::ERROR, 'Wrong password.');
+        die(header('Location: ../pages/login_page.php'));
+    }
     
-    unset($_SESSION[Session::INPUT]);
+    $session->logInUser($user);
+    $session->clearInput();
     header('Location: ../pages/dashboard.php');
 ?>

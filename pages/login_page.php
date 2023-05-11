@@ -6,8 +6,9 @@
     // Session
     include_once("../classes/session.php");
     $session = Session::getSession();
-    $prevUsername = htmlentities($_SESSION[Session::INPUT][Session::L_USERNAME] ?? "");
-    $prevPassword = htmlentities($_SESSION[Session::INPUT][Session::L_PASSWORD] ?? "");
+
+    $prevUsername = htmlentities($session->getSavedInput(Session::L_USERNAME) ?? "");
+    $prevPassword = htmlentities($session->getSavedInput(Session::L_PASSWORD) ?? "");
     
     // Draw Page
     drawHeader();
@@ -21,7 +22,10 @@
         </div>
         <div class="login-item">
             <span class="login-label">Password</span>
-            <input type="password" name="password" required value="<?=$prevPassword?>">
+            <input class="password" type="password" name="password" required value="<?=$prevPassword?>">
+        </div>
+        <div class="login-item">
+            <input type="checkbox" onclick="toggleShowPasswords()">Show Password
         </div>
         <a class="login-item" href="register_page.php">I don't have an account.</a>
         <div class="login-item">
