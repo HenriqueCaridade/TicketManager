@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS Ticket;
 
 CREATE TABLE Ticket(
     ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    clientUsername STRING NOT NULL REFERENCES User(username),
+    publisher STRING NOT NULL REFERENCES User(username),
     department STRING NOT NULL REFERENCES Department(username),
     publishDate DATETIME NOT NULL,
     priority STRING NOT NULL CHECK (priority IN('Normal', 'High', 'Urgent')),

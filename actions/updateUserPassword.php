@@ -20,14 +20,13 @@
         die(header('Location: ../pages/settings.php'));
     }
 
-    $user = new User($_SESSION[Session::USERNAME], '', '', $_POST['password1']);
-    $validation = $user->validateUpdatePassword($db);
-
+    $validation = User::validateUpdatePassword($db, $_SESSION[Session::USERNAME], $_POST['password1']);
     if ($validation !== null) { // Error
         $session->addToast(Session::ERROR, $validation);
         die(header('Location: ../pages/settings.php'));
     }
-    $user->updateUserPassword($db);
+    $user->updateUserPassword($db, $_SESSION[Session::USERNAME], $_POST['password1']);
+
     $session->addToast(Session::SUCCESS, 'Password changed successfully!');
     $session->clearInput();
     header('Location: ../pages/settings.php');
