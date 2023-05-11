@@ -3,10 +3,10 @@
     include_once("../templates/header.php");
     include_once("../templates/footer.php");
     include_once("../templates/sidebar.php");
-    
+    // Session
+    include_once("../database/connection.php");
     include_once("../classes/session.php");
     include_once("../classes/user.php");
-    include_once("../database/connection.php");
     $session = Session::getSession();
 
     if (!$session->isLoggedIn()) {

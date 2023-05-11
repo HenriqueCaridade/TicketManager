@@ -128,10 +128,10 @@ main.main-sidebar {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
-.register-label, .login-label {
+.register-label, .login-label, .update-label {
     padding: 2px 1em;
 }
-#register input, #login input{
+#register input, #login input, #update-info input, #update-password input {
     width: 100%;
     padding: 0.5em;
     border-radius: 2em;
@@ -139,21 +139,28 @@ main.main-sidebar {
     background-color: transparent;
     border: 2px solid var(--secondary-background-color);
 }
-#register input.button, #login input.button {
+#register input.button, #login input.button, #update-info input.button, #update-password input.button {
     padding: 0.8em;
     color: var(--primary-background-color);
     background-color: var(--accent-color);
     border: none;
 }
 
-div.register-item, div.login-item {
+#register input[type=checkbox], #login input[type=checkbox], #update-password input[type=checkbox] {
+    width: auto;
+    color: var(--error-color);
+    margin-right: 10px;
+    background-color: var(--error-color);
+}
+
+div.register-item, div.login-item, div.update-item {
     padding-top: 1em;
 }
 a.register-item, a.login-item {
     margin-top: 1em;
     padding-left: 1em;
 }
-.register-item, .login-item, #toasts {
+.register-item, .login-item, .update-item, #toasts {
     display: block;
     margin: auto;
     width: 30rem;
@@ -163,6 +170,7 @@ div#toasts {
     margin-top: 2em;
 }
 div.toast {
+    margin: 0.5em 0;
     padding: 0.5em;
     font-size: medium;
     border-radius: 2em;
@@ -172,4 +180,7 @@ div.toast.error {
 }
 div.toast.success {
     background-color: var(--success-color);
+}
+#caps-warning {
+    display: none;
 }

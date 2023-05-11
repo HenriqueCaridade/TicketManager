@@ -22,7 +22,10 @@
         </div>
         <div class="login-item">
             <span class="login-label">Password</span>
-            <input type="password" name="password" required value="<?=$prevPassword?>">
+            <input class="password" type="password" name="password" required value="<?=$prevPassword?>">
+        </div>
+        <div class="login-item">
+            <input type="checkbox" onclick="toggleShowPasswords()">Show Password
         </div>
         <a class="login-item" href="register_page.php">I don't have an account.</a>
         <div class="login-item">

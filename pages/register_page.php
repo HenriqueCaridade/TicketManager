@@ -33,18 +33,23 @@
         </div>
         <div class="register-item">
             <span class="register-label">Password</span>
-            <input type="password" name="password1" required value="<?=$prevPassword1?>">
+            <input class="password" type="password" name="password1" required value="<?=$prevPassword1?>">
         </div>
         <div class="register-item">
             <span class="register-label">Confirm password</span>
-            <input type="password" name="password2" required value="<?=$prevPassword2?>">
+            <input class="password" type="password" name="password2" required value="<?=$prevPassword2?>">
+        </div>
+        <div class="login-item">
+            <input type="checkbox" onclick="toggleShowPasswords()">Show Passwords
         </div>
         <a class="register-item" href="login_page.php">I already have an account.</a>
         <div class="register-item">
             <input class="button" type="submit" value="Register">
         </div>
     </form>
-    <?php drawToasts($session); ?>
+    <?php
+        drawToasts($session);
+    ?>
 </main>
 <?php
     drawFooter();
