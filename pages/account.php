@@ -15,7 +15,7 @@
     }
 
     $db = getDatabaseConnection();
-    $username = $_POST['username'] ?? $_SESSION['username'];
+    $username = $_POST['username'] ?? $_SESSION[Session::USERNAME];
     $user = User::getUserInfo($db, $username);
 
     // Draw Page

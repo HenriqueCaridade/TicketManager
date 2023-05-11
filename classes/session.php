@@ -4,6 +4,7 @@
     class Session {
         const TOAST = 'toast';
         const SUCCESS = 'success';
+        const WARNING = 'warning';
         const ERROR = 'error';
         const INPUT = 'input';
         const R_USERNAME = 'register username';
@@ -41,6 +42,16 @@
                 static::$instance = new Session();
             return static::$instance;
         }
+        
+        public function saveInput(string $attrib, string $value) : void {
+            $_SESSION[Session::INPUT][$attrib] = $value;
+        }
+        public function getSavedInput(string $attrib) : ?string {
+            return $_SESSION[Session::INPUT][$attrib];
+        }
+        public function clearInput() : void {
+            unset($_SESSION[Session::INPUT]);
+        }
 
         public function isLoggedIn() : bool {
             return isset($_SESSION[Session::USERNAME]);
@@ -67,6 +78,11 @@
         public function fetchErrorToasts() : array {
             $ret = $this->pendingToasts[Session::ERROR] ?? array();
             unset($this->pendingToasts[Session::ERROR]);
+            return $ret;
+        }
+        public function fetchWarningToasts() : array {
+            $ret = $this->pendingToasts[Session::WARNING] ?? array();
+            unset($this->pendingToasts[Session::WARNING]);
             return $ret;
         }
         public function fetchSuccessToasts() : array {

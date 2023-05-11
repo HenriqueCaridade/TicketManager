@@ -7,8 +7,8 @@
     include_once("../classes/session.php");
     $session = Session::getSession();
 
-    $prevUsername = htmlentities($_SESSION[Session::INPUT][Session::L_USERNAME] ?? "");
-    $prevPassword = htmlentities($_SESSION[Session::INPUT][Session::L_PASSWORD] ?? "");
+    $prevUsername = htmlentities($session->getSavedInput(Session::L_USERNAME) ?? "");
+    $prevPassword = htmlentities($session->getSavedInput(Session::L_PASSWORD) ?? "");
     
     // Draw Page
     drawHeader();

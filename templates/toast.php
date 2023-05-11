@@ -13,8 +13,9 @@
     function drawToasts(Session $session) { ?>
     <div id="toasts">
     <?php
-        drawToast(Session::ERROR, 'Caps-Lock is active.', 'caps-warning');
+        drawToast(Session::WARNING, 'Caps-Lock is active.', 'caps-warning');
         foreach ($session->fetchErrorToasts()   as $message) drawToast(Session::ERROR  , $message);
+        foreach ($session->fetchWarningToasts() as $message) drawToast(Session::WARNING, $message); 
         foreach ($session->fetchSuccessToasts() as $message) drawToast(Session::SUCCESS, $message);
     ?>
     </div>

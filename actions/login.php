@@ -4,8 +4,8 @@
     require_once("../classes/session.php");
     $session = Session::getSession();
 
-    $_SESSION[Session::INPUT][Session::L_USERNAME] = $_POST['username'];
-    $_SESSION[Session::INPUT][Session::L_PASSWORD] = $_POST['password'];
+    $session->saveInput(Session::L_USERNAME, $_POST['username']);
+    $session->saveInput(Session::L_PASSWORD, $_POST['password']);
 
     $db = getDatabaseConnection();
     $user = User::getUserWithPassword($db, $_POST['username'], $_POST['password']);
@@ -17,6 +17,6 @@
     }
     
     $session->logInUser($user);
-    unset($_SESSION[Session::INPUT]);
+    $session->clearInput();
     header('Location: ../pages/dashboard.php');
 ?>

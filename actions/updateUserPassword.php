@@ -4,9 +4,9 @@
     require_once("../database/connection.php");
     $session = Session::getSession();
 
-    $_SESSION[Session::INPUT][Session::U_CURR_PASSWORD] = $_POST['curr-password'];
-    $_SESSION[Session::INPUT][Session::U_PASSWORD1]     = $_POST['password1'];
-    $_SESSION[Session::INPUT][Session::U_PASSWORD2]     = $_POST['password2'];
+    $session->saveInput(Session::U_CURR_PASSWORD , $_POST['curr-password']);
+    $session->saveInput(Session::U_PASSWORD1     , $_POST['password1']);
+    $session->saveInput(Session::U_PASSWORD2     , $_POST['password2']);
 
     if ($_POST['password1'] !== $_POST['password2']) {
         $session->addToast(Session::ERROR, "Passwords don't match.");
@@ -29,6 +29,6 @@
     }
     $user->updateUserPassword($db);
     $session->addToast(Session::SUCCESS, 'Password changed successfully!');
-    unset($_SESSION[Session::INPUT]);
+    $session->clearInput();
     header('Location: ../pages/settings.php');
 ?>

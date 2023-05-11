@@ -7,11 +7,11 @@
     include_once("../classes/session.php");
     $session = Session::getSession();
 
-    $prevUsername  = htmlentities($_SESSION[Session::INPUT][Session::R_USERNAME]  ?? "");
-    $prevName      = htmlentities($_SESSION[Session::INPUT][Session::R_NAME]      ?? "");
-    $prevEmail     = htmlentities($_SESSION[Session::INPUT][Session::R_EMAIL]     ?? "");
-    $prevPassword1 = htmlentities($_SESSION[Session::INPUT][Session::R_PASSWORD1] ?? "");
-    $prevPassword2 = htmlentities($_SESSION[Session::INPUT][Session::R_PASSWORD2] ?? "");
+    $prevUsername  = htmlentities($session->getSavedInput(Session::R_USERNAME)  ?? "");
+    $prevName      = htmlentities($session->getSavedInput(Session::R_NAME)      ?? "");
+    $prevEmail     = htmlentities($session->getSavedInput(Session::R_EMAIL)     ?? "");
+    $prevPassword1 = htmlentities($session->getSavedInput(Session::R_PASSWORD1) ?? "");
+    $prevPassword2 = htmlentities($session->getSavedInput(Session::R_PASSWORD2) ?? "");
 
     // Draw Page
     drawHeader();

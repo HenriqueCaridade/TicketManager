@@ -3,9 +3,9 @@
     require_once("../classes/session.php");
     require_once("../database/connection.php");
     $session = Session::getSession();
-    $_SESSION[Session::INPUT][Session::U_USERNAME] = $_POST['username'];
-    $_SESSION[Session::INPUT][Session::U_NAME]     = $_POST['name'];
-    $_SESSION[Session::INPUT][Session::U_EMAIL]    = $_POST['email'];
+    $session->saveInput(Session::U_USERNAME, $_POST['username']);
+    $session->saveInput(Session::U_NAME    , $_POST['name']);
+    $session->saveInput(Session::U_EMAIL   , $_POST['email']);
 
     $db = getDatabaseConnection();
 
@@ -17,12 +17,9 @@
         die(header('Location: ../pages/settings.php'));
     }
     $user->updateUserParameters($_SESSION[Session::USERNAME], $db);
+    $session->logInUser($user);
     $session->addToast(Session::SUCCESS, 'Information updated successfully!');
-    $_SESSION[Session::USERNAME] = $user->username;
-    $_SESSION[Session::NAME]     = $user->name;
-    $_SESSION[Session::EMAIL]    = $user->email;
-    $_SESSION[Session::USERTYPE] = $user->userType;
-    unset($_SESSION[Session::INPUT]);
+    $session->clearInput();
     header('Location: ../pages/settings.php');
 
 ?>
