@@ -239,3 +239,28 @@ div.toast.success {
     display: block;
     padding-bottom: 1em;
 }
+
+/* FAQ STYLE*/
+.FAQ_question { 
+    margin-bottom: 1rem;
+    background-color: var(--secondary-background-color);
+    padding: 1rem;
+    transition: 0.4s;
+    width: 100%;
+    text-align: left;
+    font-size: 1.4rem;
+    color: var(--accent-color);
+}
+.FAQ_question:after {
+    content: '\002B';
+    float: right;
+  }
+.FAQ_Answer{
+    padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+  .active:after {
+    content: "\2212"; 
+  }

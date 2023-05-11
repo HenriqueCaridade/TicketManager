@@ -46,3 +46,18 @@ function toggleShowPasswords() {
     for (let element of document.getElementsByClassName('password'))
         element.type = element.type === 'password' ? 'text' : 'password';
 }
+
+//FAQ DROPDOWN
+var acc = document.getElementsByClassName("FAQ_question");
+var i;
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var answer = this.nextElementSibling;
+    if (answer.style.maxHeight) {
+      answer.style.maxHeight = null;
+    } else {
+      answer.style.maxHeight = answer.scrollHeight + "px";
+    } 
+  });
+}
