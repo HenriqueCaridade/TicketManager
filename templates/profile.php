@@ -1,7 +1,7 @@
 <?php
     function drawProfile(?string $username=null, bool $showUsername=false) {
 ?>
-<div id="profile" <?php if ($username !== null) { ?> data-user="<?=htmlentities($username)?>"> <?php } ?>
+<div <?php if ($username === null) { ?> id="profile" <?php } else { ?> data-user="<?=htmlentities($username)?>"  class="profile"<?php } ?>>
     <i class="fa-solid fa-circle-user"></i>
 <?php if ($showUsername) { ?>
     <span class="username"><?=htmlentities($username)?></span>

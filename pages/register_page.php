@@ -17,39 +17,41 @@
     drawHeader();
 ?>
 <main>
-    <h1 id="register-title" class="register">Register</h1>
-    <form id="register" action="../actions/register.php" method="post">
-        <div class="register-item">
-            <span class="register-label">Username</span>
-            <input type="text" name="username" required value="<?=$prevUsername?>">
-        </div>
-        <div class="register-item">
-            <span class="register-label">Name</span>
-            <input type="text" name="name" required value="<?=$prevName?>">
-        </div>
-        <div class="register-item">
-            <span class="register-label">E-mail</span>
-            <input type="email" name="email" required value="<?=$prevEmail?>">
-        </div>
-        <div class="register-item">
-            <span class="register-label">Password</span>
-            <input class="password" type="password" name="password1" required value="<?=$prevPassword1?>">
-        </div>
-        <div class="register-item">
-            <span class="register-label">Confirm password</span>
-            <input class="password" type="password" name="password2" required value="<?=$prevPassword2?>">
-        </div>
-        <div class="login-item">
-            <input type="checkbox" onclick="toggleShowPasswords()">Show Passwords
-        </div>
-        <a class="register-item" href="login_page.php">I already have an account.</a>
-        <div class="register-item">
-            <input class="button" type="submit" value="Register">
-        </div>
-    </form>
-    <?php
-        drawToasts($session);
-    ?>
+    <div id="register" class="page">
+        <h1 id="register-title" class="register title">Register</h1>
+        <form action="../actions/register.php" method="post">
+            <div class="register-item">
+                <span class="register-label">Username</span>
+                <input type="text" name="username" required value="<?=$prevUsername?>">
+            </div>
+            <div class="register-item">
+                <span class="register-label">Name</span>
+                <input type="text" name="name" required value="<?=$prevName?>">
+            </div>
+            <div class="register-item">
+                <span class="register-label">E-mail</span>
+                <input type="email" name="email" required value="<?=$prevEmail?>">
+            </div>
+            <div class="register-item">
+                <span class="register-label">Password</span>
+                <input class="password" type="password" name="password1" required value="<?=$prevPassword1?>">
+            </div>
+            <div class="register-item">
+                <span class="register-label">Confirm password</span>
+                <input class="password" type="password" name="password2" required value="<?=$prevPassword2?>">
+            </div>
+            <div class="login-item">
+                <input type="checkbox" onclick="toggleShowPasswords()">Show Passwords
+            </div>
+            <a class="register-item" href="login_page.php">I already have an account.</a>
+            <div class="register-item">
+                <input class="button" type="submit" value="Register">
+            </div>
+        </form>
+        <?php
+            drawToasts($session);
+        ?>
+    </div>
 </main>
 <?php
     drawFooter();
