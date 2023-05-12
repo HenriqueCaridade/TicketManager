@@ -24,6 +24,6 @@
     User::createUser($db, $_POST['username'], $_POST['name'],$_POST['password1'], $_POST['email']);
 
     $session->addToast(Session::SUCCESS, 'User was created successfully.');
-    $seesion->clearInput();
+    $session->clearInput();
     header('Location: ../pages/login_page.php');
 ?>

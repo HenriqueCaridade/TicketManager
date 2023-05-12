@@ -59,5 +59,9 @@
             }
             return $ticketArray;
         }
+        public static function createTicket(PDO $db, string $publisher, string $department, DateTime $publishDate, string $priority = Ticket::P_NORMAL, string $text) : void {
+            $stmt = $db->prepare('INSERT INTO Ticket (publisher, department, publishdate, priority, text)  VALUES (?, ?, ?, ?, ?)');
+            $stmt->execute(array($publisher, $department, $publishDate, $priority, $text));
+        }
     }
 ?>

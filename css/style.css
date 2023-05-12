@@ -281,4 +281,39 @@ div.toast.success {
     padding: 1rem;
 }
 
+/* TICKET SUBMISSION*/
+
+.ticketPopup {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+.formPopup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    border: 3px solid #999999;
+    z-index: 10;
+}
+.formContainer {
+    max-width: 300px;
+    padding: 20px;
+    background-color: #fff;
+}
+.formContainer input[type=text] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 20px 0;
+        border: none;
+        background: #eee;
+}
+.formContainer input[type=text]:focus {
+        background-color: #ddd;
+        outline: none;
+}
+#popupForm{
+    display: none;
+}
 

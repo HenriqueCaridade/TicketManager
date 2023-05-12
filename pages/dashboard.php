@@ -21,11 +21,30 @@
     drawHeader(true);
     drawSidebar();
 ?>
+
 <main class="main-sidebar">
+    
     <div id="dashboard" class="page">
         <h1 id="dashboard-title" class="title">Dashboard</h1>
         <?php drawTickets($tickets); ?>
-    </div>
+        <div class="openBtn">
+            <button class="openButton" onclick="openTicketForm()"><strong>Open Form</strong></button>
+        </div>
+        <div class="ticketPopup">
+            <div class = "formPopup" id ="popupForm">
+            <form action="../actions/addTicket.php" method="post" class="formContainer">
+                <div class="add-ticket-item">
+                    <span>Text</span>
+                    <input type="text" name="text" required>
+                 </div>
+                <div class="add-ticket-item">
+                    <button type="submit" class="btn">Submit</button>
+                    <button type="button" class="btn cancel" onclick="closeTicketForm()">Close</button>
+                </div>
+            </form>
+            </div>
+            
+        </div>
 </main>
 <?php  
     drawFooter();

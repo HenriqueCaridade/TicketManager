@@ -7,19 +7,30 @@
         const WARNING = 'warning';
         const ERROR = 'error';
         const INPUT = 'input';
+
+        //input of register form
         const R_USERNAME = 'register username';
         const R_NAME = 'register name';
         const R_EMAIL = 'register email';
         const R_PASSWORD1 = 'register password1';
         const R_PASSWORD2 = 'register password2';
+
+        //input of login 
         const L_USERNAME = 'login username';
         const L_PASSWORD = 'login password';
+        
+        //input of information updating forms
         const U_USERNAME = 'update username';
         const U_NAME = 'update name';
         const U_EMAIL = 'update email';
         const U_CURR_PASSWORD = 'update curr-password';
-        const U_PASSWORD1 = 'update password1';
+        const U_PASSWORD1 = 'update password1'; 
         const U_PASSWORD2 = 'update password2';
+
+        //input of new ticket
+        const T_TEXT = 'ticket text';
+        const T_DEPART = 'ticket department';
+
         const USERNAME = 'username';
         const NAME = 'name';
         const EMAIL = 'email';

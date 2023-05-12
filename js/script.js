@@ -64,3 +64,10 @@ for (let element of elements) {
     });
 }
 
+//NEW TICKET POPUP
+function openTicketForm() {
+  document.getElementById("popupForm").style.display = "block";
+}
+function closeTicketForm() {
+  document.getElementById("popupForm").style.display = "none";
+}
