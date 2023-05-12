@@ -18,16 +18,16 @@
 ?>
 <main class="main-sidebar">
     <h1>Frequently Asked Questions (FAQ)</h1>
-    <section class="FAQ">
-        <div class="FAQ_Item">
-        <button class="FAQ_question" id="question1">I can't login what should I do!?</button>
-            <div class="FAQ_Answer" id="answer1">
+    <section class="faq">
+        <div class="faq-item faq-collapsed" >
+        <button class="faq-question">I can't login what should I do!?</button>
+            <div class="faq-answer" >
                 Contact one of the Admins!
             </div>
         </div>
-        <div class="FAQ_Item">
-        <button class="FAQ_question" id="question2">I don't remember my password</button>
-            <div class="FAQ_Answer" id="answer2">
+        <div class="faq-item">
+        <button class="faq-question">I don't remember my password</button>
+            <div class="faq-answer">
                 Contact one of the Admins!
             </div>
         </div>

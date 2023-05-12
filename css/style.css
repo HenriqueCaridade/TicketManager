@@ -241,7 +241,7 @@ div.toast.success {
 }
 
 /* FAQ STYLE*/
-.FAQ_question { 
+.faq-question { 
     margin-bottom: 1rem;
     background-color: var(--secondary-background-color);
     padding: 1rem;
@@ -251,16 +251,22 @@ div.toast.success {
     font-size: 1.4rem;
     color: var(--accent-color);
 }
-.FAQ_question:after {
+.faq-question::after{
+    content: "\2212"; 
+    float: right;
+}
+
+.faq-collapsed > .faq-question::after {
     content: '\002B';
     float: right;
-  }
-.FAQ_Answer{
-    padding: 0 18px;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
 }
-  .active:after {
-    content: "\2212"; 
-  }
+.faq-item.faq-collapsed > .faq-answer {
+    display: none;
+}
+.faq-item > .faq-answer {
+    display:block;
+}
+.faq-answer{
+    margin: 1rem;
+    padding: 1rem;
+}
