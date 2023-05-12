@@ -1,23 +1,38 @@
 <?php
     include_once("../classes/ticket.php");
     include_once("../templates/profile.php");
-    function drawTicket(Ticket $ticket) {
+    function _drawTicket(Ticket $ticket) {
 ?>
-<div class="ticket">
-    <?php drawProfile($ticket->publisher, true); ?>
-    <div class="ticket-middle">
-        <span class="ticket-text"><?=htmlentities($ticket->text)?></span>
-        <span class="ticket-department"><?=htmlentities($ticket->department)?></span>
-    </div>
-    <div class="ticket-priority <?=htmlentities(strtolower($ticket->priority))?>"><?=htmlentities($ticket->priority)?></div>
-    <div class="ticket-status <?=htmlentities(strtolower($ticket->status->status))?>"><?=htmlentities($ticket->status->status)?></div>
-</div>
+<tr class="ticket">
+    <td class="ticket-username"><?php drawProfile($ticket->publisher, true); ?></td>
+    <td class="ticket-text"><?=htmlentities($ticket->text)?></td>
+    <td class="ticket-department"><?=htmlentities($ticket->department)?></td>
+    <td class="ticket-priority"><?=htmlentities($ticket->priority)?></td>
+    <td class="ticket-status"><?=htmlentities($ticket->status->status)?></td>
+</tr>
 <?php
     }
 
     function drawTickets(array $tickets) {
-        foreach ($tickets as $ticket) {
-            drawTicket($ticket);
-        }
+?>
+<table id="tickets">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Ticket</th>
+            <th>Department</th>
+            <th>Priority</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($tickets as $ticket) {
+        _drawTicket($ticket);
+    }
+    ?>
+    </tbody>
+</table>
+<?php
     }
 ?>

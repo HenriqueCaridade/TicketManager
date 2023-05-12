@@ -25,7 +25,7 @@ CREATE TABLE Department(
 DROP TABLE IF EXISTS Ticket;
 
 CREATE TABLE Ticket(
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    id INTEGER PRIMARY KEY NOT NULL,
     publisher STRING NOT NULL REFERENCES User(username),
     department STRING NOT NULL REFERENCES Department(username),
     publishDate DATETIME NOT NULL,

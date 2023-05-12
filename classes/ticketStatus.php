@@ -18,5 +18,10 @@
             $this->date = $date;
             $this->status = $status;
         }
+        public static function createTicketStatus(PDO $db, int $ticketId, ?string $agentUsername, DateTime $date, string $text) : void {
+            $stmt = $db->prepare('INSERT INTO TicketStatus (ticketId, agentUsername, date, status) VALUES (?, ?, ?, ?)');
+            $stmt->execute(array($ticketId, $agentUsername, $date->format('Y-m-d H:i:s'), $text));
+        }
+        
     }
 ?>

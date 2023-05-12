@@ -60,8 +60,12 @@
             return $ticketArray;
         }
         public static function createTicket(PDO $db, string $publisher, string $department, DateTime $publishDate, string $priority = Ticket::P_NORMAL, string $text) : void {
-            $stmt = $db->prepare('INSERT INTO Ticket (publisher, department, publishdate, priority, text)  VALUES (?, ?, ?, ?, ?)');
-            $stmt->execute(array($publisher, $department, $publishDate, $priority, $text));
+            $stmt = $db->prepare('SELECT MAX(id) as max FROM Ticket');
+            $stmt->execute();
+            $ticketId =  $stmt->fetch()['max'] + 1;
+            $stmt = $db->prepare('INSERT INTO Ticket (id, publisher, department, publishdate, priority, text)  VALUES (?, ?, ?, ?, ?, ?)');
+            $stmt->execute(array($ticketId, $publisher, $department, $publishDate->format('Y-m-d H:i:s'), $priority, $text));
+            TicketStatus::createTicketStatus($db, $ticketId, null, $publishDate, TicketStatus::UNASSIGNED);
         }
     }
 ?>

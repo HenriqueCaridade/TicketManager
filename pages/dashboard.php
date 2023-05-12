@@ -4,10 +4,12 @@
     include_once("../templates/footer.php");
     include_once("../templates/sidebar.php");
     include_once("../templates/ticket.php");
+    include_once("../templates/department.php");
     // Session
     include_once("../database/connection.php");
     include_once("../classes/session.php");
     include_once("../classes/ticket.php");
+    include_once("../classes/department.php");
     $session = Session::getSession();
 
     if (!$session->isLoggedIn()) {
@@ -16,6 +18,7 @@
     }
     $db = getDatabaseConnection();
     $tickets = Ticket::getTicketsFromUsername($db, $_SESSION[Session::USERNAME]);
+    $departments = Department::getAllDepartments($db);
 
     // Draw Page
     drawHeader(true);
@@ -28,7 +31,7 @@
         <h1 id="dashboard-title" class="title">Dashboard</h1>
         <?php drawTickets($tickets); ?>
         <div class="openBtn">
-            <button class="openButton" onclick="openTicketForm()"><strong>Open Form</strong></button>
+            <button class="openButton" onclick="openTicketForm()"> Submit Ticket</button>
         </div>
         <div class="ticketPopup">
             <div class = "formPopup" id ="popupForm">
@@ -37,13 +40,16 @@
                     <span>Text</span>
                     <input type="text" name="text" required>
                  </div>
+                 <div >
+                    <span>Departments:</span>
+                    <?php drawDepartments($departments); ?>
+                 </div>
                 <div class="add-ticket-item">
                     <button type="submit" class="btn">Submit</button>
-                    <button type="button" class="btn cancel" onclick="closeTicketForm()">Close</button>
+                    <button type="button" class="btn-cancel" onclick="closeTicketForm()">Close</button>
                 </div>
             </form>
             </div>
-            
         </div>
 </main>
 <?php  
