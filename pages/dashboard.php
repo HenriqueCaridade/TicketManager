@@ -30,17 +30,20 @@
     <div id="dashboard" class="page">
         <h1 id="dashboard-title" class="title">Dashboard</h1>
         <?php drawTickets($tickets); ?>
-        <div class="openBtn">
-            <button class="openButton" onclick="openTicketForm()"> Submit Ticket</button>
-        </div>
-        <div class="ticketPopup">
-            <div class = "formPopup" id ="popupForm">
-            <form action="../actions/addTicket.php" method="post" class="formContainer">
+        <button class="open-button" onclick="openTicketForm()"> Submit Ticket</button>
+        <div id="ticket-darken"></div>
+        <div class="ticket-popup">
+            <div class = "form-popup" id ="popup-form">
+            <form action="../actions/addTicket.php" method="post" class="ticket-form">
+                <div class="add-ticket-item">
+                    <span>Subject</span>
+                    <input type="text" name="subject" required>
+                </div>
                 <div class="add-ticket-item">
                     <span>Text</span>
                     <input type="text" name="text" required>
-                 </div>
-                 <div >
+                </div>
+                <div class="add-ticket-item">
                     <span>Departments:</span>
                     <?php drawDepartments($departments); ?>
                  </div>

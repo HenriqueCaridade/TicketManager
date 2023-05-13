@@ -308,50 +308,59 @@ table#tickets td {
 }
 
 /* TICKET SUBMISSION*/
-
-.openButton {
+.add-ticket-item {
+    display: block;
+}
+.open-button {
     position: absolute;
-    left : 90%;
-    top :90%;
+    top: 90%;
+    left: 90%;
     
 }
-
-.ticketPopup {
+.ticket-popup {
     position: relative;
     text-align: center;
     width: 100%;
 }
-
-.formPopup {
+.form-popup {
     display: none;
     position: fixed;
     left: 45%;
     top: 40%;
     border: 3px solid #999999;
-    z-index: 10;
+    z-index: 11;
 }
-.formContainer {
+.ticket-form {
     max-width: 300px;
     padding: 20px;
     background-color: #fff;
 }
-.formContainer input[type=text] {
-        width: 100%;
-        padding: 15px;
-        margin: 5px 0 20px 0;
-        border: none;
-        background: #eee;
-        border: 1px solid;
+.ticket-form input[type=text] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 20px 0;
+    border: none;
+    background: #eee;
+    border: 1px solid;
 }
-.formContainer input[type=text]:focus {
-        background-color: #ddd;
-        outline: none;
+.ticket-form input[type=text]:focus {
+    background-color: #ddd;
+    outline: none;
 }
-#popupForm{
+#popup-form{
     display: none;
 }
 button.btn-cancel {
     background-color: var(--error-color);
     position: relative;
 }
-
+#ticket-darken {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+    background-color: #00000066;
+    z-index: 10;
+}
