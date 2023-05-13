@@ -9,7 +9,7 @@
 
     function drawDepartments(array $departments) {
 ?>
-<select name="department" id="departments">
+<select name="department" id="department-dropdown">
     <?php
     foreach ($departments as $department) {
         _drawDepartment($department);

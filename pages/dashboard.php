@@ -43,9 +43,9 @@
                     <span>Text</span>
                     <input type="text" name="text" required>
                 </div>
-                <div class="add-ticket-item">
-                    <span>Departments:</span>
-                    <?php drawDepartments($departments); ?>
+                <div class="add-ticket-item"  >
+                    <span>Department:</span>
+                    <?php drawDepartments($departments); ?> 
                  </div>
                 <div class="add-ticket-item">
                     <button type="submit" class="btn">Submit</button>

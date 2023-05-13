@@ -327,13 +327,14 @@ table#tickets td {
     position: fixed;
     left: 45%;
     top: 40%;
-    border: 3px solid #999999;
+    border: 3px solid black;
     z-index: 11;
 }
 .ticket-form {
     max-width: 300px;
     padding: 20px;
     background-color: #fff;
+    margin: 0;
 }
 .ticket-form input[type=text] {
     width: 100%;
@@ -363,4 +364,16 @@ button.btn-cancel {
     display: none;
     background-color: #00000066;
     z-index: 10;
+}
+.add-ticket-item {
+    color: black;
+    font-weight: 500;
+}
+#department-dropdown {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 20px 0;
+    border: none;
+    background: #eee;
+    border: 1px solid;
 }
