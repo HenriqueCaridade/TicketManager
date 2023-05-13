@@ -3,7 +3,7 @@
     include_once("../templates/profile.php");
     function _drawTicket(Ticket $ticket) {
 ?>
-<tr class="ticket">
+<tr class="ticket" data-id="<?=$ticket->id?>">
     <td class="ticket-username"><?php drawProfile($ticket->publisher, true); ?></td>
     <td class="ticket-subject"><?=htmlentities($ticket->subject)?></td>
     <td class="ticket-department"><?=htmlentities($ticket->department)?></td>

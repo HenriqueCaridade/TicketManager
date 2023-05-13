@@ -1,0 +1,124 @@
+@import url(include.css);
+
+/* TICKET SYLE */
+table#tickets {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table#tickets, table#tickets th, table#tickets td {
+    position: relative;
+}
+table#tickets th {
+    padding: 0.5em;
+    text-align: left;
+}
+table#tickets td {
+    min-width: 0;
+    padding: 0.5em;
+    overflow: hidden;
+    border-top: 2px solid var(--secondary-background-color);
+}
+.ticket-resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    cursor: col-resize;
+    user-select: none;
+    border-right: 2px solid var(--secondary-background-color);
+}
+
+.ticket-resizer:hover, .ticket-resizer.ticket-resizing {
+    border-right: 2px solid var(--accent-color);
+}
+
+.ticket > td {
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* TICKET SUBMISSION*/
+.add-ticket-item {
+    display: block;
+}
+
+button#ticket-open-button {
+    margin-top: 1em;
+    padding: 1em;
+    width: 100%;
+    min-width: 15em;
+    position: relative;
+    right: 0;
+}
+.ticket-form {
+    padding: 20px;
+    margin: 0;
+}
+.ticket-form input[type=text], .ticket-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 20px 0;
+    border: none;
+    border: 1px solid;
+}
+.ticket-form textarea {
+    resize: none;
+}
+
+.ticket-form input[type=text]:focus, .ticket-form textarea:focus {
+    background-color: var(--secondary-background-color);
+    outline: none;
+}
+#popup-form {
+    display: none;
+    text-align: center;
+    display: none;
+    position: fixed;
+    top: 25vh;
+    left: 40vw;
+    width: 20vw;
+    height: 25vh;
+    min-width: 15rem;
+    min-height: 23rem;
+    background-color: var(--primary-background-color);
+    border: 3px solid black;
+    border-radius: 0.6em;
+    z-index: 11;
+}
+#popup-form button {
+    padding: 1em;
+    min-width: 6em;
+}
+#popup-form button.submit-button {
+    width: calc(100% - 8em);
+}
+
+#popup-form button.cancel-button {
+    background-color: var(--error-color);
+    position: relative;
+}
+#ticket-darken {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+    background-color: #00000066;
+    z-index: 10;
+}
+.add-ticket-item {
+    color: black;
+    font-weight: 500;
+}
+#department-dropdown {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 20px 0;
+    border: none;
+    background: #eee;
+    border: 1px solid;
+}

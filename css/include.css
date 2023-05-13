@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    /* Color Pallete */
+    --primary-background-color: #dededeff;
+    --secondary-background-color: #c4c3c7ff;
+    --primary-color: #262b2dff;
+    --secondary-color: #4c6569ff;
+    --accent-color: #1aa193ff;
+    --error-color: #ce5050ff;
+    --warning-color: #cfbd63ff;;
+    --success-color: #51d880ff;
+
+    /* General Constants */
+    --header-height: 5rem;
+    --footer-height: 3rem;
+
+    --sidebar-width: 14rem;
+    --sidebar-padding: 15px;
+
+    --margin-sides: 10rem;
+}
