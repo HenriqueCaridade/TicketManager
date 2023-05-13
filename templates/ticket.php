@@ -5,7 +5,7 @@
 ?>
 <tr class="ticket">
     <td class="ticket-username"><?php drawProfile($ticket->publisher, true); ?></td>
-    <td class="ticket-text"><?=htmlentities($ticket->text)?></td>
+    <td class="ticket-subject"><?=htmlentities($ticket->subject)?></td>
     <td class="ticket-department"><?=htmlentities($ticket->department)?></td>
     <td class="ticket-priority"><?=htmlentities($ticket->priority)?></td>
     <td class="ticket-status"><?=htmlentities($ticket->status->status)?></td>

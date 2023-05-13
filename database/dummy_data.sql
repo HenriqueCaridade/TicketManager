@@ -11,9 +11,9 @@ INSERT INTO User VALUES ('dummy3'  , 'Dummy Three'      , 'b2e98ad6f6eb8508dd6a1
 
 INSERT INTO Department VALUES ('Technology');
 
-INSERT INTO Ticket (id, publisher, department, publishDate, priority, text) VALUES (1, 'dummy1', 'Technology', '2000-01-01 01:02:03', 'Normal', 'My ticket1.');
-INSERT INTO Ticket (id, publisher, department, publishDate, priority, text) VALUES (2, 'dummy1', 'Technology', '2000-01-02 04:05:06', 'High', 'My ticket2.');
-INSERT INTO Ticket (id, publisher, department, publishDate, priority, text) VALUES (3, 'dummy1', 'Technology', '2000-01-03 07:08:09', 'Urgent', 'My ticket3.');
+INSERT INTO Ticket (id, publisher, department, publishDate, priority, subject, text) VALUES (1, 'dummy1', 'Technology', '2000-01-01 01:02:03', 'Normal', 'My ticket1.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.');
+INSERT INTO Ticket (id, publisher, department, publishDate, priority, subject, text) VALUES (2, 'dummy1', 'Technology', '2000-01-02 04:05:06', 'High', 'My ticket2.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.');
+INSERT INTO Ticket (id, publisher, department, publishDate, priority, subject, text) VALUES (3, 'dummy1', 'Technology', '2000-01-03 07:08:09', 'Urgent', 'My ticket3.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.');
 
 INSERT INTO TicketStatus (ticketId, agentUsername, date, status) VALUES (1, NULL, '2000-01-01 01:02:03', 'Unassigned');
 INSERT INTO TicketStatus (ticketId, agentUsername, date, status) VALUES (2, NULL, '2000-01-02 04:05:06', 'Unassigned');

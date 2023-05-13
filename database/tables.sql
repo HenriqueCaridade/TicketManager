@@ -30,6 +30,7 @@ CREATE TABLE Ticket(
     department STRING NOT NULL REFERENCES Department(username),
     publishDate DATETIME NOT NULL,
     priority STRING NOT NULL CHECK (priority IN('Normal', 'High', 'Urgent')),
+    subject STRING NOT NULL,
     text STRING NOT NULL
 );
 

@@ -65,10 +65,12 @@ for (let element of elements) {
 
 //NEW TICKET POPUP
 function openTicketForm() {
-  document.getElementById("popupForm").style.display = "block";
+  document.getElementById("popup-form").style.display = "block";
+  document.getElementById("ticket-darken").style.display = "block";
 }
 function closeTicketForm() {
-  document.getElementById("popupForm").style.display = "none";
+  document.getElementById("popup-form").style.display = "none";
+  document.getElementById("ticket-darken").style.display = "none";
 }
 
 // TICKET TABLE RESIZER 

@@ -5,6 +5,6 @@
 
     $session = Session::getSession();
     $db = getDatabaseConnection();
-    Ticket::createTicket($db, $_SESSION[Session::USERNAME], "Informática", new DateTime(), Ticket::P_NORMAL,$_POST['text'] );
+    Ticket::createTicket($db, $_SESSION[Session::USERNAME], "Technology", new DateTime(), Ticket::P_NORMAL, $_POST['subject'], $_POST['text']);
     header('Location: ../pages/dashboard.php');
 ?>
