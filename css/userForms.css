@@ -1,0 +1,83 @@
+@import url(include.css);
+
+/* FOR EVERYONE BELOW */
+.register-item, .login-item, .update-item, #toasts {
+    display: block;
+    width: 30rem;
+}
+.register-item, .login-item, #toasts {
+    margin: auto;
+}
+div.register-item, div.login-item, div.update-item {
+    padding-top: 1em;
+}
+.title {
+    font-size: 50px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* LOGIN AND REGISTER STYLE */
+#register-title, #login-title {
+    text-align: center;
+}
+.register-label, .login-label, .update-label {
+    padding: 2px 1em;
+}
+#register input, #login input, #settings input {
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 2em;
+    font-size: 1em;
+    background-color: transparent;
+    border: 2px solid var(--secondary-background-color);
+}
+#register input.button, #login input.button, #settings input.button {
+    padding: 0.8em;
+    color: var(--primary-background-color);
+    background-color: var(--accent-color);
+    border: none;
+}
+button:not(.faq-question) {
+    padding: 0.8em;
+    color: var(--primary-background-color);
+    background-color: var(--accent-color);
+    border: none;
+    padding: 0.5em;
+    border-radius: 2em;
+}
+
+#register input[type=checkbox], #login input[type=checkbox], #settings input[type=checkbox] {
+    width: auto;
+    color: var(--error-color);
+    margin-right: 10px;
+    background-color: var(--error-color);
+}
+
+a.register-item, a.login-item {
+    margin-top: 1em;
+    padding-left: 1em;
+}
+
+/* TOAST STYLE */
+div#toasts {
+    margin-top: 2em;
+}
+div.toast {
+    margin: 0.5em 0;
+    padding: 0.5em;
+    font-size: medium;
+    border-radius: 2em;
+}
+div.toast.error {
+    background-color: var(--error-color);
+}
+div.toast.warning {
+    background-color: var(--warning-color);
+}
+div.toast.success {
+    background-color: var(--success-color);
+}
+#caps-warning {
+    display: none;
+}

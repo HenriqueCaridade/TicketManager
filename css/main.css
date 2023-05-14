@@ -1,0 +1,111 @@
+@import url(include.css);
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--primary-background-color);
+    color: var(--primary-color);
+}
+
+.page {
+    position: relative;
+    margin: 0 var(--margin-sides);
+}
+
+
+/* HYPERLINK STYLE */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* HEADER STYLE */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    font-size: 3em;
+    border-bottom: 2px solid var(--secondary-background-color);
+    z-index: 2;
+}
+#logo {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-weight: 600;
+}
+#logo-highlight {
+    color: var(--accent-color);
+}
+
+#profile {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+/* FOOTER STYLE */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--footer-height);
+    font-size: 1em;
+    border-top: 2px solid var(--secondary-background-color);
+    z-index: 2;
+    text-align: center;
+}
+#footer-info {
+    position: relative;
+    top: 1em;
+    font-size: large;
+}
+
+/* SIDE BAR STYLE */
+.sidebar {
+    height: calc(100% - var(--header-height) - var(--footer-height) - 2 * var(--sidebar-padding));
+    width: var(--sidebar-width);
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    overflow-x: hidden;
+    border-right: 2px solid var(--secondary-background-color);
+    padding: var(--sidebar-padding) 0;
+    z-index: 1;
+}
+.sidebar a {
+    display: block;
+    padding: 6px 10px;
+    color: var(--primary-color);
+    font-size: 1.4em;
+}
+.sidebar a:hover {
+  color: var(--accent-color);
+}
+.sidebar a .icon {
+    position: absolute;
+    right: 70%;
+    width: 30%;
+    text-align: center;
+}
+.sidebar a .text {
+    position: relative;
+    left: 30%;
+}
+.sidebar a:last-child .icon, .sidebar a:last-child .text{
+    position: absolute;
+    bottom: var(--sidebar-padding);
+    color: var(--error-color);
+}
+
+/* MAIN STYLE */
+main {
+    margin-top: var(--header-height);
+    margin-bottom: var(--footer-height);
+}
+main.main-sidebar {
+    overflow: hidden;
+    margin-left: var(--sidebar-width);
+}

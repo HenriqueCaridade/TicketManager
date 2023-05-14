@@ -1,0 +1,15 @@
+@import url(include.css);
+
+/* ACCOUNT STYLE */
+#account .profile {
+    font-size: 8em;
+}
+
+#account {
+    font-size: 2em;
+}
+
+.account-item {
+    display: block;
+    padding-bottom: 1em;
+}

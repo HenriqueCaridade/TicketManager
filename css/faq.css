@@ -1,0 +1,42 @@
+@import url(include.css);
+
+/* FAQ STYLE*/
+.faq-question { 
+    margin-top: 1rem;
+    padding: 1rem;
+    transition: 0.4s;
+    width: 100%;
+    text-align: left;
+    font-size: 1.4rem;
+    color: var(--accent-color);
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid var(--secondary-color); 
+}
+.faq-item:first-child > .faq-question { 
+    margin-top: 0;
+}
+.faq-item > .faq-question::after{
+    content: "\2212"; 
+    float: right;
+}
+.faq-item.faq-collapsed > .faq-question::after {
+    content: '\002B';
+    float: right;
+}
+
+.faq-item > .faq-answer-block {
+    overflow: hidden;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    background-color: var(--secondary-background-color);
+    transition: max-height 0.4s ease-out;
+}
+    
+.faq-item.faq-collapsed >.faq-answer-block {
+    max-height: 0;
+}
+
+.faq-answer {
+    padding: 1rem;
+}
