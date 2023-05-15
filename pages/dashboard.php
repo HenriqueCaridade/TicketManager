@@ -22,7 +22,7 @@
 
     // Draw Page
     drawHeader(true);
-    drawSidebar();
+    drawSidebar($session);
 ?>
 <main class="main-sidebar">
     <div id="dashboard" class="page">

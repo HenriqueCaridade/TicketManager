@@ -14,8 +14,12 @@
         public string $name;
         public string $email;
         public string $userType;
+        
+        const USERTYPE_CLIENT = 'Client';
+        const USERTYPE_AGENT = 'Agent';
+        const USERTYPE_ADMIN = 'Admin';
 
-        private function __construct(string $username, string $name, string $email, string $userType = 'Client') { 
+        private function __construct(string $username, string $name, string $email, string $userType = User::USERTYPE_CLIENT ) { 
             $this->username = $username;
             $this->name = $name;
             $this->email = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -131,7 +135,7 @@
             return null;
         }
         protected static function validatorUserType(string $userType) : ?string {
-            if (!in_array($userType, array('Client', 'Agent', 'Admin')))
+            if (!in_array($userType, array(User::USERTYPE_CLIENT, User::USERTYPE_AGENT,  User::USERTYPE_ADMIN)))
                 return 'Invalid User Type.';
             return null;
         }
