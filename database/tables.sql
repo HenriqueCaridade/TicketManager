@@ -9,8 +9,9 @@ DROP TABLE IF EXISTS User;
 CREATE TABLE User (
     username STRING PRIMARY KEY NOT NULL,
     name STRING NOT NULL,
-    password STRING NOT NULL,
     email STRING UNIQUE NOT NULL,
+    password STRING NOT NULL,
+    salt STRING NOT NULL,
     userType STRING NOT NULL CHECK (userType IN('Client', 'Agent', 'Admin'))
 );
 --------
@@ -44,6 +45,28 @@ CREATE TABLE TicketStatus(
     agentUsername STRING REFERENCES User(username),
     date DATETIME NOT NULL,
     status STRING NOT NULL CHECK (status IN('Unassigned', 'In progress', 'Done'))
+);
+
+--------
+
+DROP TABLE IF EXISTS TicketComment;
+
+CREATE TABLE TicketComment(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    ticketId INTEGER NOT NULL REFERENCES Ticket(id),
+    user STRING REFERENCES User(username),
+    date DATETIME NOT NULL,
+    text STRING NOT NULL
+);
+
+--------
+
+DROP TABLE IF EXISTS FAQ;
+
+CREATE TABLE FAQ(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    question STRING NOT NULL,
+    answer STRING NOT NULL
 );
 
 --------

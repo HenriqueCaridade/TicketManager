@@ -27,6 +27,7 @@ header {
     height: var(--header-height);
     font-size: 3em;
     border-bottom: 2px solid var(--secondary-background-color);
+    background-color: var(--primary-background-color);
     z-index: 2;
 }
 #logo {
@@ -54,6 +55,7 @@ footer {
     height: var(--footer-height);
     font-size: 1em;
     border-top: 2px solid var(--secondary-background-color);
+    background-color: var(--primary-background-color);
     z-index: 2;
     text-align: center;
 }
@@ -73,6 +75,7 @@ footer {
     overflow-x: hidden;
     border-right: 2px solid var(--secondary-background-color);
     padding: var(--sidebar-padding) 0;
+    background-color: var(--primary-background-color);
     z-index: 1;
 }
 .sidebar a {

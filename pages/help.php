@@ -4,14 +4,19 @@
     include_once("../templates/footer.php");
     include_once("../templates/sidebar.php");
     include_once("../templates/faq.php");
-    // Session
+    // Database
+    include_once("../database/connection.php");
+    // Classes
     include_once("../classes/session.php");
+    include_once("../classes/faq.php");
     $session = Session::getSession();
 
     if (!$session->isLoggedIn()) {
         $session->addToast(Session::ERROR, 'You are not logged in!');
         die(header('Location: ../pages/login_page.php'));
     }
+    $db = getDatabaseConnection();
+    $faqs = FAQ::getAll($db);
 
     // Draw Page
     drawHeader(true);
@@ -21,8 +26,7 @@
     <div id="faq" class="page">
         <h1 id="faq-title" class="title">Frequently Asked Questions (FAQ)</h1>
         <?php
-            drawFAQ("I can't login what should I do?", "Contact one of the Admins!");
-            drawFAQ("I don't remember my password", "Contact one of the Admins!");
+            foreach ($faqs as $faq) drawFAQ($faq->question, $faq->answer);
         ?>
     </div>
 </main>

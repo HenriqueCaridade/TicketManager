@@ -6,7 +6,6 @@
     // Session
     include_once("../classes/session.php");
     $session = Session::getSession();
-
     $prevUsername = htmlentities($session->getSavedInput(Session::L_USERNAME) ?? "");
     $prevPassword = htmlentities($session->getSavedInput(Session::L_PASSWORD) ?? "");
     
