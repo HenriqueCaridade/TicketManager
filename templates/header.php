@@ -12,6 +12,7 @@
     <script src="../js/profile.js" defer></script>
     <script src="../js/ticket.js" defer></script>
     <script src="../js/userForms.js" defer></script>
+    <script src="../js/admin.js" defer></script>
     <script src="https://kit.fontawesome.com/f3cf9d3f6c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/include.css">
     <link rel="stylesheet" href="../css/main.css">

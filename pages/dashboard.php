@@ -29,7 +29,7 @@
         <h1 id="dashboard-title" class="title">My Tickets</h1>
         <?php drawTickets($tickets); ?>
         <button id="ticket-open-button" onclick="openTicketForm()">Add Ticket</button>
-        <div id="ticket-darken" onclick="closeTicketForm()"></div>
+        <div id="popup-darken" onclick="closeTicketForm()"></div>
         <div id="popup-form">
             <form action="../actions/addTicket.php" method="post" class="ticket-form">
                 <div class="add-ticket-item">

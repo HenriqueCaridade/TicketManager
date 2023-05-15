@@ -100,16 +100,7 @@ button#ticket-open-button {
     background-color: var(--error-color);
     position: relative;
 }
-#ticket-darken {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    display: none;
-    background-color: #00000066;
-    z-index: 10;
-}
+
 .add-ticket-item {
     color: black;
     font-weight: 500;
