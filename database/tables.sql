@@ -19,7 +19,8 @@ CREATE TABLE User (
 DROP TABLE IF EXISTS Department;
 
 CREATE TABLE Department(
-    name STRING PRIMARY KEY NOT NULL
+    name STRING PRIMARY KEY NOT NULL,
+    abbrev STRING UNIQUE NOT NULL
 );
 --------
 
@@ -83,7 +84,7 @@ CREATE TABLE Hashtag (
 
 DROP TABLE IF EXISTS AgentInDepartment;
 
-CREATE TABLE AgentInDepartment(
+CREATE TABLE AgentInDepartment (
     agentUsername STRING NOT NULL REFERENCES User(username),
     department STRING NOT NULL REFERENCES Department(name)
 );

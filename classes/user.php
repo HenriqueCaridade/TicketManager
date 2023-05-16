@@ -19,14 +19,14 @@
         const USERTYPE_AGENT = 'Agent';
         const USERTYPE_ADMIN = 'Admin';
 
-        private function __construct(string $username, string $name, string $email, string $userType = User::USERTYPE_CLIENT ) { 
+        protected function __construct(string $username, string $name, string $email, string $userType = User::USERTYPE_CLIENT ) { 
             $this->username = $username;
             $this->name = $name;
             $this->email = filter_var($email, FILTER_SANITIZE_EMAIL);
             $this->userType = $userType;
         }
 
-        private static function arrayToUser(array $user) : User {
+        private static function fromArray(array $user) : User {
             return new User($user['username'], $user['name'], $user['email'], $user['userType']);
         }
 
@@ -35,7 +35,7 @@
             $stmt->execute(array($username));
             $user = $stmt->fetch();
             if ($user === false) return null;
-            return User::arrayToUser($user);
+            return User::fromArray($user);
         }
         protected static function getUserPasswordAndSalt(PDO $db, string $username) : ?array {
             $stmt = $db->prepare('SELECT password, salt FROM User WHERE username=?');
@@ -49,7 +49,7 @@
             $stmt->execute();
             $usersArray = array();
             foreach($stmt->fetchAll() as $user){
-                $usersArray[] = User::arrayToUser($user);
+                $usersArray[] = User::fromArray($user);
             }
             return $usersArray;
         }
@@ -58,7 +58,7 @@
             $stmt->execute();
             $usersArray = array();
             foreach($stmt->fetchAll() as $user){
-                $usersArray[] = User::arrayToUser($user);
+                $usersArray[] = User::fromArray($user);
             }
             return $usersArray;
         }
@@ -179,7 +179,20 @@
         }
         public static function passwordSalt() : string {
             return bin2hex(random_bytes(16));
+        }   
+    }
+
+    class Agent extends User {
+        private function __construct($) {
+            
         }
-        
+
+        public static function getUser(PDO $db, string $username) : ?User {
+            $stmt = $db->prepare('SELECT * FROM User WHERE username=?');
+            $stmt->execute(array($username));
+            $user = $stmt->fetch();
+            if ($user === false) return null;
+            return User::fromArray($user);
+        }
     }
 ?>

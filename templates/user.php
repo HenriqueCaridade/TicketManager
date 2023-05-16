@@ -24,7 +24,13 @@ function _drawAgent(User $agent) { ?>
         <td class="agent-usertype">
             <a class="agent-change" data-username="<?=htmlentities($agent->username)?>" data-user-type="<?=htmlentities($agent->userType)?>"> 
                 <?=htmlentities($agent->userType)?> 
-            </a></td>
+            </a>
+        </td>
+        <td class="agent-departments">
+            <a class="agent-department" data-username="<?=htmlentities($agent->username)?>"> 
+                <?=htmlentities($agent->userType)?> 
+            </a>
+        </td>
     </tr>
     <?php
 }
