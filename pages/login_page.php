@@ -13,6 +13,8 @@
     drawHeader();
 ?>
 <main>
+<?php var_dump($_SESSION);?>
+
     <div id="login" class="page">
         <h1 id="login-title" class="login title">Login</h1>
         <form action="../actions/login.php" method="post">

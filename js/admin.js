@@ -41,12 +41,24 @@ for (let agent of document.getElementsByClassName('agent-department-change')) {
     agent.addEventListener('click', function(ev){
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
-            console.log("Called")
             document.getElementById('popup').innerHTML = this.responseText;
             openPopup();
         };
         xhttp.open("POST", '../ajax/departmentPopup.php', false);
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhttp.send(`username=${agent.dataset.username}`);
+    });
+}
+
+for (let ticket of document.getElementsByClassName('ticket-department-change')) {
+    ticket.addEventListener('click', function(ev){
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/ticketDepartmentPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send(`id=${ticket.dataset.id}&department=${ticket.dataset.department}`);
     });
 }

@@ -16,24 +16,25 @@
         public static function getAllDepartments(PDO $db) : array {
             $stmt = $db->prepare('SELECT * FROM Department');
             $stmt->execute();
-            $deparmentArray = array();
+            $departmentArray = array();
             foreach($stmt->fetchAll() as $department){
-                $deparmentArray[] = Department::fromArray($department);
+                $departmentArray[] = Department::fromArray($department);
             }
-            return $deparmentArray;
+            return $departmentArray;
         }
 
         public static function getDepartmentsFromAgent(PDO $db, string $agentUsername) : array {
             $stmt = $db->prepare('SELECT * FROM AgentInDepartment WHERE agentUsername=?');
             $stmt->execute(array($agentUsername));
-            $deparmentArray = array();
+            $departmentArray = array();
             foreach($stmt->fetchAll() as $connection){
                 $stmt2 = $db->prepare('SELECT * FROM Department WHERE name=?');
                 $stmt2->execute(array($connection['department']));
                 $department = $stmt2->fetch();
-                $deparmentArray[] = Department::fromArray($department);
+                $departmentArray[] = Department::fromArray($department);
             }
-            return $deparmentArray;
+            return $departmentArray;
         }
+        
     }
 ?>

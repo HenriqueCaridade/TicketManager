@@ -60,5 +60,21 @@
             $stmt->execute(array($ticketId, $publisher, $department, $publishDate->format('Y-m-d H:i:s'), $priority, $subject,  $text));
             TicketStatus::createTicketStatus($db, $ticketId, null, $publishDate, TicketStatus::UNASSIGNED);
         }
+        public static function getTicketsFromDepartment (PDO $db, string $department) : array {
+            $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=?');
+            $stmt->execute(array($department));
+            $tickets = $stmt->fetchAll();
+            $ticketArray = array();
+            foreach ($tickets as $ticket) {
+                $ticketArray[] = Ticket::fromArray($db, $ticket);
+            }
+            return $ticketArray;
+        }
+        public static function changeDepartment (PDO $db, int $id, string $department) : void {
+            $stmt = $db->prepare('UPDATE Ticket SET department = ? WHERE id = ?');
+            $stmt->execute(array($department, $id));
+        }
+        
+
     }
 ?>

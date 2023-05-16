@@ -10,6 +10,7 @@ INSERT INTO User VALUES ('dummy2'  , 'Dummy Two'        , 'dummy.two@gmail.com' 
 INSERT INTO User VALUES ('dummy3'  , 'Dummy Three'      , 'dummy.three@gmail.com'         , '1e13aee26163247d2fbd950d754f81b16d78a8cc854ce2b43a36bee371d71e20', 'b00de92b2ec0b38f3a9098a62c25283e', 'Client');
 
 INSERT INTO Department VALUES ('Technology', 'Tech');
+INSERT INTO Department VALUES ('Ecommerce', 'Ecom');
 
 INSERT INTO Ticket (id, publisher, department, publishDate, priority, subject, text) VALUES (1, 'dummy1', 'Technology', '2000-01-01 01:02:03', 'Normal', 'My ticket1.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.');
 INSERT INTO Ticket (id, publisher, department, publishDate, priority, subject, text) VALUES (2, 'dummy1', 'Technology', '2000-01-02 04:05:06', 'High', 'My ticket2.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.');
@@ -21,3 +22,6 @@ INSERT INTO TicketStatus (ticketId, agentUsername, date, status) VALUES (3, NULL
 
 INSERT INTO FAQ (question, answer) VALUES ("I can't login what should I do?", "Contact one of the Admins!");
 INSERT INTO FAQ (question, answer) VALUES ("I don't remember my password", "Contact one of the Admins!");
+
+INSERT INTO AgentInDepartment(agentUsername, department) VALUES ('igorcher', 'Technology');
+INSERT INTO AgentInDepartment(agentUsername, department) VALUES ('henrique', 'Technology');
