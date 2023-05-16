@@ -5,6 +5,6 @@
     $session = Session::getSession();
     $db = getDatabaseConnection();
 
-    User::updateUserType($db, $_SESSION[Session::USERNAME], $_POST['usertype']);
+    User::updateUserType($db, $_POST['username'], $_POST['userType']);
     header('Location: ../pages/admin.php');
 ?>

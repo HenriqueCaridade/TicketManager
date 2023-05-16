@@ -8,12 +8,11 @@
     $session->saveInput(Session::L_PASSWORD, $_POST['password']);
 
     $db = getDatabaseConnection();
-    $password = User::getUserPassword($db, $_POST['username']);
-    if ($password === null) {
+    if (!User::usernameExists($db, $_POST['username'])) {
         $session->addToast(Session::ERROR, 'Username doesn\'t exist.');
         die(header('Location: ../pages/login_page.php'));
     }
-    if (!User::passwordMatchesHash($_POST['password'], $password)) {
+    if (!User::passwordMatchesUser($db, $_POST['username'], $_POST['password'])) {
         $session->addToast(Session::ERROR, 'Wrong password.');
         die(header('Location: ../pages/login_page.php'));
     }

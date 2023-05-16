@@ -16,12 +16,12 @@
     }
     $db = getDatabaseConnection();
 
-    $validation = User::validateParameters($db, $_POST['username'], $_POST['name'], $_POST['password1'], $_POST['email']);
+    $validation = User::validateParameters($db, $_POST['username'], $_POST['name'], $_POST['email'], $_POST['password1']);
     if ($validation !== null) { // Error
         $session->addToast(Session::ERROR, $validation);
         die(header('Location: ../pages/register_page.php'));
     }
-    User::createUser($db, $_POST['username'], $_POST['name'],$_POST['password1'], $_POST['email']);
+    User::createUser($db, $_POST['username'], $_POST['name'], $_POST['email'], $_POST['password1']);
 
     $session->addToast(Session::SUCCESS, 'User was created successfully.');
     $session->clearInput();

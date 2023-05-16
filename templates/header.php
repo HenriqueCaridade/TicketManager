@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="../css/faq.css">
     <link rel="stylesheet" href="../css/ticket.css">
     <link rel="stylesheet" href="../css/userForms.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/popup.css">
+    <link rel="stylesheet" href="../css/table.css">
     <title>Tick.et</title>
 </head>
 <body>

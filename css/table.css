@@ -1,0 +1,41 @@
+@import url(include.css);
+
+/* TABLE SYLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, table th, table td {
+    position: relative;
+}
+table th {
+    padding: 0.5em;
+    text-align: left;
+}
+table td {
+    min-width: 0;
+    padding: 0.5em;
+    overflow: hidden;
+    border-top: 2px solid var(--secondary-background-color);
+}
+.table-resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    cursor: col-resize;
+    user-select: none;
+    border-right: 2px solid var(--secondary-background-color);
+}
+
+.table-resizer:hover, .table-resizer.table-resizing {
+    border-right: 2px solid var(--accent-color);
+}
+
+table td {
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+}

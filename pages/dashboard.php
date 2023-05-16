@@ -29,26 +29,28 @@
         <h1 id="dashboard-title" class="title">My Tickets</h1>
         <?php drawTickets($tickets); ?>
         <button id="ticket-open-button" onclick="openTicketForm()">Add Ticket</button>
-        <div id="popup-darken" onclick="closeTicketForm()"></div>
-        <div id="popup-form">
-            <form action="../actions/addTicket.php" method="post" class="ticket-form">
-                <div class="add-ticket-item">
-                    <span>Subject</span>
-                    <input type="text" name="subject" required>
-                </div>
-                <div class="add-ticket-item">
-                    <span>Text</span>
-                    <textarea name="text" maxlength="500" required></textarea>
-                </div>
-                <div class="add-ticket-item"  >
-                    <span>Department:</span>
-                    <?php drawDepartments($departments); ?> 
-                </div>
-                <div class="add-ticket-item">
-                    <button type="submit" class="submit-button">Submit</button>
-                    <button type="button" class="cancel-button" onclick="closeTicketForm()">Close</button>
-                </div>
-            </form>
+        <div id="popup">
+            <div id="popup-darken" onclick="closeTicketForm()"></div>
+            <div id="popup-form">
+                <form action="../actions/addTicket.php" method="post" class="ticket-form">
+                    <div class="add-ticket-item">
+                        <span>Subject</span>
+                        <input type="text" name="subject" required>
+                    </div>
+                    <div class="add-ticket-item">
+                        <span>Text</span>
+                        <textarea name="text" maxlength="500" required></textarea>
+                    </div>
+                    <div class="add-ticket-item"  >
+                        <span>Department:</span>
+                        <?php drawDepartments($departments); ?> 
+                    </div>
+                    <div class="add-ticket-item">
+                        <button type="submit" class="submit-button">Submit</button>
+                        <button type="button" class="cancel-button" onclick="closeTicketForm()">Close</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </main>

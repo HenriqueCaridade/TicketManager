@@ -7,7 +7,7 @@ function _drawClient(User $client) { ?>
         <td class="client-name"><?=htmlentities($client->name)?></td>
         <td class="client-email"><?=htmlentities($client->email)?></td>
         <td class="client-usertype"> 
-            <a onclick="openClientPopup()"> 
+            <a class="client-change" data-username="<?=htmlentities($client->username)?>" data-user-type="<?=htmlentities($client->userType)?>"> 
                 <?=htmlentities($client->userType)?> 
             </a>
         </td>
@@ -21,7 +21,16 @@ function _drawAgent(User $agent) { ?>
         <td class="agent-username"><?php drawProfile($agent->username, true); ?></td>
         <td class="agent-name"><?=htmlentities($agent->name)?></td>
         <td class="agent-email"><?=htmlentities($agent->email)?></td>
-        <td class="agent-usertype"><?=htmlentities($agent->userType)?></td>
+        <td class="agent-usertype">
+            <a class="agent-change" data-username="<?=htmlentities($agent->username)?>" data-user-type="<?=htmlentities($agent->userType)?>"> 
+                <?=htmlentities($agent->userType)?> 
+            </a>
+        </td>
+        <td class="agent-departments">
+            <a class="agent-department" data-username="<?=htmlentities($agent->username)?>"> 
+                <?=htmlentities($agent->userType)?> 
+            </a>
+        </td>
     </tr>
     <?php
 }
