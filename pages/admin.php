@@ -9,7 +9,7 @@
     $session = Session::getSession();
     $db = getDatabaseConnection();
     $clients = User::getAllClients($db);
-    $agents = User::getAllAgents($db);
+    $agents = Agent::getAllAgents($db);
 
     if (!$session->isLoggedIn()) {
         $session->addToast(Session::ERROR, 'You are not logged in!');

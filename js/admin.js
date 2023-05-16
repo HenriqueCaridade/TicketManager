@@ -11,30 +11,42 @@ function closePopup() {
     document.getElementById("popup-form").style.display = "none";
 }
 
-let clientsChangeHTML = document.getElementsByClassName('client-change');
-for (let client of clientsChangeHTML) {
+for (let client of document.getElementsByClassName('client-usertype-change')) {
     client.addEventListener('click', function(ev){
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
             document.getElementById('popup').innerHTML = this.responseText;
             openPopup();
         };
-        xhttp.open("POST", '../ajax/popup.php', false);
+        xhttp.open("POST", '../ajax/userTypePopup.php', false);
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhttp.send(`username=${client.dataset.username}&userType=${client.dataset.userType}`);
     });
 }
 
-let agentsChangeHTML = document.getElementsByClassName('agent-change');
-for (let agent of agentsChangeHTML) {
+for (let agent of document.getElementsByClassName('agent-usertype-change')) {
     agent.addEventListener('click', function(ev){
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
             document.getElementById('popup').innerHTML = this.responseText;
             openPopup();
         };
-        xhttp.open("POST", '../ajax/popup.php', false);
+        xhttp.open("POST", '../ajax/userTypePopup.php', false);
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhttp.send(`username=${agent.dataset.username}&userType=${agent.dataset.userType}`);
+    });
+}
+
+for (let agent of document.getElementsByClassName('agent-department-change')) {
+    agent.addEventListener('click', function(ev){
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            console.log("Called")
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/departmentPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send(`username=${agent.dataset.username}`);
     });
 }

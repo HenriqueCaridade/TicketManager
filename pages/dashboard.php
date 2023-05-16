@@ -32,20 +32,20 @@
         <div id="popup">
             <div id="popup-darken" onclick="closeTicketForm()"></div>
             <div id="popup-form">
-                <form action="../actions/addTicket.php" method="post" class="ticket-form">
-                    <div class="add-ticket-item">
+                <form action="../actions/addTicket.php" method="post">
+                    <div class="popup-item">
                         <span>Subject</span>
-                        <input type="text" name="subject" required>
+                        <input type="text" minlength="5" name="subject" required>
                     </div>
-                    <div class="add-ticket-item">
+                    <div class="popup-item">
                         <span>Text</span>
-                        <textarea name="text" maxlength="500" required></textarea>
+                        <textarea name="text" minlength="30" maxlength="500" required></textarea>
                     </div>
-                    <div class="add-ticket-item"  >
+                    <div class="popup-item">
                         <span>Department:</span>
-                        <?php drawDepartments($departments); ?> 
+                        <?php drawDepartments($departments); ?>
                     </div>
-                    <div class="add-ticket-item">
+                    <div class="popup-item">
                         <button type="submit" class="submit-button">Submit</button>
                         <button type="button" class="cancel-button" onclick="closeTicketForm()">Close</button>
                     </div>

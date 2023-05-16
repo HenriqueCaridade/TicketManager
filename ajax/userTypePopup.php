@@ -7,9 +7,9 @@
 ?>
 <div id="popup-darken" onclick="closePopup()"></div>
 <div id="popup-form">
-    <form action="../actions/client.php" method="post" class="client-form">
+    <form action="../actions/client.php" method="post">
         <div class="popup-item">
-            <span>Change <?=htmlentities($_POST['username'])?>'s UserType to: </span>
+            <span><?=htmlentities($_POST['username'])?>'s User Type: </span>
             <select name="userType" required>
                 <option <?=$_POST['userType'] === User::USERTYPE_CLIENT ? 'selected' : ''?> value="Client">Client</option>
                 <option <?=$_POST['userType'] === User::USERTYPE_AGENT ? 'selected' : ''?> value="Agent">Agent</option>
@@ -20,6 +20,6 @@
             <button type="submit" class="submit-button">Submit</button>
             <button type="button" class="cancel-button" onclick="closePopup()">Close</button>
         </div>
-        <input type="hidden" name = 'username' value="<?=htmlentities($_POST['username'])?>"> 
+        <input type="hidden" name='username' value="<?=htmlentities($_POST['username'])?>"> 
     </form>
 </div>
