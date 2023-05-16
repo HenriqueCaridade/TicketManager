@@ -27,10 +27,10 @@
     top: 25vh;
     left: 40vw;
     width: 20vw;
-    height: 25vh;
     min-width: 15rem;
-    min-height: 23rem;
+    padding: 0.5em;
     background-color: var(--primary-background-color);
+    color: var(--primary-color);
     border: 3px solid black;
     border-radius: 0.6em;
     z-index: 11;
@@ -39,14 +39,11 @@
     padding: 1em;
     min-width: 6em;
 }
-#popup-form button.submit-button {
-    width: calc(100% - 8em);
-}
 
 #popup-form button.cancel-button {
     width: auto;
+    margin-top: 1em;
     background-color: var(--error-color);
-    position: relative;
 }
 
 .popup-item, .popup-item > :not(button) {
@@ -59,4 +56,13 @@
 .popup-item > * {
     padding: 0.5em;
     width: 100%;
+}
+#popup-form input[type='text'], #popup-form textarea {
+    font-size: 1rem;
+}
+
+#popup-form textarea {
+    font-family: 'Inter', sans-serif;
+    resize: none;
+    height: 6em;
 }

@@ -1,9 +1,6 @@
 @import url(include.css);
 
 /* TICKET SUBMISSION*/
-.add-ticket-item {
-    display: block;
-}
 
 button#ticket-open-button {
     margin-top: 1em;
@@ -12,36 +9,4 @@ button#ticket-open-button {
     min-width: 15em;
     position: relative;
     right: 0;
-}
-.ticket-form {
-    padding: 20px;
-    margin: 0;
-}
-.ticket-form input[type=text], .ticket-form textarea {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 20px 0;
-    border: none;
-    border: 1px solid;
-}
-.ticket-form textarea {
-    resize: none;
-}
-
-.ticket-form input[type=text]:focus, .ticket-form textarea:focus {
-    background-color: var(--secondary-background-color);
-    outline: none;
-}
-
-.add-ticket-item {
-    color: black;
-    font-weight: 500;
-}
-#department-dropdown {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 20px 0;
-    border: none;
-    background: #eee;
-    border: 1px solid;
 }

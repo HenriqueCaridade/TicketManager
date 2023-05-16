@@ -1,5 +1,6 @@
 <?php
     declare(strict_types=1);
+    include_once("../classes/department.php");
 
     class User {
         protected const MIN_PASSWORD_LENGTH = 8;
@@ -19,7 +20,7 @@
         const USERTYPE_AGENT = 'Agent';
         const USERTYPE_ADMIN = 'Admin';
 
-        protected function __construct(string $username, string $name, string $email, string $userType = User::USERTYPE_CLIENT ) { 
+        protected function __construct(string $username, string $name, string $email, string $userType = User::USERTYPE_CLIENT) { 
             $this->username = $username;
             $this->name = $name;
             $this->email = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -53,15 +54,7 @@
             }
             return $usersArray;
         }
-        public static function getAllAgents(PDO $db) : array {
-            $stmt = $db->prepare('SELECT * FROM User WHERE userType = \'Agent\' ');
-            $stmt->execute();
-            $usersArray = array();
-            foreach($stmt->fetchAll() as $user){
-                $usersArray[] = User::fromArray($user);
-            }
-            return $usersArray;
-        }
+
         public static function updateUserParameters(PDO $db, string $currUsername, string $newUsername, string $newName, string $newEmail) : void {
             $newEmail = filter_var($newEmail, FILTER_SANITIZE_EMAIL);
             $stmt = $db->prepare('UPDATE User SET username = ?, name = ?, email = ? WHERE username = ?');
@@ -183,16 +176,40 @@
     }
 
     class Agent extends User {
-        private function __construct($) {
-            
+        public array $departments;
+        private function __construct(string $username, string $name, string $email, array $departments, string $userType = User::USERTYPE_AGENT) {
+            parent::__construct($username, $name, $email, $userType);
+            $this->departments = $departments;
+        }
+        private static function fromArrays(array $agent, array $departments) : Agent {
+            return new Agent($agent['username'], $agent['name'], $agent['email'], $departments, $agent['userType']);
         }
 
-        public static function getUser(PDO $db, string $username) : ?User {
+        public static function getAgent(PDO $db, string $username) : ?Agent {
             $stmt = $db->prepare('SELECT * FROM User WHERE username=?');
             $stmt->execute(array($username));
             $user = $stmt->fetch();
             if ($user === false) return null;
-            return User::fromArray($user);
+            return Agent::fromArrays($user, Department::getDepartmentsFromAgent($db, $username));
+        }
+        public static function getAllAgents(PDO $db) : array {
+            $stmt = $db->prepare('SELECT * FROM User WHERE userType=\'Agent\' ');
+            $stmt->execute();
+            $agentsArray = array();
+            foreach($stmt->fetchAll() as $agent){
+                $agentsArray[] = Agent::fromArrays($agent, Department::getDepartmentsFromAgent($db, $agent['username']));
+            }
+            return $agentsArray;
+        }
+
+        public static function addDepartment(PDO $db, string $username, string $department) : void {
+            $stmt = $db->prepare('INSERT INTO AgentInDepartment (agentUsername, department) VALUES (?, ?)');
+            $stmt->execute(array($username, $department));
+        }
+
+        public static function removeDepartment(PDO $db, string $username, string $department) : void {
+            $stmt = $db->prepare('DELETE FROM AgentInDepartment WHERE agentUsername=? AND department=?');
+            $stmt->execute(array($username, $department));
         }
     }
 ?>

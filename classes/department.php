@@ -23,7 +23,7 @@
             return $deparmentArray;
         }
 
-        public static function getDepartmentsFromAgent(PDO $db, int $agentUsername) : array {
+        public static function getDepartmentsFromAgent(PDO $db, string $agentUsername) : array {
             $stmt = $db->prepare('SELECT * FROM AgentInDepartment WHERE agentUsername=?');
             $stmt->execute(array($agentUsername));
             $deparmentArray = array();
