@@ -1,12 +1,14 @@
 
 //NEW TICKET POPUP
 function openTicketForm() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("popup-darken").style.display = "block";
     document.getElementById("popup-form").style.display = "block";
-    document.getElementById("ticket-darken").style.display = "block";
 }
 function closeTicketForm() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("popup-darken").style.display = "none";
     document.getElementById("popup-form").style.display = "none";
-    document.getElementById("ticket-darken").style.display = "none";
 }
   
   // TICKET TABLE RESIZER 

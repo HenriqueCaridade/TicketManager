@@ -26,12 +26,16 @@
             $this->userType = $userType;
         }
 
+        private static function arrayToUser(array $user) : User {
+            return new User($user['username'], $user['name'], $user['email'], $user['userType']);
+        }
+
         public static function getUser(PDO $db, string $username) : ?User {
             $stmt = $db->prepare('SELECT * FROM User WHERE username=?');
             $stmt->execute(array($username));
             $user = $stmt->fetch();
             if ($user === false) return null;
-            return new User($user['username'], $user['name'], $user['email'], $user['userType']);
+            return User::arrayToUser($user);
         }
         protected static function getUserPasswordAndSalt(PDO $db, string $username) : ?array {
             $stmt = $db->prepare('SELECT password, salt FROM User WHERE username=?');
@@ -39,6 +43,24 @@
             $user = $stmt->fetch();
             if ($user === false) { $_SESSION['test2'] = $username; return null;}
             return $user;
+        }
+        public static function getAllClients(PDO $db) : array {
+            $stmt = $db->prepare('SELECT * FROM User WHERE userType = \'Client\' ');
+            $stmt->execute();
+            $usersArray = array();
+            foreach($stmt->fetchAll() as $user){
+                $usersArray[] = User::arrayToUser($user);
+            }
+            return $usersArray;
+        }
+        public static function getAllAgents(PDO $db) : array {
+            $stmt = $db->prepare('SELECT * FROM User WHERE userType = \'Agent\' ');
+            $stmt->execute();
+            $usersArray = array();
+            foreach($stmt->fetchAll() as $user){
+                $usersArray[] = User::arrayToUser($user);
+            }
+            return $usersArray;
         }
         public static function updateUserParameters(PDO $db, string $currUsername, string $newUsername, string $newName, string $newEmail) : void {
             $newEmail = filter_var($newEmail, FILTER_SANITIZE_EMAIL);
@@ -48,6 +70,10 @@
         public static function updateUserPassword(PDO $db, string $username, string $password) : void {
             $stmt = $db->prepare('UPDATE User SET password = ? WHERE username = ?');
             $stmt->execute(array(User::passwordHash($password), $username));
+        }
+        public static function updateUserType(PDO $db, string $username, string $userType) {
+            $stmt = $db->prepare('UPDATE User SET userType = ? WHERE username = ?');
+            $stmt->execute(array($userType, $username));
         }
         public static function createUser(PDO $db, string $username, string $name, string $email, string $password, string $userType = 'Client') : void {
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -154,5 +180,6 @@
         public static function passwordSalt() : string {
             return bin2hex(random_bytes(16));
         }
+        
     }
 ?>

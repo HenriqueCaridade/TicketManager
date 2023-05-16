@@ -1,0 +1,62 @@
+@import url(include.css);
+
+#popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9;
+}
+
+#popup-darken {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #00000066;
+    z-index: 10;
+}
+
+#popup-form {
+    text-align: center;
+    display: none;
+    position: fixed;
+    top: 25vh;
+    left: 40vw;
+    width: 20vw;
+    height: 25vh;
+    min-width: 15rem;
+    min-height: 23rem;
+    background-color: var(--primary-background-color);
+    border: 3px solid black;
+    border-radius: 0.6em;
+    z-index: 11;
+}
+#popup-form button {
+    padding: 1em;
+    min-width: 6em;
+}
+#popup-form button.submit-button {
+    width: calc(100% - 8em);
+}
+
+#popup-form button.cancel-button {
+    width: auto;
+    background-color: var(--error-color);
+    position: relative;
+}
+
+.popup-item, .popup-item > :not(button) {
+    display: block;
+}
+.popup-item {
+    padding: 1em;
+    width: calc(100% - 2em);
+}
+.popup-item > * {
+    padding: 0.5em;
+    width: 100%;
+}
