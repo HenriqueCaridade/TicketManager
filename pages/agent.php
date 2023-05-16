@@ -18,9 +18,9 @@
     drawHeader(true);
     drawSidebar($session);
 ?>
-    <main class="main-sidebar">
+<main class="main-sidebar">
 
-    </main>
+</main>
 <?php
     drawFooter();
 ?>

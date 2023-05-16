@@ -26,7 +26,7 @@ const createResizableColumn = function (col, nextCol, resizer) {
 
         document.addEventListener('mousemove', mouseMoveHandler);
         document.addEventListener('mouseup', mouseUpHandler);
-        resizer.classList.add('ticket-resizing');
+        resizer.classList.add('table-resizing');
     };
 
     const mouseMoveHandler = function (e) {
@@ -46,24 +46,26 @@ const createResizableColumn = function (col, nextCol, resizer) {
     const mouseUpHandler = function () {
         document.removeEventListener('mousemove', mouseMoveHandler);
         document.removeEventListener('mouseup', mouseUpHandler);
-        resizer.classList.remove('ticket-resizing');
+        resizer.classList.remove('table-resizing');
     };
 
     resizer.addEventListener('mousedown', mouseDownHandler);
 };
 
-const table = document.getElementById('tickets');
-if (table !== null) {
-    const cols = table.querySelectorAll('th');
-    for (let i = 0; i + 1 < cols.length; i++) {
-        let col = cols[i];
-        let nextCol = cols[i + 1];
-        const resizer = document.createElement('div');
-        resizer.classList.add('ticket-resizer');
-        resizer.style.height = `${table.offsetHeight}px`;
-        col.appendChild(resizer);
+const tables = document.querySelectorAll('table');
+for (let table of tables) {
+    if (table !== null) {
+        const cols = table.querySelectorAll('th');
+        for (let i = 0; i + 1 < cols.length; i++) {
+            let col = cols[i];
+            let nextCol = cols[i + 1];
+            const resizer = document.createElement('div');
+            resizer.classList.add('table-resizer');
+            resizer.style.height = `${table.offsetHeight}px`;
+            col.appendChild(resizer);
 
-        createResizableColumn(col, nextCol, resizer);
+            createResizableColumn(col, nextCol, resizer);
+        }
     }
 }
 
