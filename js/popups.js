@@ -62,3 +62,28 @@ for (let ticket of document.getElementsByClassName('ticket-department-change')) 
         xhttp.send(`id=${ticket.dataset.id}&department=${ticket.dataset.department}`);
     });
 }
+
+let departmentAdd = document.getElementById('department-add-button');
+let departmentRemove = document.getElementById('department-remove-button');
+if (departmentAdd !== null && departmentRemove !== null) {
+    departmentAdd.addEventListener('click', function() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/addDepartmentPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send();
+    });
+    departmentRemove.addEventListener('click', function() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/removeDepartmentPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send();
+    });
+}

@@ -17,7 +17,7 @@
     <div class="popup-item">
         <span><?=htmlentities($_POST['username'])?>'s Departments: </span>
     </div>
-    <form action="../actions/addDepartment.php" method="post">
+    <form action="../actions/addDepartmentToAgent.php" method="post">
         <div class="popup-item">
             <span>Add Department:</span>
             <?php drawDepartments($otherDepartments); ?>
@@ -27,9 +27,9 @@
         </div>
         <input type="hidden" name='username' value="<?=htmlentities($_POST['username'])?>"> 
     </form>
-    <form action="../actions/removeDepartment.php" method="post">
+    <form action="../actions/removeDepartmentFromAgent.php" method="post">
         <div class="popup-item">
-            <span>Remove Department:</span>
+            <span>Department</span>
             <?php drawDepartments($agentDepartments); ?>
         </div>
         <div class="popup-item">
@@ -37,5 +37,5 @@
         </div>
         <input type="hidden" name='username' value="<?=htmlentities($_POST['username'])?>"> 
     </form>
-    <button type="button" class="cancel-button" onclick="closePopup()">Close</button>
+    <button type="button" class="red" onclick="closePopup()">Close</button>
 </div>

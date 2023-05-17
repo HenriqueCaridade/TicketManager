@@ -1,16 +1,4 @@
 
-//NEW TICKET POPUP
-function openTicketForm() {
-    document.getElementById("popup").style.display = "block";
-    document.getElementById("popup-darken").style.display = "block";
-    document.getElementById("popup-form").style.display = "block";
-}
-function closeTicketForm() {
-    document.getElementById("popup").style.display = "none";
-    document.getElementById("popup-darken").style.display = "none";
-    document.getElementById("popup-form").style.display = "none";
-}
-  
   // TICKET TABLE RESIZER 
 const createResizableColumn = function (col, nextCol, resizer) {
     let x = 0;
@@ -69,8 +57,7 @@ for (let table of tables) {
     }
 }
 
-let tickets = document.getElementsByClassName('ticket');
-for (let ticket of tickets) {
+for (let ticket of document.getElementsByClassName('ticket')) {
     ticket.querySelector('.ticket-subject').addEventListener('click', function(ev) {
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {

@@ -13,7 +13,7 @@
     </div>
     <form action="../actions/changeTicketDepartment.php" method="post">
         <div class="popup-item">
-            <span>Change Department:</span>
+            <span>Department</span>
             <?php drawDepartments($departments); ?>
         </div>
         <div class="popup-item">
@@ -21,5 +21,5 @@
         </div>
         <input type="hidden" name='id' value="<?=htmlentities($_POST['id'])?>"> 
     </form>
-    <button type="button" class="cancel-button" onclick="closePopup()">Close</button>
+    <button type="button" class="red" onclick="closePopup()">Close</button>
 </div>

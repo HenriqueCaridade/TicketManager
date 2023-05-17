@@ -6,7 +6,7 @@
 
     $session = Session::getSession();
     $db = getDatabaseConnection();
-    if (!isset($_POST['name']) || !isset($_POST['abbrev'])) die(header('Location: ../pages/department_page.php'));
-    // TODO
-    header('Location: ../pages/department_page.php');
+    if (!isset($_POST['department']) || !isset($_POST['username'])) die(header('Location: ../pages/admin.php'));
+    Agent::removeDepartment($db, $_POST['username'], $_POST['department']);
+    header('Location: ../pages/admin.php');
 ?>

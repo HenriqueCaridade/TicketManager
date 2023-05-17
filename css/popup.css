@@ -28,10 +28,10 @@
     left: 40vw;
     width: 20vw;
     min-width: 15rem;
-    padding: 0.5em;
+    padding: 0 0.5em;
     background-color: var(--primary-background-color);
     color: var(--primary-color);
-    border: 3px solid black;
+    border: 2px solid var(--primary-color);
     border-radius: 0.6em;
     z-index: 11;
 }
@@ -40,18 +40,15 @@
     min-width: 6em;
 }
 
-#popup-form button.cancel-button {
+#popup-form button.red {
     width: auto;
     margin-bottom: 1em;
-    background-color: var(--error-color);
 }
 
-.popup-item, .popup-item > :not(button) {
-    display: block;
-}
 .popup-item {
-    padding: 1em;
-    width: calc(100% - 2em);
+    display: block;
+    padding: 0.5em;
+    width: calc(100% - 1em);
 }
 .popup-item > * {
     padding: 0.5em;

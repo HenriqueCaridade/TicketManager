@@ -38,14 +38,7 @@ div.register-item, div.login-item, div.update-item {
     background-color: var(--accent-color);
     border: none;
 }
-button:not(.faq-question) {
-    padding: 0.8em;
-    color: var(--primary-background-color);
-    background-color: var(--accent-color);
-    border: none;
-    padding: 0.5em;
-    border-radius: 2em;
-}
+
 
 #register input[type=checkbox], #login input[type=checkbox], #settings input[type=checkbox] {
     width: auto;
