@@ -6,7 +6,7 @@
 
     $session = Session::getSession();
     $db = getDatabaseConnection();
-    if (!isset($_POST['id']) || !isset($_POST['department'])) die(header('Location: ../pages/agent.php'));
+    if (!isset($_POST['id']) || !isset($_POST['department'])) die(header('Location: ../pages/department_page.php'));
     Ticket::changeDepartment($db, $_POST['id'], $_POST['department']);
-    header('Location: ../pages/agent.php');
+    header('Location: ../pages/department_page.php');
 ?>

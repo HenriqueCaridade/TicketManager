@@ -8,15 +8,15 @@
     $session->saveInput(Session::U_PASSWORD1     , $_POST['password1']);
     $session->saveInput(Session::U_PASSWORD2     , $_POST['password2']);
 
-    if ($_POST['password1'] !== $_POST['password2']) {
-        $session->addToast(Session::ERROR, "Passwords don't match.");
-        die(header('Location: ../pages/settings.php'));
-    }
     $db = getDatabaseConnection();
     
-    $hashedPassword = User::getUserPassword($db, $_SESSION['username']);
-    if (!User::passwordMatchesHash($_POST['curr-password'], $hashedPassword)) {
+    if (!User::passwordMatchesUser($db, $_SESSION[Session::USERNAME], $_POST['curr-password'])) {
         $session->addToast(Session::ERROR, "Your current password is wrong.");
+        die(header('Location: ../pages/settings.php'));
+    }
+    
+    if ($_POST['password1'] !== $_POST['password2']) {
+        $session->addToast(Session::ERROR, "Passwords don't match.");
         die(header('Location: ../pages/settings.php'));
     }
 
