@@ -20,7 +20,7 @@
 
     // Draw Page
     drawHeader(true);
-    drawSidebar($session);
+    drawSidebar($session, 'help');
 ?>
 <main class="main-sidebar">
     <div id="faq" class="page">

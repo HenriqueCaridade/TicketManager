@@ -24,19 +24,21 @@
 
     // Draw Page
     drawHeader(true);
-    drawSidebar($session);
+    drawSidebar($session, 'departments');
 ?>
 <main class="main-sidebar">
     <div class="page">
+        <h1 class="title">Departments</h1>
+        <input id="department-search" type="text">
+        <button id="department-filters"><i class="fa-solid fa-filter"></i></button>
         <?php 
         foreach ($departments as $department) {
             $tickets = Ticket::getTicketsFromDepartment($db, $department->name);
             drawDepartmentTickets($department->name, $tickets);
         }
         if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
-        <div class="big-button"><button id="department-add-button">Add Department</button></div>
-        <div class="big-button"><button id="department-remove-button" class="red">Remove Department</button></div>
-        <div id="popup"></div>
+            <div class="big-button"><button id="department-add-button">Add Department</button></div>
+            <div class="big-button"><button id="department-remove-button" class="red">Remove Department</button></div>
         <?php } ?>
     </div>
     <div id='popup'></div>

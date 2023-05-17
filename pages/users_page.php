@@ -17,16 +17,19 @@
 
     // Draw Page
     drawHeader(true);
-    drawSidebar($session);
+    drawSidebar($session, 'users');
 ?>
 <main class="main-sidebar">
     <div class="page"> 
+        <h1 class="title">Users</h1>
+        <input id="user-search" type="text">
+        <button id="user-filters"><i class="fa-solid fa-filter"></i></button>
         <h1 class="admin-item">Manage clients</h1>
         <div class="admin-item client-table"> <?php drawClients($clients); ?> </div>
         <h1 class="admin-item">Manage agents</h1>
         <div class="admin-item agent-table"> <?php drawAgents($agents); ?> </div>
-        <div id='popup'></div>
     </div>
+    <div id='popup'></div>
 </main>
 <?php
     drawFooter();

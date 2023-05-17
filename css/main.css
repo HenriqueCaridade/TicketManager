@@ -103,6 +103,10 @@ footer {
     color: var(--error-color);
 }
 
+.sidebar .selected {
+    color: var(--secondary-color);
+}
+
 /* MAIN STYLE */
 main {
     margin-top: var(--header-height);

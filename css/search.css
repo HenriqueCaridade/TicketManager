@@ -1,0 +1,23 @@
+@import url(include.css);
+
+#user-search {
+    font-size: 1rem;
+    padding: 0.5em;
+    border-radius: 2em;
+    border: 2px solid var(--secondary-background-color);
+    width: calc(100% - 3rem);
+}
+#user-filters {
+    padding: 0.8em;
+}
+
+#department-search {
+    font-size: 1rem;
+    padding: 0.5em;
+    border-radius: 2em;
+    border: 2px solid var(--secondary-background-color);
+    width: calc(100% - 3rem);
+}
+#department-filters {
+    padding: 0.8em;
+}

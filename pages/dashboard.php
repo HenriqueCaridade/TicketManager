@@ -22,7 +22,7 @@
 
     // Draw Page
     drawHeader(true);
-    drawSidebar($session);
+    drawSidebar($session, 'dashboard');
 ?>
 <main class="main-sidebar">
     <div id="dashboard" class="page">
@@ -31,28 +31,28 @@
         <div class="big-button">
             <button id="ticket-open-button" onclick="openPopup()">Add Ticket</button>
         </div>
-        <div id="popup">
-            <div id="popup-darken" onclick="closePopup()"></div>
-            <div id="popup-form">
-                <form action="../actions/addTicket.php" method="post">
-                    <div class="popup-item">
-                        <span>Subject</span>
-                        <input type="text" minlength="5" name="subject" required>
-                    </div>
-                    <div class="popup-item">
-                        <span>Text</span>
-                        <textarea name="text" minlength="30" maxlength="500" required></textarea>
-                    </div>
-                    <div class="popup-item">
-                        <span>Department</span>
-                        <?php drawDepartments($departments); ?>
-                    </div>
-                    <div class="popup-item">
-                        <button type="submit" class="submit-button">Submit</button>
-                    </div>
-                </form>
-                <button type="button" class="red" onclick="closePopup()">Close</button>
-            </div>
+    </div>
+    <div id="popup">
+        <div id="popup-darken" onclick="closePopup()"></div>
+        <div id="popup-form">
+            <form action="../actions/addTicket.php" method="post">
+                <div class="popup-item">
+                    <span>Subject</span>
+                    <input type="text" minlength="5" name="subject" required>
+                </div>
+                <div class="popup-item">
+                    <span>Text</span>
+                    <textarea name="text" minlength="30" maxlength="500" required></textarea>
+                </div>
+                <div class="popup-item">
+                    <span>Department</span>
+                    <?php drawDepartments($departments); ?>
+                </div>
+                <div class="popup-item">
+                    <button type="submit" class="submit-button">Submit</button>
+                </div>
+            </form>
+            <button type="button" class="red" onclick="closePopup()">Close</button>
         </div>
     </div>
 </main>
