@@ -16,11 +16,14 @@ button.red {
     background-color: var(--error-color);
 }
 
-button#ticket-open-button, button#department-add-button, button#department-remove-button {
+div.big-button {
     margin-top: 1em;
-    padding: 1em;
     width: 100%;
+    text-align: center;
+}
+
+button#ticket-open-button, button#department-add-button, button#department-remove-button {
+    width: 50%;
     min-width: 15em;
-    position: relative;
-    right: 0;
+    padding: 1em;
 }
