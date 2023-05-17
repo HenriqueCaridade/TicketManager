@@ -28,7 +28,9 @@
     <div id="dashboard" class="page">
         <h1 id="dashboard-title" class="title">My Tickets</h1>
         <?php drawTickets($tickets); ?>
-        <button id="ticket-open-button" onclick="openPopup()">Add Ticket</button>
+        <div class="big-button">
+            <button id="ticket-open-button" onclick="openPopup()">Add Ticket</button>
+        </div>
         <div id="popup">
             <div id="popup-darken" onclick="closePopup()"></div>
             <div id="popup-form">
