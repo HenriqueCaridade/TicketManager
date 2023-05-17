@@ -7,6 +7,6 @@
     $session = Session::getSession();
     $db = getDatabaseConnection();
     if (!isset($_POST['department'])) die(header('Location: ../pages/department_page.php'));
-    // TODO
+    Department::removeDepartment($db, $_POST['department']);
     header('Location: ../pages/department_page.php');
 ?>

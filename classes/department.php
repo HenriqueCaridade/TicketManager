@@ -36,5 +36,18 @@
             return $departmentArray;
         }
         
+        public static function removeDepartment(PDO $db, string $department) : void {
+            $stmt = $db->prepare('DELETE FROM Ticket WHERE department=?');
+            $stmt->execute(array($department));
+            $stmt = $db->prepare('DELETE FROM AgentInDepartment WHERE department=?');
+            $stmt->execute(array($department));
+            $stmt = $db->prepare('DELETE FROM Department WHERE name=?');
+            $stmt->execute(array($department));
+        }
+
+        public static function addDepartment(PDO $db, string $name, string $abbrev) : void {
+            $stmt = $db->prepare('INSERT INTO Department (name, abbrev) VALUES (?, ?)');
+            $stmt->execute(array($name, $abbrev));
+        }
     }
 ?>

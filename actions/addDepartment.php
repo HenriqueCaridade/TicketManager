@@ -7,6 +7,6 @@
     $session = Session::getSession();
     $db = getDatabaseConnection();
     if (!isset($_POST['name']) || !isset($_POST['abbrev'])) die(header('Location: ../pages/department_page.php'));
-    // TODO
+    Department::addDepartment($db, $_POST['name'], $_POST['abbrev']);
     header('Location: ../pages/department_page.php');
 ?>
