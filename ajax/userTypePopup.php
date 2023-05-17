@@ -18,8 +18,8 @@
         </div>
         <div class="popup-item">
             <button type="submit" class="submit-button">Submit</button>
-            <button type="button" class="cancel-button" onclick="closePopup()">Close</button>
         </div>
         <input type="hidden" name='username' value="<?=htmlentities($_POST['username'])?>"> 
+        <button type="button" class="red" onclick="closePopup()">Close</button>
     </form>
 </div>

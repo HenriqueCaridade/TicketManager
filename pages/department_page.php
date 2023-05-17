@@ -32,7 +32,12 @@
         foreach ($departments as $department) {
             $tickets = Ticket::getTicketsFromDepartment($db, $department->name);
             drawDepartmentTickets($department->name, $tickets);
-        } ?>
+        }
+        if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
+        <button id="department-add-button">Add Department</button>
+        <button id="department-remove-button" class="red">Remove Department</button>
+        <div id="popup"></div>
+        <?php } ?>
     </div>
     <div id='popup'></div>
 </main>

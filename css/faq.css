@@ -1,7 +1,7 @@
 @import url(include.css);
 
 /* FAQ STYLE*/
-.faq-question { 
+button.faq-question { 
     margin-top: 1rem;
     padding: 1rem;
     transition: 0.4s;
