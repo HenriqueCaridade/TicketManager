@@ -19,7 +19,7 @@
 
     // Draw Page
     drawHeader(true);
-    drawSidebar($session);
+    drawSidebar($session, 'settings');
 ?>
 <main class="main-sidebar">
     <div id="settings" class="page">

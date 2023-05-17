@@ -63,8 +63,8 @@ for (let ticket of document.getElementsByClassName('ticket-department-change')) 
     });
 }
 
-let departmentAdd = document.getElementById('department-add-button');
-let departmentRemove = document.getElementById('department-remove-button');
+const departmentAdd = document.getElementById('department-add-button');
+const departmentRemove = document.getElementById('department-remove-button');
 if (departmentAdd !== null && departmentRemove !== null) {
     departmentAdd.addEventListener('click', function() {
         const xhttp = new XMLHttpRequest();
@@ -83,6 +83,34 @@ if (departmentAdd !== null && departmentRemove !== null) {
             openPopup();
         };
         xhttp.open("POST", '../ajax/removeDepartmentPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send();
+    });
+}
+
+
+const userFilters = document.getElementById('user-filters');
+if (userFilters !== null) {
+    userFilters.addEventListener('click', function() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/userFiltersPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send();
+    });
+}
+const departmentFilters = document.getElementById('department-filters');
+if (departmentFilters !== null) {
+    departmentFilters.addEventListener('click', function() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/departmentFiltersPopup.php', false);
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhttp.send();
     });
