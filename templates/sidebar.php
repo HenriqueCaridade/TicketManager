@@ -4,7 +4,7 @@
 <div class="sidebar">
     <a href="../pages/dashboard.php">
         <span class="icon"><i class="fa-solid fa-ticket"></i></span>
-        <span class="text">Dashboard</span>
+        <span class="text">My Tickets</span>
     </a>
     <a href="../pages/settings.php">
         <span class="icon"><i class="fa-solid fa-gear"></i></span>
@@ -15,9 +15,9 @@
         <span class="text">Help</span>
     </a>
     <?php if($session->getRights(User::USERTYPE_AGENT) ) { ?>
-        <a href="../pages/agent.php">
-            <span class="icon"><i class="fa-brands fa-redhat"></i></span>
-            <span class="text">Agent</span>
+        <a href="../pages/department_page.php">
+            <span class="icon"><i class="fa-solid fa-box-archive"></i></span>
+            <span class="text">Departments</span>
         </a>
     <?php } ?>
     <?php if($session->getRights(User::USERTYPE_ADMIN) ) { ?>

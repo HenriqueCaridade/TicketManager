@@ -7,14 +7,13 @@
     include_once("../database/connection.php");
 
     $session = Session::getSession();
-    $db = getDatabaseConnection();
-    $clients = User::getAllClients($db);
-    $agents = Agent::getAllAgents($db);
-
     if (!$session->isLoggedIn()) {
         $session->addToast(Session::ERROR, 'You are not logged in!');
         die(header('Location: ../pages/login_page.php'));
     }
+    $db = getDatabaseConnection();
+    $clients = User::getAllClients($db);
+    $agents = Agent::getAllAgents($db);
 
     // Draw Page
     drawHeader(true);

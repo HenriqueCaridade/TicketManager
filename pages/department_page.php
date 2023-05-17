@@ -13,13 +13,14 @@
     include_once("../database/connection.php");
     
     $session = Session::getSession();
-    $db = getDatabaseConnection();
-    $departments = Department::getDepartmentsFromAgent($db, $_SESSION[Session::USERNAME]);
-
-    if (!$session->isLoggedIn()) {
+    if (!$session->isLoggedIn() || !$session->getRights(User::USERTYPE_AGENT)) {
         $session->addToast(Session::ERROR, 'You are not logged in!');
         die(header('Location: ../pages/login_page.php'));
     }
+    $db = getDatabaseConnection();
+    $departments = ($session->getRights(User::USERTYPE_ADMIN)) ?
+        Department::getAllDepartments($db) :
+        Department::getDepartmentsFromAgent($db, $_SESSION[Session::USERNAME]);
 
     // Draw Page
     drawHeader(true);

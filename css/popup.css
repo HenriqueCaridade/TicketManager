@@ -42,7 +42,7 @@
 
 #popup-form button.cancel-button {
     width: auto;
-    margin-top: 1em;
+    margin-bottom: 1em;
     background-color: var(--error-color);
 }
 
