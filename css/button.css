@@ -1,14 +1,12 @@
-@import url(include.css);
 
-
-button:not(.faq-question):not(.ticket-page-submit):not(.user-page-submit) {
+button:not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit) {
     padding: 0.8em;
     color: var(--primary-background-color);
     border: none;
     padding: 0.5em;
     border-radius: 2em;
 }
-button:not(.red):not(.faq-question):not(.ticket-page-submit):not(.user-page-submit) {
+button:not(.red):not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit) {
     background-color: var(--accent-color);
 }
 
@@ -37,7 +35,18 @@ button.ticket-page-submit, button.user-page-submit {
     width: 100%;
     text-align: left;
 }
+button.profile-submit {
+    background-color: transparent;
+    border: none;
+    font-size: 4rem;
+    padding: 0;
+}
+form.profile-form {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+}
 
-form.ticket-page-form, form.user-page-form {
+form.ticket-page-form, form.user-page-form, form.profile-form {
     margin-block-end: 0;
 }

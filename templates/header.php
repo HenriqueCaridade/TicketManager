@@ -30,9 +30,12 @@
 <body>
     <header>
         <span id="logo">Tick.<span id="logo-highlight">et</span></span>
-        <div id="profile" class="profile" data-user="<?=htmlentities($_SESSION[Session::USERNAME])?>">
-            <i class="fa-solid fa-circle-user"></i>
-        </div>
+        <?php if ($drawProfile) { ?>
+            <form class="profile-form" action="../pages/user_page.php" method="post">
+                <input type="hidden" name="username" value="<?=$_SESSION[Session::USERNAME]?>">
+                <button type='submit' class="profile-submit"><i class="fa-solid fa-circle-user"></i></button>
+            </form>
+        <?php } ?>
     </header>
 <?php
     }
