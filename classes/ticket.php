@@ -60,9 +60,48 @@
             $stmt->execute(array($ticketId, $publisher, $department, $publishDate->format('Y-m-d H:i:s'), $priority, $subject,  $text));
             TicketStatus::createTicketStatus($db, $ticketId, null, $publishDate, TicketStatus::UNASSIGNED);
         }
-        public static function getTicketsFromDepartment (PDO $db, string $department) : array {
+        public static function getAllTicketsFromDepartment (PDO $db, string $department) : array {
             $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=?');
             $stmt->execute(array($department));
+            $tickets = $stmt->fetchAll();
+            $ticketArray = array();
+            foreach ($tickets as $ticket) {
+                $ticketArray[] = Ticket::fromArray($db, $ticket);
+            }
+            return $ticketArray;
+        }
+        public static function getTicketsFromDepartmentPriorityFilter (PDO $db, string $department, ?string $normal, ?string $high, ?string $urgent) : array {
+            if($normal === null && $high === null && $urgent === null){  //all null
+                return array();
+            } 
+            if($normal !== null && $high === null && $urgent === null){ //only normal tickets
+                $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=? AND priority=?');
+                $stmt->execute(array($department, $normal));
+            }
+            else if($normal === null && $high !== null && $urgent === null){ //only high tickets
+                $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=? AND priority=?');
+                $stmt->execute(array($department, $high));
+            }
+            else if($normal === null && $high === null && $urgent !== null){ //only urgent tickets
+                $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=? AND priority=?');
+                $stmt->execute(array($department, $urgent));
+            }
+            else if($normal !== null && $high !== null && $urgent === null){  //normal and high
+                $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=? AND priority IN (?,?)');
+                $stmt->execute(array($department, $normal , $high));
+            }
+            else if($normal !== null && $high === null && $urgent !== null){  //normal and urgent
+                $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=? AND priority IN (?,?)');
+                $stmt->execute(array($department, $normal , $urgent));
+            }
+            else if($normal === null && $high !== null && $urgent !== null){  //high and urgent
+                $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=? AND priority IN (?,?)');
+                $stmt->execute(array($department, $high , $urgent));
+            }
+            else if($normal !== null && $high !== null && $urgent !== null){  //all 3
+                $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=? AND priority IN (?,?,?)');
+                $stmt->execute(array($department, $normal, $high , $urgent));
+            }          
             $tickets = $stmt->fetchAll();
             $ticketArray = array();
             foreach ($tickets as $ticket) {
