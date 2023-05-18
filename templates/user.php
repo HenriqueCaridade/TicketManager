@@ -6,7 +6,6 @@ function _drawClient(User $client) { ?>
         <td class="client-username"><?php drawProfile($client->username, true); ?></td>
         <td class="client-name"><?=htmlentities($client->name)?></td>
         <td class="client-email"><?=htmlentities($client->email)?></td>
-        <td class="client-usertype"><?=htmlentities($client->userType)?></td>
         <td class="user-edit">
             <form class="user-page-form" action="../pages/user_page.php" method="post">
                 <input type="hidden" name="username" value="<?=$client->username?>">
@@ -23,7 +22,6 @@ function _drawAgent(Agent $agent) { ?>
         <td class="agent-username"><?php drawProfile($agent->username, true); ?></td>
         <td class="agent-name"><?=htmlentities($agent->name)?></td>
         <td class="agent-email"><?=htmlentities($agent->email)?></td>
-        <td class="agent-usertype"><?=htmlentities($agent->userType)?></td>
         <td class="agent-department"> <?= $agent->departmentString?> </td>
         <td class="user-edit">
             <form class="user-page-form" action="../pages/user_page.php" method="post">
@@ -42,7 +40,6 @@ function drawClients(array $clients) {  ?>
                 <th>Username</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Usertype</th>
                 <th style="width: 0;">See User</th>
             </tr>
         </thead>
@@ -64,7 +61,6 @@ function drawAgents(array $agents) {  ?>
                 <th>Username</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Usertype</th>
                 <th>Departments</th>
                 <th style="width: 0;">See User</th>
             </tr>

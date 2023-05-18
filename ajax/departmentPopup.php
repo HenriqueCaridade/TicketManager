@@ -29,7 +29,7 @@
     </form>
     <form action="../actions/removeDepartmentFromAgent.php" method="post">
         <div class="popup-item">
-            <span>Department</span>
+            <span>Remove Department</span>
             <?php drawDepartments($agentDepartments); ?>
         </div>
         <div class="popup-item">

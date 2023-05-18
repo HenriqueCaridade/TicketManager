@@ -24,7 +24,7 @@
         }
 
         public static function getDepartmentsFromAgent(PDO $db, string $agentUsername) : array {
-            $stmt = $db->prepare('SELECT * FROM AgentInDepartment WHERE agentUsername=?');
+            $stmt = $db->prepare('SELECT * FROM AgentInDepartment WHERE agentUsername = ?');
             $stmt->execute(array($agentUsername));
             $departmentArray = array();
             foreach($stmt->fetchAll() as $connection){
@@ -37,10 +37,6 @@
         }
         
         public static function removeDepartment(PDO $db, string $department) : void {
-            $stmt = $db->prepare('DELETE FROM Ticket WHERE department=?');
-            $stmt->execute(array($department));
-            $stmt = $db->prepare('DELETE FROM AgentInDepartment WHERE department=?');
-            $stmt->execute(array($department));
             $stmt = $db->prepare('DELETE FROM Department WHERE name=?');
             $stmt->execute(array($department));
         }

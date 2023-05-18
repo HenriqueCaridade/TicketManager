@@ -13,10 +13,14 @@
     include_once("../database/connection.php");
     
     $session = Session::getSession();
-    if (!$session->isLoggedIn() || !$session->getRights(User::USERTYPE_AGENT)) {
+    if (!$session->isLoggedIn()) {
         $session->addToast(Session::ERROR, 'You are not logged in!');
         die(header('Location: ../pages/login_page.php'));
     }
+    if (!$session->getRights(User::USERTYPE_AGENT)) {
+        die(header('Location: ../pages/dashboard.php'));
+    }
+
     $db = getDatabaseConnection();
     $departments = ($session->getRights(User::USERTYPE_ADMIN)) ?
         Department::getAllDepartments($db) :
@@ -31,14 +35,16 @@
         <h1 class="title">Departments</h1>
         <input id="department-search" type="text">
         <button id="department-filters"><i class="fa-solid fa-filter"></i></button>
-        <?php
-        foreach ($departments as $department) {
-            $tickets = Ticket::getFilteredTickets($db, $department->name, $session->getFilter(Session::DEPARTMENT_PRIORITY1), 
-                $session->getFilter(Session::DEPARTMENT_PRIORITY2), $session->getFilter(Session::DEPARTMENT_PRIORITY3));
-            ?> <h1> <?=htmlentities($department->name); ?></h1> <?php
-            drawTickets($tickets);
-        }
-        if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
+        <div id="department-tables">
+            <?php
+            foreach ($departments as $department) {
+                $tickets = Ticket::getFilteredTickets($db, $department->name, $session->getFilter(Session::DEPARTMENT_PRIORITY1), 
+                    $session->getFilter(Session::DEPARTMENT_PRIORITY2), $session->getFilter(Session::DEPARTMENT_PRIORITY3));
+                ?> <h1> <?=htmlentities($department->name); ?></h1> <?php
+                drawTicketsDepartment($tickets);
+            }?>
+        </div>
+        <?php if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
             <div class="big-button"><button id="department-add-button">Add Department</button></div>
             <div class="big-button"><button id="department-remove-button" class="red">Remove Department</button></div>
         <?php } ?>

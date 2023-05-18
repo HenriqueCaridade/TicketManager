@@ -5,10 +5,7 @@
     padding: 0.5em;
     border-radius: 2em;
     border: 2px solid var(--secondary-background-color);
-    width: calc(100% - 3rem);
-}
-#user-filters {
-    padding: 0.8em;
+    width: 100%;
 }
 
 #department-search {
