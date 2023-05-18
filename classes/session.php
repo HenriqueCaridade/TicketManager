@@ -7,6 +7,7 @@
         const WARNING = 'warning';
         const ERROR = 'error';
         const INPUT = 'input';
+        const FILTER = 'filter';
 
         //input of register form
         const R_USERNAME = 'register username';
@@ -30,6 +31,11 @@
         //input of new ticket
         const T_TEXT = 'ticket text';
         const T_DEPART = 'ticket department';
+
+        //departments filter
+        const DEPARTMENT_PRIORITY1 = 'department normal';
+        const DEPARTMENT_PRIORITY2 = 'department high';
+        const DEPARTMENT_PRIORITY3 = 'department urgent';
 
         const USERNAME = 'username';
         const NAME = 'name';
@@ -111,6 +117,13 @@
             if($userType === User::USERTYPE_ADMIN){
                 return $_SESSION[Session::USERTYPE] === User::USERTYPE_ADMIN;
             }
+        }
+        public function saveFilter(string $attrib, ?string $value) : void {
+            if ($value === null) unset($_SESSION[Session::FILTER][$attrib]); 
+            else $_SESSION[Session::FILTER][$attrib] = $value;
+        }
+        public function getFilter(string $attrib) : ?string {
+            return $_SESSION[Session::FILTER][$attrib];
         }
     }    
 ?>

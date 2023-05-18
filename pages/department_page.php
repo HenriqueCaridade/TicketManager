@@ -31,9 +31,10 @@
         <h1 class="title">Departments</h1>
         <input id="department-search" type="text">
         <button id="department-filters"><i class="fa-solid fa-filter"></i></button>
-        <?php 
+        <?php
         foreach ($departments as $department) {
-            $tickets = Ticket::getTicketsFromDepartment($db, $department->name);
+            $tickets = Ticket::getFilteredTickets($db, $department->name, $session->getFilter(Session::DEPARTMENT_PRIORITY1), 
+                $session->getFilter(Session::DEPARTMENT_PRIORITY2), $session->getFilter(Session::DEPARTMENT_PRIORITY3));
             ?> <h1> <?=htmlentities($department->name); ?></h1> <?php
             drawTickets($tickets);
         }
