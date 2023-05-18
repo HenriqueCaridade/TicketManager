@@ -11,8 +11,8 @@ function closePopup() {
     document.getElementById("popup-form").style.display = "none";
 }
 
-for (let client of document.getElementsByClassName('client-usertype-change')) {
-    client.addEventListener('click', function(ev){
+for (let user of document.getElementsByClassName('usertype-change')) {
+    user.addEventListener('click', function(ev){
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function(){
             document.getElementById('popup').innerHTML = this.responseText;
@@ -20,20 +20,7 @@ for (let client of document.getElementsByClassName('client-usertype-change')) {
         };
         xhttp.open("POST", '../ajax/userTypePopup.php', false);
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhttp.send(`username=${client.dataset.username}&userType=${client.dataset.userType}`);
-    });
-}
-
-for (let agent of document.getElementsByClassName('agent-usertype-change')) {
-    agent.addEventListener('click', function(ev){
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function(){
-            document.getElementById('popup').innerHTML = this.responseText;
-            openPopup();
-        };
-        xhttp.open("POST", '../ajax/userTypePopup.php', false);
-        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhttp.send(`username=${agent.dataset.username}&userType=${agent.dataset.userType}`);
+        xhttp.send(`username=${user.dataset.username}&userType=${user.dataset.userType}`);
     });
 }
 

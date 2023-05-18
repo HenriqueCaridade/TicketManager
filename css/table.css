@@ -39,3 +39,7 @@ table td {
     overflow: hidden;
     min-width: 0;
 }
+
+table th {
+    white-space: nowrap;
+}

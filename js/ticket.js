@@ -56,15 +56,3 @@ for (let table of tables) {
         }
     }
 }
-
-for (let ticket of document.getElementsByClassName('ticket')) {
-    ticket.querySelector('.ticket-subject').addEventListener('click', function(ev) {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-            document.querySelector('main').innerHTML = this.responseText;
-        }
-        xhttp.open("POST", "../ajax/ticket.php", false);
-        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhttp.send(`id=${ticket.dataset.id}`);
-    });
-}

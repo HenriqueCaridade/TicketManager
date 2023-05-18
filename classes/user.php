@@ -177,9 +177,20 @@
 
     class Agent extends User {
         public array $departments;
+        public string $departmentString;
         private function __construct(string $username, string $name, string $email, array $departments, string $userType = User::USERTYPE_AGENT) {
             parent::__construct($username, $name, $email, $userType);
             $this->departments = $departments;
+            $i = 0;
+            $str = "";
+            foreach ($this->departments as $department) {
+                if ($i++ != 0) $str = $str . ', ';
+                $str = $str . htmlentities($department->abbrev);
+            }
+            if ($i == 0) { // No Departments
+                $str = 'None';
+            }
+            $this->departmentString = $str;
         }
         private static function fromArrays(array $agent, array $departments) : Agent {
             return new Agent($agent['username'], $agent['name'], $agent['email'], $departments, $agent['userType']);
