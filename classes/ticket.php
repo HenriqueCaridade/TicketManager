@@ -70,7 +70,7 @@
             }
             return $ticketArray;
         }
-        public static function getTicketsFromDepartmentPriorityFilter (PDO $db, string $department, ?string $normal, ?string $high, ?string $urgent) : array {
+        public static function getFilteredTickets (PDO $db, string $department, ?string $normal, ?string $high, ?string $urgent) : array {
             if($normal === null && $high === null && $urgent === null){  //all null
                 return array();
             } 

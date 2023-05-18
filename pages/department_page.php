@@ -3,7 +3,7 @@
     include_once("../templates/header.php");
     include_once("../templates/footer.php");
     include_once("../templates/sidebar.php");
-    include_once("../templates/departmentTicket.php");
+    include_once("../templates/ticket.php");
     // Session
     include_once("../classes/session.php");
     //Classes
@@ -32,12 +32,11 @@
         <input id="department-search" type="text">
         <button id="department-filters"><i class="fa-solid fa-filter"></i></button>
         <?php
-        
         foreach ($departments as $department) {
-
-            $tickets = Ticket::getTicketsFromDepartmentPriorityFilter($db, $department->name, $session->getFilter(Session::DEPARTMENT_PRIORITY1), 
+            $tickets = Ticket::getFilteredTickets($db, $department->name, $session->getFilter(Session::DEPARTMENT_PRIORITY1), 
                 $session->getFilter(Session::DEPARTMENT_PRIORITY2), $session->getFilter(Session::DEPARTMENT_PRIORITY3));
-            drawDepartmentTickets($department->name, $tickets);
+            ?> <h1> <?=htmlentities($department->name); ?></h1> <?php
+            drawTickets($tickets);
         }
         if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
             <div class="big-button"><button id="department-add-button">Add Department</button></div>

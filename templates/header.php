@@ -14,6 +14,7 @@
     <script src="../js/userForms.js" defer></script>
     <script src="../js/popups.js" defer></script>
     <script src="../js/search.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://kit.fontawesome.com/f3cf9d3f6c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/include.css">
     <link rel="stylesheet" href="../css/main.css">

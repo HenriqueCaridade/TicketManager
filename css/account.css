@@ -2,7 +2,7 @@
 
 /* ACCOUNT STYLE */
 #account .profile {
-    font-size: 8em;
+    font-size: 6em;
 }
 
 #account {
@@ -11,5 +11,5 @@
 
 .account-item {
     display: block;
-    padding-bottom: 1em;
+    padding-bottom: 1rem;
 }

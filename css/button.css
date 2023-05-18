@@ -1,14 +1,14 @@
 @import url(include.css);
 
 
-button:not(.faq-question) {
+button:not(.faq-question):not(.ticket-page-submit):not(.user-page-submit) {
     padding: 0.8em;
     color: var(--primary-background-color);
     border: none;
     padding: 0.5em;
     border-radius: 2em;
 }
-button:not(.red):not(.faq-question) {
+button:not(.red):not(.faq-question):not(.ticket-page-submit):not(.user-page-submit) {
     background-color: var(--accent-color);
 }
 
@@ -26,4 +26,18 @@ button#ticket-open-button, button#department-add-button, button#department-remov
     width: 50%;
     min-width: 15em;
     padding: 1em;
+}
+
+button.ticket-page-submit, button.user-page-submit {
+    background-color: transparent;
+    border: none;
+    color: var(--accent-color);
+    font-size: 1rem;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+}
+
+form.ticket-page-form, form.user-page-form {
+    margin-block-end: 0;
 }
