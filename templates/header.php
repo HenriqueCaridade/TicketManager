@@ -9,7 +9,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/faq.js" defer></script>
-    <script src="../js/profile.js" defer></script>
     <script src="../js/ticket.js" defer></script>
     <script src="../js/userForms.js" defer></script>
     <script src="../js/popups.js" defer></script>

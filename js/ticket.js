@@ -40,19 +40,22 @@ const createResizableColumn = function (col, nextCol, resizer) {
     resizer.addEventListener('mousedown', mouseDownHandler);
 };
 
-const tables = document.querySelectorAll('table');
-for (let table of tables) {
-    if (table !== null) {
-        const cols = table.querySelectorAll('th');
-        for (let i = 0; i + 1 < cols.length; i++) {
-            let col = cols[i];
-            let nextCol = cols[i + 1];
-            const resizer = document.createElement('div');
-            resizer.classList.add('table-resizer');
-            resizer.style.height = `${table.offsetHeight}px`;
-            col.appendChild(resizer);
+function createResizableTables(){
+    for (let table of document.querySelectorAll('table')) {
+        if (table !== null) {
+            const cols = table.querySelectorAll('th');
+            for (let i = 0; i + 1 < cols.length; i++) {
+                let col = cols[i];
+                let nextCol = cols[i + 1];
+                const resizer = document.createElement('div');
+                resizer.classList.add('table-resizer');
+                resizer.style.height = `${table.offsetHeight}px`;
+                col.appendChild(resizer);
 
-            createResizableColumn(col, nextCol, resizer);
+                createResizableColumn(col, nextCol, resizer);
+            }
         }
     }
 }
+
+createResizableTables();

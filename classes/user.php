@@ -46,8 +46,18 @@
             return $user;
         }
         public static function getAllClients(PDO $db) : array {
-            $stmt = $db->prepare('SELECT * FROM User WHERE userType = \'Client\' ');
+            $stmt = $db->prepare('SELECT * FROM User WHERE userType = "Client"');
             $stmt->execute();
+            $usersArray = array();
+            foreach($stmt->fetchAll() as $user){
+                $usersArray[] = User::fromArray($user);
+            }
+            return $usersArray;
+        }
+        public static function getClientsFiltered(PDO $db, string $query) : array {
+            $stmt = $db->prepare('SELECT * FROM User WHERE userType = "Client" AND (username LIKE ? OR name LIKE ?)');
+            $query = '%' . $query . '%';
+            $stmt->execute(array($query, $query));
             $usersArray = array();
             foreach($stmt->fetchAll() as $user){
                 $usersArray[] = User::fromArray($user);
@@ -197,15 +207,26 @@
         }
 
         public static function getAgent(PDO $db, string $username) : ?Agent {
-            $stmt = $db->prepare('SELECT * FROM User WHERE username=?');
+            $stmt = $db->prepare('SELECT * FROM User WHERE username = ?');
             $stmt->execute(array($username));
             $user = $stmt->fetch();
             if ($user === false) return null;
             return Agent::fromArrays($user, Department::getDepartmentsFromAgent($db, $username));
         }
         public static function getAllAgents(PDO $db) : array {
-            $stmt = $db->prepare('SELECT * FROM User WHERE userType=\'Agent\' ');
+            $stmt = $db->prepare('SELECT * FROM User WHERE userType = "Agent"');
             $stmt->execute();
+            $agentsArray = array();
+            foreach($stmt->fetchAll() as $agent){
+                $agentsArray[] = Agent::fromArrays($agent, Department::getDepartmentsFromAgent($db, $agent['username']));
+            }
+            return $agentsArray;
+        }
+
+        public static function getAgentsFiltered(PDO $db, string $query) : array {
+            $stmt = $db->prepare('SELECT * FROM User WHERE userType = "Agent" AND (username LIKE ? OR name LIKE ?)');
+            $query = '%' . $query . '%';
+            $stmt->execute(array($query, $query));
             $agentsArray = array();
             foreach($stmt->fetchAll() as $agent){
                 $agentsArray[] = Agent::fromArrays($agent, Department::getDepartmentsFromAgent($db, $agent['username']));

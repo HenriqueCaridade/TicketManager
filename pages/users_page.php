@@ -23,11 +23,10 @@
     <div class="page"> 
         <h1 class="title">Users</h1>
         <input id="user-search" type="text">
-        <button id="user-filters"><i class="fa-solid fa-filter"></i></button>
-        <h1 class="admin-item">Manage clients</h1>
-        <div class="admin-item client-table"> <?php drawClients($clients); ?> </div>
-        <h1 class="admin-item">Manage agents</h1>
-        <div class="admin-item agent-table"> <?php drawAgents($agents); ?> </div>
+        <h1 class="admin-item">Clients</h1>
+        <div id="client-table" class="admin-item"> <?php drawClients($clients); ?> </div>
+        <h1 class="admin-item">Agents</h1>
+        <div id="agent-table" class="admin-item"> <?php drawAgents($agents); ?> </div>
     </div>
     <div id='popup'></div>
 </main>
