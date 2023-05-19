@@ -2,13 +2,13 @@
 
 :root {
     /* Color Pallete */
-    --primary-background-color: #dededeff;
-    --secondary-background-color: #c4c3c7ff;
+    --primary-background-color: #ffffffff;
+    --secondary-background-color: #d7d7d7ff;
     --primary-color: #262b2dff;
-    --secondary-color: #4c6569ff;
+    --secondary-color: #5c9599ff;
     --accent-color: #1aa193ff;
     --error-color: #ce5050ff;
-    --warning-color: #cfbd63ff;;
+    --warning-color: #cfbd63ff;
     --success-color: #51d880ff;
 
     /* General Constants */

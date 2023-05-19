@@ -12,8 +12,9 @@
         die(header('Location: ../pages/login_page.php'));
     }
     $db = getDatabaseConnection();
-    $clients = User::getAllClients($db);
-    $agents = Agent::getAllAgents($db);
+    $query = $session->getSavedInput(Session::S_USER) ?? '';
+    $clients = User::getClientsFiltered($db, $query);
+    $agents = Agent::getAgentsFiltered($db, $query);
 
     // Draw Page
     drawHeader(true);
@@ -22,7 +23,7 @@
 <main class="main-sidebar">
     <div class="page"> 
         <h1 class="title">Users</h1>
-        <input id="user-search" type="text">
+        <input id="user-search" type="search" placeholder="Search user..." value="<?=$query?>">
         <h1 class="admin-item">Clients</h1>
         <div id="client-table" class="admin-item"> <?php drawClients($clients); ?> </div>
         <h1 class="admin-item">Agents</h1>

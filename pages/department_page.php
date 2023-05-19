@@ -35,12 +35,12 @@
 <main class="main-sidebar">
     <div class="page">
         <h1 class="title">Departments</h1>
-        <input id="department-search" type="text" value="<?=$query?>">
+        <input id="department-search" type="search" placeholder="Search ticket..." value="<?=$query?>">
         <button id="department-filters"><i class="fa-solid fa-filter"></i></button>
         <div id="department-tables">
             <?php
             foreach ($departments as $department) {
-                $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences->normal, $preferences->high, $preferences->urgent, $query);
+                $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences, $query);
                 ?> <h1> <?=htmlentities($department->name); ?></h1> <?php
                 drawTicketsDepartment($tickets);
             }?>

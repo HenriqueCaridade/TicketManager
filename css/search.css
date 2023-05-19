@@ -17,3 +17,18 @@
 #department-filters {
     padding: 0.8em;
 }
+
+#user-search::-webkit-search-cancel-button, #department-search::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    width: 1em;
+    height: 1em;
+    border-radius: 50em;
+    background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg) no-repeat 50% 50%;
+    background-size: contain;
+    opacity: 0;
+    pointer-events: none;
+}
+#user-search:focus::-webkit-search-cancel-button, #department-search:focus::-webkit-search-cancel-button {
+    opacity: .3;
+    pointer-events: all;
+  }

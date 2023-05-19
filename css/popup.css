@@ -45,14 +45,31 @@
 }
 
 .popup-item {
+    position: relative;
     display: block;
     padding: 0.5em;
     width: calc(100% - 1em);
 }
 .popup-item > * {
+    display: inline;
     padding: 0.5em;
     width: 100%;
 }
+.popup-item.filter-item {
+    text-align: left;
+}
+
+.popup-item > input[type='checkbox'].filter-item {
+    position: absolute;
+    right: 60%;
+    width: auto;
+    text-align: right;
+}
+label.filter-item {
+    position: relative;
+    left: 40%;
+}
+
 #popup-form input[type='text'], #popup-form textarea {
     font-size: 1rem;
 }
