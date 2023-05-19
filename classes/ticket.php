@@ -2,7 +2,7 @@
     declare(strict_types=1);
     include_once("../classes/ticketStatus.php");
     include_once("../classes/ticketComment.php");
-
+    include_once("../classes/preferences.php");
     class Ticket {
         const P_NORMAL = 'Normal';
         const P_HIGH = 'High';
@@ -70,8 +70,8 @@
             }
             return $ticketArray;
         }
-        public static function getFilteredTickets(PDO $db, string $department, bool $normal, bool $high, bool $urgent, string $query = '') : array {
-            $array = array_filter(array($normal? 'Normal' : null , $high? 'High': null, $urgent? 'Urgent' : null), fn($val) => $val !== null);
+        public static function getFilteredTickets(PDO $db, string $department, Preferences $filters, string $query = '') : array {
+            $array = array_filter(array($filters->normal? 'Normal' : null , $filters->high? 'High': null, $filters->urgent? 'Urgent' : null), fn($val) => $val !== null);
             $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=? AND priority IN (' . join(',', array_fill(0, sizeof($array), '?')) . ') AND (subject LIKE ? OR text LIKE ?)');
             $query = '%' . $query . '%';
             $stmt->execute(array($department, ...$array, $query, $query));

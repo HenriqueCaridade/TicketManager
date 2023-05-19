@@ -8,7 +8,7 @@
         public bool $normal;
         public bool $high;
         public bool $urgent;
-
+        
         private function __construct(bool $normal, bool $high, bool $urgent) {     
             $this->normal = $normal;
             $this->high = $high;

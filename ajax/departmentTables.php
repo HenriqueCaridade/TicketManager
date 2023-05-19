@@ -21,7 +21,7 @@
 
     foreach ($departments as $department) {
         
-        $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences->normal, $preferences->high, $preferences->urgent, $_POST['query']);
+        $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences, $_POST['query']);
         ?> <h1> <?=htmlentities($department->name); ?></h1> <?php
         drawTicketsDepartment($tickets);
     }

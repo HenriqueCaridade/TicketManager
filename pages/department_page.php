@@ -40,7 +40,7 @@
         <div id="department-tables">
             <?php
             foreach ($departments as $department) {
-                $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences->normal, $preferences->high, $preferences->urgent, $query);
+                $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences, $query);
                 ?> <h1> <?=htmlentities($department->name); ?></h1> <?php
                 drawTicketsDepartment($tickets);
             }?>
