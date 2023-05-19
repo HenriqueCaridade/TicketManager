@@ -35,7 +35,7 @@
 <main class="main-sidebar">
     <div class="page">
         <h1 class="title">Departments</h1>
-        <input id="department-search" type="text" value="<?=$query?>">
+        <input id="department-search" type="search" placeholder="Search ticket..." value="<?=$query?>">
         <button id="department-filters"><i class="fa-solid fa-filter"></i></button>
         <div id="department-tables">
             <?php

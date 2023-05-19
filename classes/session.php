@@ -80,10 +80,7 @@
         }
 
         public function logOut() : void {
-            unset($_SESSION[Session::USERNAME]);
-            unset($_SESSION[Session::NAME]);
-            unset($_SESSION[Session::EMAIL]);
-            unset($_SESSION[Session::USERTYPE]);
+            session_destroy();
         }
 
         public function addToast(string $type, string $message) : void {
