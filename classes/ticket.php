@@ -70,8 +70,8 @@
             }
             return $ticketArray;
         }
-        public static function getFilteredTickets(PDO $db, string $department, ?string $normal, ?string $high, ?string $urgent, string $query = '') : array {
-            $array = array_filter(array($normal, $high, $urgent), fn($val) => $val !== null);
+        public static function getFilteredTickets(PDO $db, string $department, bool $normal, bool $high, bool $urgent, string $query = '') : array {
+            $array = array_filter(array($normal? 'Normal' : null , $high? 'High': null, $urgent? 'Urgent' : null), fn($val) => $val !== null);
             $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=? AND priority IN (' . join(',', array_fill(0, sizeof($array), '?')) . ') AND (subject LIKE ? OR text LIKE ?)');
             $query = '%' . $query . '%';
             $stmt->execute(array($department, ...$array, $query, $query));

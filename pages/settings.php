@@ -13,9 +13,9 @@
         die(header('Location: ../pages/login_page.php'));
     }
 
-    $prevCurrPassword = htmlentities($_SESSION[Session::INPUT][Session::U_CURR_PASSWORD]);
-    $prevPassword1    = htmlentities($_SESSION[Session::INPUT][Session::U_PASSWORD1]);
-    $prevPassword2    = htmlentities($_SESSION[Session::INPUT][Session::U_PASSWORD2]);
+    $prevCurrPassword = htmlentities($session->getSavedInput(Session::U_CURR_PASSWORD));
+    $prevPassword1    = htmlentities($session->getSavedInput(Session::U_PASSWORD1));
+    $prevPassword2    =  htmlentities($session->getSavedInput(Session::U_PASSWORD2));
 
     // Draw Page
     drawHeader(true);

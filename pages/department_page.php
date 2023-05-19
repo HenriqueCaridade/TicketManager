@@ -9,6 +9,7 @@
     //Classes
     include_once("../classes/department.php");
     include_once("../classes/ticket.php");
+    include_once("../classes/preferences.php");
     // Database
     include_once("../database/connection.php");
     
@@ -25,7 +26,8 @@
     $departments = ($session->getRights(User::USERTYPE_ADMIN)) ?
         Department::getAllDepartments($db) :
         Department::getDepartmentsFromAgent($db, $_SESSION[Session::USERNAME]);
-
+    $preferences = Preferences::getPreferences($db, $_SESSION[Session::USERNAME]);
+    $query = $session->getSavedInput(Session::S_DEPARTMENT)?? '';
     // Draw Page
     drawHeader(true);
     drawSidebar($session, 'departments');
@@ -33,13 +35,12 @@
 <main class="main-sidebar">
     <div class="page">
         <h1 class="title">Departments</h1>
-        <input id="department-search" type="text">
+        <input id="department-search" type="text" value="<?=$query?>">
         <button id="department-filters"><i class="fa-solid fa-filter"></i></button>
         <div id="department-tables">
             <?php
             foreach ($departments as $department) {
-                $tickets = Ticket::getFilteredTickets($db, $department->name, $session->getFilter(Session::DEPARTMENT_PRIORITY1), 
-                    $session->getFilter(Session::DEPARTMENT_PRIORITY2), $session->getFilter(Session::DEPARTMENT_PRIORITY3));
+                $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences->normal, $preferences->high, $preferences->urgent, $query);
                 ?> <h1> <?=htmlentities($department->name); ?></h1> <?php
                 drawTicketsDepartment($tickets);
             }?>
