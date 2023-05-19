@@ -25,6 +25,18 @@
             <input class="filter-item" type="checkbox" name="priority3" value="Urgent"<?php if($preferences->urgent) {?>checked <?php }?>>
             <label class="filter-item" for="priority3"> Urgent</label>
         </div>
+        <div class="popup-item filter-item">
+            <input class="filter-item" type="checkbox" name="status1" value="Unassigned"<?php if($preferences->unassigned) {?>checked <?php }?>>
+            <label class="filter-item" for="status1"> Unassigned</label>
+        </div>
+        <div class="popup-item filter-item">
+            <input class="filter-item" type="checkbox" name="status2" value="In progress"<?php if($preferences->inProgress) {?>checked <?php }?>>
+            <label class="filter-item" for="status2"> In progress</label>
+        </div>
+        <div class="popup-item filter-item">
+            <input class="filter-item" type="checkbox" name="status3" value="Done"<?php if($preferences->done) {?>checked <?php }?>>
+            <label class="filter-item" for="status3"> Done</label>
+        </div>
         <div class="popup-item">
             <button type="submit" class="submit-button">Submit</button>
         </div>

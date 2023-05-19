@@ -17,8 +17,8 @@ INSERT INTO Ticket (id, publisher, department, publishDate, priority, subject, t
 INSERT INTO Ticket (id, publisher, department, publishDate, priority, subject, text) VALUES (3, 'dummy1', 'Technology', '2000-01-03 07:08:09', 'Urgent', 'My ticket3.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.');
 
 INSERT INTO TicketStatus (ticketId, agentUsername, date, status) VALUES (1, NULL, '2000-01-01 01:02:03', 'Unassigned');
-INSERT INTO TicketStatus (ticketId, agentUsername, date, status) VALUES (2, NULL, '2000-01-02 04:05:06', 'Unassigned');
-INSERT INTO TicketStatus (ticketId, agentUsername, date, status) VALUES (3, NULL, '2000-01-03 07:08:09', 'Unassigned');
+INSERT INTO TicketStatus (ticketId, agentUsername, date, status) VALUES (2, NULL, '2000-01-02 04:05:06', 'In progress');
+INSERT INTO TicketStatus (ticketId, agentUsername, date, status) VALUES (3, NULL, '2000-01-03 07:08:09', 'Done');
 
 INSERT INTO FAQ (question, answer) VALUES ("I can't login what should I do?", "Contact one of the Admins!");
 INSERT INTO FAQ (question, answer) VALUES ("I don't remember my password", "Contact one of the Admins!");

@@ -82,7 +82,10 @@ CREATE TABLE IF NOT EXISTS Preferences (
     username STRING PRIMARY KEY REFERENCES User(username) NOT NULL,
     filterNormal BOOLEAN NOT NULL DEFAULT TRUE,
     filterHigh BOOLEAN NOT NULL DEFAULT TRUE,
-    filterUrgent BOOLEAN NOT NULL DEFAULT TRUE
+    filterUrgent BOOLEAN NOT NULL DEFAULT TRUE,
+    filterUnassigned  BOOLEAN NOT NULL DEFAULT TRUE,
+    filterInProgress  BOOLEAN NOT NULL DEFAULT TRUE,
+    filterDone  BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 --------------
