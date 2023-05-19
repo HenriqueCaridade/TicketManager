@@ -80,6 +80,7 @@ footer {
 .sidebar a {
     display: block;
     padding: 6px 10px;
+    width: calc(100% - 20px);
     color: var(--primary-color);
     font-size: 1.4em;
 }
@@ -96,7 +97,7 @@ footer {
     position: relative;
     left: 30%;
 }
-.sidebar a:last-child .icon, .sidebar a:last-child .text{
+.sidebar a:last-child {
     position: absolute;
     bottom: var(--sidebar-padding);
     color: var(--error-color);

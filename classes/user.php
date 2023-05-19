@@ -56,7 +56,7 @@
         }
         public static function getClientsFiltered(PDO $db, string $query) : array {
             $stmt = $db->prepare('SELECT * FROM User WHERE userType = "Client" AND (username LIKE ? OR name LIKE ?)');
-            $query = '%' . $query . '%';
+            $query = '%' . str_replace(array('\\', '_', '%'), array('\\\\', '\\_', '\\%'), $query) . '%';
             $stmt->execute(array($query, $query));
             $usersArray = array();
             foreach($stmt->fetchAll() as $user){
@@ -225,7 +225,7 @@
 
         public static function getAgentsFiltered(PDO $db, string $query) : array {
             $stmt = $db->prepare('SELECT * FROM User WHERE userType = "Agent" AND (username LIKE ? OR name LIKE ?)');
-            $query = '%' . $query . '%';
+            $query = '%' . str_replace(array('\\', '_', '%'), array('\\\\', '\\_', '\\%'), $query) . '%';
             $stmt->execute(array($query, $query));
             $agentsArray = array();
             foreach($stmt->fetchAll() as $agent){
