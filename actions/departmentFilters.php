@@ -10,7 +10,8 @@
     $unassigned = ! is_null($_POST['status1']);
     $inProgress = ! is_null($_POST['status2']);
     $done = ! is_null($_POST['status3']);
-
-    Preferences::updatePreferences($db, $_SESSION[Session::USERNAME], $normal, $high, $urgent, $unassigned, $inProgress, $done);
+    $from = Preferences::datetimeLocalToDatetime($_POST['dateFrom']);
+    $to = Preferences::datetimeLocalToDatetime($_POST['dateTo']);
+    Preferences::updatePreferences($db, $_SESSION[Session::USERNAME], $normal, $high, $urgent, $unassigned, $inProgress, $done, $from, $to);
     die(header('Location: ../index.php?page=departments'));
 ?>

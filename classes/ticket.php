@@ -73,9 +73,9 @@
         public static function getFilteredTickets(PDO $db, string $department, Preferences $filters, string $query = '') : array {
             $array = array_filter(array($filters->normal ? 'Normal' : null , $filters->high ? 'High': null, $filters->urgent ? 'Urgent' : null), fn($val) => $val !== null);
             $statusArray = array_filter(array($filters->unassigned ? 'Unassigned' : null, $filters->inProgress ? 'In progress' : null, $filters->done ? 'Done' : null), fn($val) => $val !== null);
-            $stmt = $db->prepare('SELECT * FROM Ticket WHERE department = ? AND priority IN (' . join(',', array_fill(0, sizeof($array), '?')) . ') AND (subject LIKE ? OR text LIKE ?) AND id IN (SELECT id from TicketStatus WHERE status IN (' . join(',', array_fill(0, sizeof($statusArray), '?')) . '))');
+            $stmt = $db->prepare('SELECT * FROM Ticket WHERE department = ? AND priority IN (' . join(',', array_fill(0, sizeof($array), '?')) . ') AND (publishDate BETWEEN ? AND ?) AND (subject LIKE ? OR text LIKE ?) AND id IN (SELECT id from TicketStatus WHERE status IN (' . join(',', array_fill(0, sizeof($statusArray), '?')) . '))');
             $query = '%' . str_replace(array('\\', '_', '%'), array('\\\\', '\\_', '\\%'), $query) . '%';
-            $stmt->execute(array($department, ...$array, $query, $query, ...$statusArray));
+            $stmt->execute(array($department, ...$array, $filters->from, $filters->to, $query, $query, ...$statusArray));
             $tickets = $stmt->fetchAll();
             $ticketArray = array();
             foreach ($tickets as $ticket) {

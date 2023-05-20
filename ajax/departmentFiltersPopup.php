@@ -43,6 +43,18 @@
                 <input class="filter-item" id="filter-checkmark" type="checkbox" name="status3" value="Done"<?php if($preferences->done) {?>checked <?php }?>>
                 <?php drawStatus('Done');?>
             </div>
+            <br>
+            <div class="popup-item-filter-item" id='filter-title'>By date:</div>
+            <div class="popup-item-filter-item" >
+                <span>From:</span>
+                <br>
+                <input class="filter-item" id="filter-date" type="datetime-local" name="dateFrom" value = "<?= Preferences::DatetimeTodatetimeLocal($preferences->from);?>" min="1900-01-01T00:00" max="2030-01-01T00:00">
+            </div>
+            <div class="popup-item-filter-item" >
+                <span>To:</span>
+                <br>
+                <input class="filter-item" id="filter-date" type="datetime-local" name="dateTo" value = "<?= Preferences::DatetimeTodatetimeLocal($preferences->to);?>" min="1900-01-01T00:00" max="2050-01-01T00:00">
+            </div>
         </div>
         <div class="popup-item">
             <button type="submit" class="submit-button">Submit</button>
