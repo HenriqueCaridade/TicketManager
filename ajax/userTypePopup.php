@@ -1,5 +1,5 @@
 <?php
-    include_once('../classes/user.php');
+    require_once(dirname(__DIR__) . "/classes/user.php");
     if (!isset($_POST['username']) || !isset($_POST['userType'])) {
         echo '<p>failed</p>';
         die();

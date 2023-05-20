@@ -116,3 +116,16 @@ main.main-sidebar {
     overflow: hidden;
     margin-left: var(--sidebar-width);
 }
+
+.title {
+    font-size: 50px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid var(--secondary-background-color);
+}

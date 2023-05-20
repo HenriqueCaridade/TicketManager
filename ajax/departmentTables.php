@@ -1,10 +1,10 @@
 <?php
-    include_once("../database/connection.php");
-    include_once("../classes/department.php");
-    include_once("../classes/ticket.php");
-    include_once("../classes/session.php");
-    include_once("../classes/preferences.php");
-    include_once("../templates/ticket.php");
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    require_once(dirname(__DIR__) . "/classes/department.php");
+    require_once(dirname(__DIR__) . "/classes/ticket.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/preferences.php");
+    require_once(dirname(__DIR__) . "/templates/ticket.php");
     
     $session = Session::getSession();
 

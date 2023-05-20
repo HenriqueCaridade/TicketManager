@@ -1,10 +1,10 @@
 <?php
-    require_once("../classes/session.php");
-    require_once("../classes/user.php");
-    require_once("../database/connection.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/user.php");
+    require_once(dirname(__DIR__) . "/database/connection.php");
     $session = Session::getSession();
     $db = getDatabaseConnection();
-    if (!isset($_POST['username']) || !isset($_POST['userType'])) die(header('Location: ../pages/users_page.php'));
+    if (!isset($_POST['username']) || !isset($_POST['userType'])) die(header('Location: ../index.php?page=users'));
     User::updateUserType($db, $_POST['username'], $_POST['userType']);
-    header('Location: ../pages/users_page.php');
+    die(header('Location: ../index.php?page=users'));
 ?>

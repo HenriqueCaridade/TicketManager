@@ -1,5 +1,5 @@
 <?php
-    include_once("../templates/profile.php");
+    require_once(dirname(__DIR__) . "/templates/profile.php");
 
 function _drawClient(User $client) { ?>
     <tr class="client">
@@ -7,7 +7,8 @@ function _drawClient(User $client) { ?>
         <td class="client-name"><?=htmlentities($client->name)?></td>
         <td class="client-email"><?=htmlentities($client->email)?></td>
         <td class="user-edit">
-            <form class="user-page-form" action="../pages/user_page.php" method="post">
+            <form class="user-page-form" action="./index.php" method="get">
+                <input type="hidden" name="page" value="user">
                 <input type="hidden" name="username" value="<?=$client->username?>">
                 <button type='submit' class="user-page-submit">See User</button>
             </form>
@@ -24,7 +25,8 @@ function _drawAgent(Agent $agent) { ?>
         <td class="agent-email"><?=htmlentities($agent->email)?></td>
         <td class="agent-department"> <?= $agent->departmentString?> </td>
         <td class="user-edit">
-            <form class="user-page-form" action="../pages/user_page.php" method="post">
+            <form class="user-page-form" action="./index.php" method="get">
+                <input type="hidden" name="page" value="user">
                 <input type="hidden" name="username" value="<?=$agent->username?>">
                 <button type='submit' class="user-page-submit">See User</button>
             </form>

@@ -1,7 +1,7 @@
 <?php
-    require_once("../classes/session.php");
-    require_once("../classes/preferences.php");
-    require_once("../database/connection.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/preferences.php");
+    require_once(dirname(__DIR__) . "/database/connection.php");
     $session = Session::getSession();
     $db = getDatabaseConnection();
     $normal = ! is_null($_POST['priority1']);
@@ -12,5 +12,5 @@
     $done = ! is_null($_POST['status3']);
 
     Preferences::updatePreferences($db, $_SESSION[Session::USERNAME], $normal, $high, $urgent, $unassigned, $inProgress, $done);
-    header('Location: ../pages/department_page.php');
+    die(header('Location: ../index.php?page=departments'));
 ?>

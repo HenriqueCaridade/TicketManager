@@ -1,8 +1,8 @@
 <?php
-    include_once("../database/connection.php");
-    include_once("../templates/user.php");
-    include_once("../classes/user.php");
-    include_once("../classes/session.php");
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    require_once(dirname(__DIR__) . "/templates/user.php");
+    require_once(dirname(__DIR__) . "/classes/user.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
 
     $session = Session::getSession();
 

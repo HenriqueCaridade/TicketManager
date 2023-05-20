@@ -1,20 +1,24 @@
 <?php
     // Templates
-    include_once("../templates/header.php");
-    include_once("../templates/footer.php");
-    include_once("../templates/toast.php");
+    require_once(dirname(__DIR__) . "/templates/header.php");
+    require_once(dirname(__DIR__) . "/templates/footer.php");
+    require_once(dirname(__DIR__) . "/templates/toast.php");
+    // Classes
+    require_once(dirname(__DIR__) . "/classes/session.php");
     // Session
-    include_once("../classes/session.php");
     $session = Session::getSession();
 
-    $prevUsername  = htmlentities($session->getSavedInput(Session::R_USERNAME)  ?? "");
-    $prevName      = htmlentities($session->getSavedInput(Session::R_NAME)      ?? "");
-    $prevEmail     = htmlentities($session->getSavedInput(Session::R_EMAIL)     ?? "");
-    $prevPassword1 = htmlentities($session->getSavedInput(Session::R_PASSWORD1) ?? "");
-    $prevPassword2 = htmlentities($session->getSavedInput(Session::R_PASSWORD2) ?? "");
+    function drawPage(array $getArray) {
+        global $session;
 
-    // Draw Page
-    drawHeader();
+        $prevUsername  = htmlentities($session->getSavedInput(Session::R_USERNAME)  ?? "");
+        $prevName      = htmlentities($session->getSavedInput(Session::R_NAME)      ?? "");
+        $prevEmail     = htmlentities($session->getSavedInput(Session::R_EMAIL)     ?? "");
+        $prevPassword1 = htmlentities($session->getSavedInput(Session::R_PASSWORD1) ?? "");
+        $prevPassword2 = htmlentities($session->getSavedInput(Session::R_PASSWORD2) ?? "");
+        
+        // Draw Page
+        drawHeader(false);
 ?>
 <main>
     <div id="register" class="page">
@@ -54,5 +58,6 @@
     </div>
 </main>
 <?php
-    drawFooter();
+        drawFooter();
+    }
 ?>

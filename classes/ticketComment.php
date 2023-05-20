@@ -30,15 +30,13 @@
         }
 
         public static function getTicketComments(PDO $db, int $id) : array {
-            $stmt = $db->prepare('SELECT * FROM TicketComment WHERE ticketId=?');
-            $stmt->execute(array($id));
+            $stmt = $db->prepare('SELECT * FROM TicketComment WHERE ticketId=? ORDER BY date');
+            $stmt->execute(array($id));;
             $comments = $stmt->fetchAll();
             $commentArray = array();
             foreach ($comments as $comment) {
                 $commentArray[] = TicketComment::fromArray($comment);
             }
-            // Order from newer to older
-            usort($commentArray, fn(TicketComment $a, TicketComment $b) => ($a->date > $b->date) ? 1 : (($a->date < $b->date) ? -1 : 0));
             return $commentArray;
         }
     }

@@ -1,12 +1,12 @@
 
-button:not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit) {
+button:not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit):not(.ticket-submit) {
     padding: 0.8em;
     color: var(--primary-background-color);
     border: none;
     padding: 0.5em;
     border-radius: 2em;
 }
-button:not(.red):not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit) {
+button:not(.red):not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit):not(.ticket-submit) {
     background-color: var(--accent-color);
 }
 
@@ -26,7 +26,7 @@ button#ticket-open-button, button#department-add-button, button#department-remov
     padding: 1em;
 }
 
-button.ticket-page-submit, button.user-page-submit {
+button.ticket-page-submit, button.ticket-submit, button.user-page-submit {
     background-color: transparent;
     border: none;
     color: var(--accent-color);
@@ -34,6 +34,9 @@ button.ticket-page-submit, button.user-page-submit {
     padding: 0;
     width: 100%;
     text-align: left;
+}
+form.ticket-page-form{
+    display: inline-block;
 }
 button.profile-submit {
     background-color: transparent;
@@ -47,6 +50,6 @@ form.profile-form {
     right: 1rem;
 }
 
-form.ticket-page-form, form.user-page-form, form.profile-form {
+form.ticket-page-form, form.ticket-form, form.user-page-form, form.profile-form {
     margin-block-end: 0;
 }

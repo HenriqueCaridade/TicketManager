@@ -1,12 +1,12 @@
 <?php
-    include_once("../database/connection.php");
-    include_once("../classes/session.php");
-    include_once("../classes/ticket.php");
-    include_once("../classes/department.php");
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/ticket.php");
+    require_once(dirname(__DIR__) . "/classes/department.php");
 
     $session = Session::getSession();
     $db = getDatabaseConnection();
-    if (!isset($_POST['id']) || !isset($_POST['department'])) die(header('Location: ../pages/department_page.php'));
+    if (!isset($_POST['id']) || !isset($_POST['department'])) die(header('Location: ../index.php?page=departments'));
     Ticket::changeDepartment($db, $_POST['id'], $_POST['department']);
-    header('Location: ../pages/department_page.php');
+    die(header('Location: ../index.php?page=departments'));
 ?>

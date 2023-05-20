@@ -1,6 +1,6 @@
 <?php
     declare(strict_types=1);
-    include_once("../classes/department.php");
+    require_once(dirname(__DIR__) . "/classes/department.php");
 
     class User {
         protected const MIN_PASSWORD_LENGTH = 8;

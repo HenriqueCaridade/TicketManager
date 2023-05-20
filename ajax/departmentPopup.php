@@ -1,8 +1,8 @@
 <?php
-    include_once('../templates/department.php');
-    include_once('../database/connection.php');
-    include_once('../classes/user.php');
-    include_once('../classes/department.php');
+    require_once(dirname(__DIR__) . "/templates/department.php");
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    require_once(dirname(__DIR__) . "/classes/user.php");
+    require_once(dirname(__DIR__) . "/classes/department.php");
     if (!isset($_POST['username'])) {
         var_dump($_POST);
         die();
@@ -11,7 +11,7 @@
     $agentDepartments = Department::getDepartmentsFromAgent($db, $_POST['username']);
     $departments = Department::getAllDepartments($db);
     $otherDepartments = array_filter($departments, fn($value) => !in_array($value, $agentDepartments));
-?>
+?> 
 <div id="popup-darken" onclick="closePopup()"></div>
 <div id="popup-form">
     <div class="popup-item">

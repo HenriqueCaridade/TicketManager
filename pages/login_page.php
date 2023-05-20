@@ -1,16 +1,21 @@
 <?php
     // Templates
-    include_once("../templates/header.php");
-    include_once("../templates/footer.php");
-    include_once("../templates/toast.php");
+    require_once(dirname(__DIR__) . "/templates/header.php");
+    require_once(dirname(__DIR__) . "/templates/footer.php");
+    require_once(dirname(__DIR__) . "/templates/toast.php");
+    // Classes
+    require_once(dirname(__DIR__) . "/classes/session.php");
     // Session
-    include_once("../classes/session.php");
     $session = Session::getSession();
-    $prevUsername = htmlentities($session->getSavedInput(Session::L_USERNAME) ?? "");
-    $prevPassword = htmlentities($session->getSavedInput(Session::L_PASSWORD) ?? "");
     
-    // Draw Page
-    drawHeader();
+    function drawPage(array $getArray) {
+        global $session;
+
+        $prevUsername = htmlentities($session->getSavedInput(Session::L_USERNAME) ?? "");
+        $prevPassword = htmlentities($session->getSavedInput(Session::L_PASSWORD) ?? "");
+        
+        // Draw Page
+        drawHeader(false);
 ?>
 <main>
     <div id="login" class="page">
@@ -36,5 +41,6 @@
     </div>
 </main>
 <?php  
-    drawFooter();
+        drawFooter();
+    }
 ?>
