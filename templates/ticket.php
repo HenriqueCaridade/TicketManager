@@ -1,14 +1,16 @@
 <?php
     include_once("../classes/ticket.php");
     include_once("../templates/profile.php");
+    include_once("../templates/priority.php");
+    include_once("../templates/status.php");
     function _drawTicket(Ticket $ticket) {
 ?>
 <tr class="ticket">
     <td class="ticket-username"><?php drawProfile($ticket->publisher, true); ?></td>
     <td class="ticket-subject"><?=htmlentities($ticket->subject)?></td>
     <td class="ticket-department"><?=htmlentities($ticket->department)?></td>
-    <td class="ticket-priority"><?=htmlentities($ticket->priority)?></td>
-    <td class="ticket-status"><?=htmlentities($ticket->status->status)?></td>
+    <td class="ticket-priority"><?php drawPriority($ticket->priority); ?></td>
+    <td class="ticket-status"><?php drawStatus($ticket->status->status); ?></td>
     <td class="ticket-edit">
         <form class="ticket-page-form" action="../pages/ticket_page.php" method="post">
             <input type="hidden" name="id" value="<?=$ticket->id?>">
@@ -47,8 +49,8 @@
         <tr class="ticket">
             <td class="ticket-username"><?php drawProfile($ticket->publisher, true); ?></td>
             <td class="ticket-subject"><?=htmlentities($ticket->subject)?></td>
-            <td class="ticket-priority"><?=htmlentities($ticket->priority)?></td>
-            <td class="ticket-status"><?=htmlentities($ticket->status->status)?></td>
+            <td class="ticket-priority"><?php drawPriority($ticket->priority); ?></td>
+            <td class="ticket-status"><?php drawStatus($ticket->status->status); ?></td>
             <td class="ticket-edit">
                 <form class="ticket-page-form" action="../pages/ticket_page.php" method="post">
                     <input type="hidden" name="id" value="<?=$ticket->id?>">

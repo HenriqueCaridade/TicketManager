@@ -1,5 +1,7 @@
 <?php
     include_once("../templates/department.php");
+    include_once("../templates/priority.php");
+    include_once("../templates/status.php");
     include_once("../database/connection.php");
     include_once("../classes/department.php");
     include_once("../classes/session.php");
@@ -11,31 +13,36 @@
     $preferences = Preferences::getPreferences($db, $_SESSION[Session::USERNAME]);
 ?>
 <div id="popup-darken" onclick="closePopup()"></div>
-<div id="popup-form">
+<div id="popup-form" >
     <form action="../actions/departmentFilters.php" method="post">
-        <div class="popup-item filter-item">
-            <input class="filter-item" type="checkbox" name="priority1" value="Normal" <?php if($preferences->normal) {?>checked <?php }?>>
-            <label class="filter-item" for="priority1"> Normal</label>
-        </div>
-        <div class="popup-item filter-item">
-            <input class="filter-item" type="checkbox" name="priority2" value="High" <?php if($preferences->high) {?>checked <?php }?>>
-            <label class="filter-item" for="priority2"> High</label>
-        </div>
-        <div class="popup-item filter-item">
-            <input class="filter-item" type="checkbox" name="priority3" value="Urgent"<?php if($preferences->urgent) {?>checked <?php }?>>
-            <label class="filter-item" for="priority3"> Urgent</label>
-        </div>
-        <div class="popup-item filter-item">
-            <input class="filter-item" type="checkbox" name="status1" value="Unassigned"<?php if($preferences->unassigned) {?>checked <?php }?>>
-            <label class="filter-item" for="status1"> Unassigned</label>
-        </div>
-        <div class="popup-item filter-item">
-            <input class="filter-item" type="checkbox" name="status2" value="In progress"<?php if($preferences->inProgress) {?>checked <?php }?>>
-            <label class="filter-item" for="status2"> In progress</label>
-        </div>
-        <div class="popup-item filter-item">
-            <input class="filter-item" type="checkbox" name="status3" value="Done"<?php if($preferences->done) {?>checked <?php }?>>
-            <label class="filter-item" for="status3"> Done</label>
+        <div id="popup-item-filter">
+            <div class="popup-item-filter-item" id='filter-title'>By priority:</div>
+            <div class="popup-item-filter-item" id="filter-normal">
+                <input class="filter-item" id="filter-checkmark" type="checkbox" name="priority1" value="Normal" <?php if($preferences->normal) {?>checked <?php }?>>
+                <?php drawPriority('Normal');?>
+            </div>
+            <div class="popup-item-filter-item" id='filter-high'>
+                <input class="filter-item" id="filter-checkmark" type="checkbox" name="priority2" value="High" <?php if($preferences->high) {?>checked <?php }?>>
+                <?php drawPriority('High');?>
+            </div>
+            <div class="popup-item-filter-item" id = "filter-urgent">
+                <input class="filter-item" id="filter-checkmark" type="checkbox" name="priority3" value="Urgent"<?php if($preferences->urgent) {?>checked <?php }?>>
+                <?php drawPriority('Urgent');?>
+            </div>
+            <br>
+            <div class="popup-item-filter-item" id='filter-title'>By status:</div>
+            <div class="popup-item-filter-item" id="filter-unassigned">
+                <input class="filter-item" id="filter-checkmark" type="checkbox" name="status1" value="Unassigned"<?php if($preferences->unassigned) {?>checked <?php }?>>
+                <?php drawStatus('Unassigned');?>
+            </div>
+            <div class="popup-item-filter-item" id='filter-progress' > 
+                <input class="filter-item" id="filter-checkmark" type="checkbox" name="status2" value="In progress"<?php if($preferences->inProgress) {?>checked <?php }?>>
+                <?php drawStatus('In progress');?>
+            </div>
+            <div class="popup-item-filter-item" id='filter-done'>
+                <input class="filter-item" id="filter-checkmark" type="checkbox" name="status3" value="Done"<?php if($preferences->done) {?>checked <?php }?>>
+                <?php drawStatus('Done');?>
+            </div>
         </div>
         <div class="popup-item">
             <button type="submit" class="submit-button">Submit</button>
