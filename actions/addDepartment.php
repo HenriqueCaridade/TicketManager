@@ -1,12 +1,12 @@
 <?php
-    include_once("../database/connection.php");
-    include_once("../classes/session.php");
-    include_once("../classes/user.php");
-    include_once("../classes/department.php");
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/user.php");
+    require_once(dirname(__DIR__) . "/classes/department.php");
 
     $session = Session::getSession();
     $db = getDatabaseConnection();
-    if (!isset($_POST['name']) || !isset($_POST['abbrev'])) die(header('Location: ../pages/department_page.php'));
+    if (!isset($_POST['name']) || !isset($_POST['abbrev'])) die(header('Location: ../index.php?page=departments'));
     Department::addDepartment($db, $_POST['name'], $_POST['abbrev']);
-    header('Location: ../pages/department_page.php');
+    die(header('Location: ../index.php?page=departments'));
 ?>

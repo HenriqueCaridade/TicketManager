@@ -1,53 +1,67 @@
 <?php
     // Templates
-    include_once("../templates/header.php");
-    include_once("../templates/footer.php");
-    include_once("../templates/sidebar.php");
-    include_once("../templates/ticket.php");
-    include_once("../templates/department.php");
+    require_once(dirname(__DIR__) . "/templates/header.php");
+    require_once(dirname(__DIR__) . "/templates/footer.php");
+    require_once(dirname(__DIR__) . "/templates/sidebar.php");
+    require_once(dirname(__DIR__) . "/templates/ticket.php");
+    require_once(dirname(__DIR__) . "/templates/department.php");
+    // Database
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    // Classes
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/ticket.php");
+    require_once(dirname(__DIR__) . "/classes/department.php");
     // Session
-    include_once("../database/connection.php");
-    include_once("../classes/session.php");
-    include_once("../classes/ticket.php");
-    include_once("../classes/department.php");
     $session = Session::getSession();
 
     if (!$session->isLoggedIn()) {
         $session->addToast(Session::ERROR, 'You are not logged in!');
-        die(header('Location: ../pages/login_page.php'));
+        die(header('Location: ./index.php?page=login'));
     }
-    $db = getDatabaseConnection();
-    $user = User::getUser($db, $_POST['username']);
-    if ($user->userType !== USER::USERTYPE_CLIENT)
-        $user = Agent::getAgent($db, $_POST['username']);
-    
+    function drawPage(array $getArray) {
+        global $session;
 
-    drawHeader(true);
-    drawSidebar($session, 'NONE');
+        if (!isset($getArray['username'])) {
+            die(header('Location: index.php?page=dashboard'));
+        }
+
+        $db = getDatabaseConnection();
+        $user = User::getUser($db, $getArray['username']);
+
+        // Draw Page
+        drawHeader();
+        drawSidebar($session);
 ?>
 <main class="main-sidebar">
     <div id="user-page" class="page">
         <h1 id="user-page-title" class="title"><?php drawProfile($user->username, true) ?></h1>
         <div class="account-item">
-            Name: <?=htmlentities($user->name)?>
+            <span class="account-label">Name</span>
+            <div class="account-box"><?=htmlentities($user->name)?></div>
         </div>
         <div class="account-item">
-            E-mail: <?=htmlentities($user->email)?>
+            <span class="account-label">E-mail</span>
+            <div class="account-box"><?=htmlentities($user->email)?></div>
         </div>
         <div class="account-item">
-            User Type:
+            <span class="account-label">User Type</span>
+            <div class="account-box"><?=htmlentities($user->userType)?></div>
             <?php if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
-                <a class="usertype-change" data-username="<?=htmlentities($user->username)?>" data-user-type="<?=htmlentities($user->userType)?>"> 
-                    <?=htmlentities($user->userType)?> 
+                <a class="usertype-change option" data-username="<?=htmlentities($user->username)?>" data-user-type="<?=htmlentities($user->userType)?>"> 
+                    Change...
                 </a>
             <?php }?>
         </div>
-        <?php if ($user->userType !== User::USERTYPE_CLIENT) { ?>
-        <div>
-            Departments:
+        <?php
+        if ($user->userType !== User::USERTYPE_CLIENT) {
+            $user = Agent::getAgent($db, $_POST['username']);    
+        ?>
+        <div class="account-item">
+            <span class="account-label">Departments</span>
+            <div class="account-box"><?=$user->departmentString?></div>
             <?php if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
-                <a class="agent-department-change" data-username="<?=htmlentities($user->username)?>">
-                    <?=$user->departmentString?>
+                <a class="agent-department-change option" data-username="<?=htmlentities($user->username)?>">
+                    Change...
                 </a>
             <?php }?>
         </div>
@@ -56,5 +70,6 @@
     <div id="popup"></div>
 </main>
 <?php
-    drawFooter();
+        drawFooter();
+    }
 ?>

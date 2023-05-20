@@ -1,7 +1,7 @@
 <?php
-    include_once("../templates/profile.php");
-    include_once("../classes/session.php");
-    function drawHeader(bool $drawProfile=false) {
+    require_once(dirname(__DIR__) . "/templates/profile.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    function drawHeader(bool $drawProfile=true) {
         $session = Session::getSession();
 ?>
 <html lang="en">
@@ -13,7 +13,6 @@
     <script src="../js/userForms.js" defer></script>
     <script src="../js/popups.js" defer></script>
     <script src="../js/search.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://kit.fontawesome.com/f3cf9d3f6c.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/include.css">
     <link rel="stylesheet" href="../css/main.css">
@@ -25,13 +24,15 @@
     <link rel="stylesheet" href="../css/popup.css">
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/search.css">
+    <link rel="stylesheet" href="../css/ticket.css">
     <title>Tick.et</title>
 </head>
 <body>
     <header>
         <span id="logo">Tick.<span id="logo-highlight">et</span></span>
         <?php if ($drawProfile) { ?>
-            <form class="profile-form" action="../pages/user_page.php" method="post">
+            <form class="profile-form" action="./index.php" method="get">
+                <input type="hidden" name="page" value="user">
                 <input type="hidden" name="username" value="<?=$_SESSION[Session::USERNAME]?>">
                 <button type='submit' class="profile-submit"><i class="fa-solid fa-circle-user"></i></button>
             </form>

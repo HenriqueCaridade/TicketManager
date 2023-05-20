@@ -1,24 +1,31 @@
 <?php
     // Templates
-    include_once("../templates/header.php");
-    include_once("../templates/footer.php");
-    include_once("../templates/sidebar.php");
-    include_once("../templates/user.php");
-    include_once("../database/connection.php");
-
+    require_once(dirname(__DIR__) . "/templates/header.php");
+    require_once(dirname(__DIR__) . "/templates/footer.php");
+    require_once(dirname(__DIR__) . "/templates/sidebar.php");
+    require_once(dirname(__DIR__) . "/templates/user.php");
+    // Database
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    // Classes
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    // Session
     $session = Session::getSession();
     if (!$session->isLoggedIn()) {
         $session->addToast(Session::ERROR, 'You are not logged in!');
-        die(header('Location: ../pages/login_page.php'));
+        die(header('Location: ./index.php?page=login'));
     }
-    $db = getDatabaseConnection();
-    $query = $session->getSavedInput(Session::S_USER) ?? '';
-    $clients = User::getClientsFiltered($db, $query);
-    $agents = Agent::getAgentsFiltered($db, $query);
 
-    // Draw Page
-    drawHeader(true);
-    drawSidebar($session, 'users');
+    function drawPage(array $getArray) {
+        global $session;
+
+        $db = getDatabaseConnection();
+        $query = $session->getSavedInput(Session::S_USER) ?? '';
+        $clients = User::getClientsFiltered($db, $query);
+        $agents = Agent::getAgentsFiltered($db, $query);
+
+        // Draw Page
+        drawHeader();
+        drawSidebar($session, 'users');
 ?>
 <main class="main-sidebar">
     <div class="page"> 
@@ -32,5 +39,6 @@
     <div id='popup'></div>
 </main>
 <?php
-    drawFooter();
+        drawFooter();
+    }
 ?>

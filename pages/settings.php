@@ -1,25 +1,28 @@
 <?php
     // Templates
-    include_once("../templates/header.php");
-    include_once("../templates/footer.php");
-    include_once("../templates/sidebar.php");
-    include_once("../templates/toast.php");
+    require_once(dirname(__DIR__) . "/templates/header.php");
+    require_once(dirname(__DIR__) . "/templates/footer.php");
+    require_once(dirname(__DIR__) . "/templates/sidebar.php");
+    require_once(dirname(__DIR__) . "/templates/toast.php");
+    // Classes
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/user.php");
     // Session
-    include_once("../classes/session.php");
-    include_once("../classes/user.php");
     $session = Session::getSession();
     if (!$session->isLoggedIn()) {
         $session->addToast(Session::ERROR, 'You are not logged in!');
-        die(header('Location: ../pages/login_page.php'));
+        die(header('Location: ./index.php?page=login'));
     }
 
     $prevCurrPassword = htmlentities($session->getSavedInput(Session::U_CURR_PASSWORD));
     $prevPassword1    = htmlentities($session->getSavedInput(Session::U_PASSWORD1));
-    $prevPassword2    =  htmlentities($session->getSavedInput(Session::U_PASSWORD2));
+    $prevPassword2    = htmlentities($session->getSavedInput(Session::U_PASSWORD2));
 
-    // Draw Page
-    drawHeader(true);
-    drawSidebar($session, 'settings');
+    function drawPage(array $getArray) {
+        global $session, $prevCurrPassword, $prevPassword1, $prevPassword2;
+        // Draw Page
+        drawHeader();
+        drawSidebar($session, 'settings');
 ?>
 <main class="main-sidebar">
     <div id="settings" class="page">
@@ -67,5 +70,6 @@
     </div>
 </main>
 <?php  
-    drawFooter();
+        drawFooter();
+    }
 ?>

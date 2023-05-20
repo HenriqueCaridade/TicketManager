@@ -1,47 +1,81 @@
 <?php
     // Templates
-    include_once("../templates/header.php");
-    include_once("../templates/footer.php");
-    include_once("../templates/sidebar.php");
-    include_once("../templates/ticket.php");
-    include_once("../templates/department.php");
+    require_once(dirname(__DIR__) . "/templates/header.php");
+    require_once(dirname(__DIR__) . "/templates/footer.php");
+    require_once(dirname(__DIR__) . "/templates/sidebar.php");
+    require_once(dirname(__DIR__) . "/templates/ticket.php");
+    require_once(dirname(__DIR__) . "/templates/department.php");
+    require_once(dirname(__DIR__) . "/templates/comment.php");
+    // Database
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    // Classes
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/ticket.php");
+    require_once(dirname(__DIR__) . "/classes/department.php");
     // Session
-    include_once("../database/connection.php");
-    include_once("../classes/session.php");
-    include_once("../classes/ticket.php");
-    include_once("../classes/department.php");
     $session = Session::getSession();
 
     if (!$session->isLoggedIn()) {
         $session->addToast(Session::ERROR, 'You are not logged in!');
-        die(header('Location: ../pages/login_page.php'));
+        die(header('Location: ./index.php?page=login'));
     }
-    if (!isset($_POST['id'])) {
-        die(header("Location: ../pages/dashboard.php"));
-    }
-    $db = getDatabaseConnection();
-    $ticket = Ticket::getTicket($db, $_POST['id']);
+    function drawPage(array $getArray) {
+        global $session;
 
-    drawHeader(true);
-    drawSidebar($session, 'NONE');
+        if (!isset($getArray['id'])) {
+            die(header('Location: index.php?page=dashboard'));
+        }
+
+        $db = getDatabaseConnection();
+        $ticket = Ticket::getTicket($db, intval($getArray['id']));
+
+        // Draw Page
+        drawHeader();
+        drawSidebar($session);
 ?>
 <main class="main-sidebar">
     <div id="ticket-page" class="page">
         <h1 id="ticket-page-title" class="title"><?=htmlentities($ticket->subject)?></h1>
-        <p><?php drawProfile($ticket->publisher, true)?></p>
-        <p>Publish Date: <?=htmlentities($ticket->publishDate->format("H:i:s d-m-Y"))?></p>
-        <p>Department: <?php if ($session->getRights(User::USERTYPE_AGENT)) { ?>
-                <a class="ticket-department-change" data-id="<?=$ticket->id?>" data-department="<?=$ticket->department?>"> 
-                    <?=htmlentities($ticket->department)?>
+        <div class="ticket-item">
+            <span class="ticket-label">Publisher</span>
+            <div class="ticket-box"><?=htmlentities($ticket->publisher)?></div>
+        </div>
+        <div class="ticket-item">
+            <span class="ticket-label">Publish Date</span>
+            <div class="ticket-box"><?=htmlentities($ticket->publishDate->format("H:i:s d-m-Y"))?></div>
+        </div>
+        <div class="ticket-item">
+            <span class="ticket-label">Priority</span>
+            <div class="ticket-box"><?=htmlentities($ticket->priority)?></div>
+        </div>
+        <div class="ticket-item">
+            <span class="ticket-label">Status</span>
+            <div class="ticket-box"><?=htmlentities($ticket->status->status)?></div>
+            <?php if ($session->getRights(User::USERTYPE_AGENT)) { ?>
+                <form class="ticket-page-form " action="./index.php" method="get">
+                    <input type="hidden" name="page" value="ticket-history">
+                    <input type="hidden" name="id" value="<?=$ticket->id?>">
+                    <button type='submit' class="ticket-page-submit">View History...</button>
+                </form>
+            <?php } ?>
+        </div>
+        <div class="ticket-item">
+            <span class="ticket-label">Department</span>
+            <div class="ticket-box"><?=htmlentities($ticket->department)?></div>
+            <?php if ($session->getRights(User::USERTYPE_AGENT)) { ?>
+                <a class="ticket-department-change option" data-id="<?=$ticket->id?>" data-department="<?=$ticket->department?>"> 
+                    Change...
                 </a>
-            <?php } else { echo htmlentities($ticket->department); } ?>
-        </p>
-        <p>Text: <?=htmlentities($ticket->text)?></p>
-        <p>Priority: <?=htmlentities($ticket->priority)?></p>
-        <p>Status: <?=htmlentities($ticket->status->status)?></p>
+            <?php } ?>
+        </div>
+        <hr>
+        <p><?=htmlentities($ticket->text)?></p>
+        <hr>
+        <?php drawComments($ticket->comments); ?>
     </div>
     <div id="popup"></div>
 </main>
 <?php
-    drawFooter();
+        drawFooter();
+    }
 ?>

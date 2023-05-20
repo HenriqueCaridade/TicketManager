@@ -1,7 +1,7 @@
 <?php
-    require_once("../database/connection.php");
-    require_once("../classes/user.php");
-    require_once("../classes/session.php");
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    require_once(dirname(__DIR__) . "/classes/user.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
     $session = Session::getSession();
 
     $session->saveInput(Session::L_USERNAME, $_POST['username']);
@@ -10,14 +10,14 @@
     $db = getDatabaseConnection();
     if (!User::usernameExists($db, $_POST['username'])) {
         $session->addToast(Session::ERROR, 'Username doesn\'t exist.');
-        die(header('Location: ../pages/login_page.php'));
+        die(header('Location: ../index.php?page=login'));
     }
     if (!User::passwordMatchesUser($db, $_POST['username'], $_POST['password'])) {
         $session->addToast(Session::ERROR, 'Wrong password.');
-        die(header('Location: ../pages/login_page.php'));
+        die(header('Location: ../index.php?page=login'));
     }
     
     $session->logInUser(User::getUser($db, $_POST['username']));
     $session->clearInput();
-    header('Location: ../pages/dashboard.php');
+    die(header('Location: ../index.php?page=dashboard'));
 ?>

@@ -34,15 +34,13 @@
         }
 
         public static function getTicketStatuses(PDO $db, int $id) : array {
-            $stmt = $db->prepare('SELECT * FROM TicketStatus WHERE ticketId=?');
+            $stmt = $db->prepare('SELECT * FROM TicketStatus WHERE ticketId=? ORDER BY date');
             $stmt->execute(array($id));
             $statuses = $stmt->fetchAll();
             $statusArray = array();
             foreach ($statuses as $status) {
                 $statusArray[] = TicketStatus::fromArray($status);
             }
-            // Order from newer to older
-            usort($statusArray, fn(TicketStatus $a, TicketStatus $b) => ($a->date > $b->date) ? 1 : (($a->date < $b->date) ? -1 : 0));
             return $statusArray;
         }
     }

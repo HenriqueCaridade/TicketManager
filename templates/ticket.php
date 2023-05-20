@@ -1,8 +1,8 @@
 <?php
-    include_once("../classes/ticket.php");
-    include_once("../templates/profile.php");
-    include_once("../templates/priority.php");
-    include_once("../templates/status.php");
+    require_once(dirname(__DIR__) . "/classes/ticket.php");
+    require_once(dirname(__DIR__) . "/templates/profile.php");
+    require_once(dirname(__DIR__) . "/templates/priority.php");
+    require_once(dirname(__DIR__) . "/templates/status.php");
     function _drawTicket(Ticket $ticket) {
 ?>
 <tr class="ticket">
@@ -12,7 +12,8 @@
     <td class="ticket-priority"><?php drawPriority($ticket->priority); ?></td>
     <td class="ticket-status"><?php drawStatus($ticket->status->status); ?></td>
     <td class="ticket-edit">
-        <form class="ticket-page-form" action="../pages/ticket_page.php" method="post">
+        <form class="ticket-page-form" action="./index.php" method="get">
+            <input type="hidden" name="page" value="ticket">
             <input type="hidden" name="id" value="<?=$ticket->id?>">
             <button type='submit' class="ticket-page-submit">See Ticket</button>
         </form>
@@ -52,9 +53,10 @@
             <td class="ticket-priority"><?php drawPriority($ticket->priority); ?></td>
             <td class="ticket-status"><?php drawStatus($ticket->status->status); ?></td>
             <td class="ticket-edit">
-                <form class="ticket-page-form" action="../pages/ticket_page.php" method="post">
+                <form class="ticket-form" action="./index.php" method="get">
+                    <input type="hidden" name="page" value="ticket">
                     <input type="hidden" name="id" value="<?=$ticket->id?>">
-                    <button type='submit' class="ticket-page-submit">See Ticket</button>
+                    <button type='submit' class="ticket-submit">See Ticket</button>
                 </form>
             </td>
         </tr>

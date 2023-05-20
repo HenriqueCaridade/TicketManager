@@ -1,11 +1,11 @@
 <?php
-    include_once("../templates/department.php");
-    include_once("../templates/priority.php");
-    include_once("../templates/status.php");
-    include_once("../database/connection.php");
-    include_once("../classes/department.php");
-    include_once("../classes/session.php");
-    include_once("../classes/preferences.php");
+    require_once(dirname(__DIR__) . "/templates/department.php");
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    require_once(dirname(__DIR__) . "/classes/department.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/preferences.php");
+    require_once(dirname(__DIR__) . "/templates/priority.php");
+    require_once(dirname(__DIR__) . "/templates/status.php");
 
     $session = Session::getSession();
     $db = getDatabaseConnection();

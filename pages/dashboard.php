@@ -1,28 +1,34 @@
 <?php
     // Templates
-    include_once("../templates/header.php");
-    include_once("../templates/footer.php");
-    include_once("../templates/sidebar.php");
-    include_once("../templates/ticket.php");
-    include_once("../templates/department.php");
+    require_once(dirname(__DIR__) . "/templates/header.php");
+    require_once(dirname(__DIR__) . "/templates/footer.php");
+    require_once(dirname(__DIR__) . "/templates/sidebar.php");
+    require_once(dirname(__DIR__) . "/templates/ticket.php");
+    require_once(dirname(__DIR__) . "/templates/department.php");
+    // Database
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    // Classes
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/ticket.php");
+    require_once(dirname(__DIR__) . "/classes/department.php");
     // Session
-    include_once("../database/connection.php");
-    include_once("../classes/session.php");
-    include_once("../classes/ticket.php");
-    include_once("../classes/department.php");
     $session = Session::getSession();
 
     if (!$session->isLoggedIn()) {
         $session->addToast(Session::ERROR, 'You are not logged in!');
-        die(header('Location: ../pages/login_page.php'));
+        die(header('Location: ./index.php?page=login'));
     }
-    $db = getDatabaseConnection();
-    $tickets = Ticket::getTicketsFromUsername($db, $_SESSION[Session::USERNAME]);
-    $departments = Department::getAllDepartments($db);
 
-    // Draw Page
-    drawHeader(true);
-    drawSidebar($session, 'dashboard');
+    function drawPage(array $getArray) {
+        global $session;
+
+        $db = getDatabaseConnection();
+        $tickets = Ticket::getTicketsFromUsername($db, $_SESSION[Session::USERNAME]);
+        $departments = Department::getAllDepartments($db);
+
+        // Draw Page
+        drawHeader();
+        drawSidebar($session, 'dashboard');
 ?>
 <main class="main-sidebar">
     <div id="dashboard" class="page">
@@ -57,5 +63,6 @@
     </div>
 </main>
 <?php  
-    drawFooter();
+        drawFooter();
+    }
 ?>

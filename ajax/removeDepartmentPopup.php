@@ -1,7 +1,7 @@
 <?php
-    include_once("../templates/department.php");
-    include_once("../database/connection.php");
-    include_once("../classes/department.php");
+    require_once(dirname(__DIR__) . "/templates/department.php");
+    require_once(dirname(__DIR__) . "/database/connection.php");
+    require_once(dirname(__DIR__) . "/classes/department.php");
     $db = getDatabaseConnection();
     $departments = Department::getAllDepartments($db);
 ?>

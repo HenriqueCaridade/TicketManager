@@ -1,15 +1,15 @@
 
-/* ACCOUNT STYLE */
-.account-item {
+/* TICKET PAGE STYLE */
+.ticket-item {
     display: block;
     margin-bottom: 0.5em;
 }
-.account-item > .account-label {
+.ticket-item > .ticket-label {
     display: block;
     padding: 2px 1em;
 }
 
-.account-item > .account-box {
+.ticket-item > .ticket-box {
     display: inline-block;
     width: 30em;
     padding: 0.5em;

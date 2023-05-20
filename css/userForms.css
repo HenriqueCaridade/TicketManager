@@ -10,11 +10,6 @@
 div.register-item, div.login-item, div.update-item {
     padding-top: 1em;
 }
-.title {
-    font-size: 50px;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
 
 /* LOGIN AND REGISTER STYLE */
 #register-title, #login-title {

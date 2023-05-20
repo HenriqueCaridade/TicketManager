@@ -1,5 +1,5 @@
 <?php
-    include_once("../classes/session.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
 
     function drawToast(string $type, string $message, ?string $id=null) : void {
 ?>

@@ -1,6 +1,6 @@
 <?php
     declare(strict_types=1);
-    include_once('../classes/user.php');
+    require_once(dirname(__DIR__) . "/classes/user.php");
     class Session {
         const TOAST = 'toast';
         const SUCCESS = 'success';
