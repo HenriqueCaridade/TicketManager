@@ -10,15 +10,14 @@
 
     $db = getDatabaseConnection();
 
-    $validation = User::validateUpdateParameters($db, $_POST['username'], $_POST['name'], $_POST['email']);
+    $validation = User::validateUpdateParameters($db, $_SESSION[Session::USERNAME], $_POST['username'], $_POST['name'], $_POST['email']);
     if ($validation !== null) { // Error
         $session->addToast(Session::ERROR, $validation);
         die(header('Location: ../index.php?page=settings'));
     }
-    $user->updateUserParameters($db, $_SESSION[Session::USERNAME], $_POST['username'], $_POST['name'], $_POST['email']);
-    
-    $session->logInUser($user);
-    $session->addToast(Session::SUCCESS, 'Information updated successfully!');
+    User::updateUserParameters($db, $_SESSION[Session::USERNAME], $_POST['username'], $_POST['name'], $_POST['email']);
+    $session->logInUser(User::getUser($db, $_POST['username']));
     $session->clearInput();
+    $session->addToast(Session::SUCCESS, 'Information updated successfully!');
     die(header('Location: ../index.php?page=settings'));
 ?>

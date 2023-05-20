@@ -10,6 +10,10 @@ body {
     margin: 0 var(--margin-sides);
 }
 
+.logres-page {
+    width: 30rem;
+    margin: auto;
+}
 
 /* HYPERLINK STYLE */
 a {

@@ -45,15 +45,18 @@
 }
 
 .popup-item {
+    display: inline-block;
+    vertical-align: middle;
     position: relative;
-    display: block;
     padding: 0.5em;
     width: calc(100% - 1em);
 }
 .popup-item > * {
+    position: relative;
     display: inline;
     padding: 0.5em;
     width: 100%;
+    vertical-align: middle;
 }
 .popup-item.filter-item {
     text-align: left;
@@ -65,6 +68,25 @@
     width: auto;
     text-align: right;
 }
+.popup-item > input[type='radio'].priority-item {
+    display: block;
+    position: absolute;
+    right: 60%;
+    width: auto;
+    text-align: right;
+}
+
+.popup-item > .priority {
+    width: min-content;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    padding-left: 0.4em;
+    display: block;
+    position: relative;
+    left: 40%;
+}
+
 label.filter-item {
     position: relative;
     left: 40%;

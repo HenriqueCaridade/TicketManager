@@ -18,3 +18,7 @@
     background-color: transparent;
     border: 2px solid var(--secondary-background-color);
 }
+
+.option {
+    display: inline-block;
+}

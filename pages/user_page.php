@@ -5,6 +5,7 @@
     require_once(dirname(__DIR__) . "/templates/sidebar.php");
     require_once(dirname(__DIR__) . "/templates/ticket.php");
     require_once(dirname(__DIR__) . "/templates/department.php");
+    require_once(dirname(__DIR__) . "/templates/toast.php");
     // Database
     require_once(dirname(__DIR__) . "/database/connection.php");
     // Classes
@@ -52,9 +53,8 @@
                 </a>
             <?php }?>
         </div>
-        <?php
-        if ($user->userType !== User::USERTYPE_CLIENT) {
-            $user = Agent::getAgent($db, $_POST['username']);    
+        <?php if ($user->userType !== User::USERTYPE_CLIENT) {
+            $user = Agent::getAgent($db, $getArray['username']);    
         ?>
         <div class="account-item">
             <span class="account-label">Departments</span>
@@ -65,7 +65,9 @@
                 </a>
             <?php }?>
         </div>
-        <?php }?>
+        <?php }
+            drawToasts($session);
+        ?>
     </div>
     <div id="popup"></div>
 </main>

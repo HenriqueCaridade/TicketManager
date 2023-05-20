@@ -50,6 +50,34 @@ for (let ticket of document.getElementsByClassName('ticket-department-change')) 
     });
 }
 
+for (let ticket of document.getElementsByClassName('ticket-priority-change')) {
+    ticket.addEventListener('click', function(ev){
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/ticketPriorityPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send(`id=${ticket.dataset.id}&priority=${ticket.dataset.priority}`);
+    });
+}
+
+
+for (let ticket of document.getElementsByClassName('ticket-status-change')) {
+    ticket.addEventListener('click', function(ev){
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        console.log(ticket.dataset);
+        xhttp.open("POST", '../ajax/ticketStatusPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send(`id=${ticket.dataset.id}&status=${ticket.dataset.status}`);
+    });
+}
+
 const departmentAdd = document.getElementById('department-add-button');
 const departmentRemove = document.getElementById('department-remove-button');
 if (departmentAdd !== null && departmentRemove !== null) {

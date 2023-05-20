@@ -6,6 +6,7 @@
     require_once(dirname(__DIR__) . "/templates/ticket.php");
     require_once(dirname(__DIR__) . "/templates/department.php");
     require_once(dirname(__DIR__) . "/templates/comment.php");
+    require_once(dirname(__DIR__) . "/templates/toast.php");
     // Database
     require_once(dirname(__DIR__) . "/database/connection.php");
     // Classes
@@ -39,25 +40,15 @@
         <div class="ticket-item">
             <span class="ticket-label">Publisher</span>
             <div class="ticket-box"><?=htmlentities($ticket->publisher)?></div>
+            <form class="user-page-form option" action="./index.php" method="get">
+                <input type="hidden" name="page" value="account">
+                <input type="hidden" name="username" value="<?=$ticket->publisher?>">
+                <button type='submit' class="user-page-submit">See User...</button>
+            </form>
         </div>
         <div class="ticket-item">
             <span class="ticket-label">Publish Date</span>
             <div class="ticket-box"><?=htmlentities($ticket->publishDate->format("H:i:s d-m-Y"))?></div>
-        </div>
-        <div class="ticket-item">
-            <span class="ticket-label">Priority</span>
-            <div class="ticket-box"><?=htmlentities($ticket->priority)?></div>
-        </div>
-        <div class="ticket-item">
-            <span class="ticket-label">Status</span>
-            <div class="ticket-box"><?=htmlentities($ticket->status->status)?></div>
-            <?php if ($session->getRights(User::USERTYPE_AGENT)) { ?>
-                <form class="ticket-page-form " action="./index.php" method="get">
-                    <input type="hidden" name="page" value="ticket-history">
-                    <input type="hidden" name="id" value="<?=$ticket->id?>">
-                    <button type='submit' class="ticket-page-submit">View History...</button>
-                </form>
-            <?php } ?>
         </div>
         <div class="ticket-item">
             <span class="ticket-label">Department</span>
@@ -68,6 +59,32 @@
                 </a>
             <?php } ?>
         </div>
+        <div class="ticket-item">
+            <span class="ticket-label">Priority</span>
+            <div class="ticket-box"><?php drawPriority($ticket->status->priority); ?></div>
+            <?php if ($session->getRights(User::USERTYPE_AGENT)) { ?>
+                <a class="ticket-priority-change option" data-id="<?=$ticket->id?>" data-priority="<?=$ticket->status->priority?>"> 
+                    Change...
+                </a>
+            <?php } ?>
+        </div>
+        <div class="ticket-item">
+            <span class="ticket-label">Status</span>
+            <div class="ticket-box"><?php drawStatus($ticket->status->status, $ticket->status->agentUsername); ?></div>
+            <?php if ($session->getRights(User::USERTYPE_AGENT)) { ?>
+                <a class="ticket-status-change option" data-id="<?=$ticket->id?>" data-status="<?=$ticket->status->status?>"> 
+                    Change...
+                </a>
+            <?php } ?>
+        </div>
+        <div class="ticket-item">
+                <form class="ticket-page-form " action="./index.php" method="get">
+                    <input type="hidden" name="page" value="ticket-history">
+                    <input type="hidden" name="id" value="<?=$ticket->id?>">
+                    <button type='submit' class="ticket-page-submit">View Ticket History...</button>
+                </form>
+        </div>
+        <?php drawToasts($session); ?>
         <hr>
         <p><?=htmlentities($ticket->text)?></p>
         <hr>

@@ -42,7 +42,7 @@
 
         static ?Session $instance = null;
 
-        private array $pendingToasts;
+        public array $pendingToasts;
         private function __construct() {
             session_start();
             $this->pendingToasts = $_SESSION[Session::TOAST] ?? array();

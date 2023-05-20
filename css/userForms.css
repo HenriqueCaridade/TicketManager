@@ -2,10 +2,7 @@
 /* FOR EVERYONE BELOW */
 .register-item, .login-item, .update-item, #toasts {
     display: block;
-    width: 30rem;
-}
-.register-item, .login-item, #toasts {
-    margin: auto;
+    max-width: 30rem;
 }
 div.register-item, div.login-item, div.update-item {
     padding-top: 1em;
@@ -67,4 +64,8 @@ div.toast.success {
 }
 #caps-warning {
     display: none;
+}
+
+div.center-toast div#toasts {
+    margin: auto;
 }

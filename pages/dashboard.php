@@ -5,6 +5,7 @@
     require_once(dirname(__DIR__) . "/templates/sidebar.php");
     require_once(dirname(__DIR__) . "/templates/ticket.php");
     require_once(dirname(__DIR__) . "/templates/department.php");
+    require_once(dirname(__DIR__) . "/templates/toast.php");
     // Database
     require_once(dirname(__DIR__) . "/database/connection.php");
     // Classes
@@ -31,12 +32,13 @@
         drawSidebar($session, 'dashboard');
 ?>
 <main class="main-sidebar">
-    <div id="dashboard" class="page">
+    <div id="dashboard" class="page center-toast">
         <h1 id="dashboard-title" class="title">My Tickets</h1>
         <?php drawTickets($tickets); ?>
         <div class="big-button">
             <button id="ticket-open-button" onclick="openPopup()">Add Ticket</button>
         </div>
+        <?php drawToasts($session); ?>
     </div>
     <div id="popup">
         <div id="popup-darken" onclick="closePopup()"></div>

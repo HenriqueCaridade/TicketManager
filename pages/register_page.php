@@ -21,7 +21,7 @@
         drawHeader(false);
 ?>
 <main>
-    <div id="register" class="page">
+    <div id="register" class="logres-page">
         <h1 id="register-title" class="register title">Register</h1>
         <form action="../actions/register.php" method="post">
             <div class="register-item">

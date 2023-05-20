@@ -10,19 +10,20 @@
         foreach ($statuses as $status) _drawTicketStatus($status);
     }
 
-    function drawStatus(string $status) {
+    function drawStatus(string $status, ?string $agentUsername=null) {
+        $statusStr = $status;
 ?>
 <div class="status">
-    <?php if($status === 'Unassigned'){
-        ?>
+    
+    <?php if ($status === TicketStatus::UNASSIGNED) { ?>
         <i class="fa-solid fa-circle-xmark" style="color: gray;"></i> 
-    <?php }
-    else if($status === 'In progress') {?>
-        <i class="fa-solid fa-list-check" style="color: dodgerblue"></i> 
-    <?php }
-    else if($status ==='Done') {?>
-        <i class="fa-solid fa-circle-check" style =" color: var(--success-color);"></i> 
-    <?php } ?>  
-        <span class="status"><?=htmlentities($status)?></span>
-</div> <?php }
-?>
+    <?php } else if ($status === TicketStatus::ASSIGNED) { ?>
+        <i class="fa-solid fa-list-check" style="color: dodgerblue"></i>
+        <?php if ($agentUsername !== null) $statusStr .= " to " . $agentUsername;?>
+    <?php } else if ($status === TicketStatus::DONE) { ?>
+        <i class="fa-solid fa-circle-check" style="color: var(--success-color);"></i>
+        <?php if ($agentUsername !== null) $statusStr .= " by " . $agentUsername;?>
+    <?php } ?>    
+    <span class="status"><?=htmlentities($statusStr)?></span>
+</div>
+<?php } ?>

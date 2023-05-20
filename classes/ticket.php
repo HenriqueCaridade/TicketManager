@@ -4,35 +4,30 @@
     require_once(dirname(__DIR__) . "/classes/ticketComment.php");
     require_once(dirname(__DIR__) . "/classes/preferences.php");
     class Ticket {
-        const P_NORMAL = 'Normal';
-        const P_HIGH = 'High';
-        const P_URGENT = 'Urgent';
 
         public int $id;
         public string $publisher;
         public string $department;
         public DateTime $publishDate;
-        public string $priority;
         public string $subject;
         public string $text;
         public TicketStatus $status;
         public array $statuses;
         public array $comments;
         
-        private function __construct(PDO $db, int $id, string $publisher, string $department, DateTime $publishDate, string $priority, string $subject, string $text) {
+        private function __construct(PDO $db, int $id, string $publisher, string $department, DateTime $publishDate, string $subject, string $text) {
             $this->id = $id;
             $this->publisher = $publisher;
             $this->department = $department;
             $this->publishDate = $publishDate;
-            $this->priority = $priority;
             $this->subject = $subject;
             $this->text = $text;
+            $this->status = TicketStatus::getLatestTicketStatus($db, $id);
             $this->statuses = TicketStatus::getTicketStatuses($db, $id);
-            $this->status = $this->statuses[0];
             $this->comments = TicketComment::getTicketComments($db, $id);
         }
         private static function fromArray(PDO $db, array $ticket) : Ticket {
-            return new Ticket($db, (int) $ticket['id'], $ticket['publisher'], $ticket['department'], new DateTime($ticket['publishDate']), $ticket['priority'], $ticket['subject'], $ticket['text']);
+            return new Ticket($db, (int) $ticket['id'], $ticket['publisher'], $ticket['department'], new DateTime($ticket['publishDate']), $ticket['subject'], $ticket['text']);
         }
         public static function getTicket(PDO $db, int $id) : ?Ticket {
             $stmt = $db->prepare('SELECT * FROM Ticket WHERE id=?');
@@ -52,13 +47,13 @@
             }
             return $ticketArray;
         }
-        public static function createTicket(PDO $db, string $publisher, string $department, DateTime $publishDate, string $priority = Ticket::P_NORMAL, string $subject, string $text) : void {
+        public static function createTicket(PDO $db, string $publisher, string $department, DateTime $publishDate, string $subject, string $text) : void {
             $stmt = $db->prepare('SELECT MAX(id) as max FROM Ticket');
             $stmt->execute();
             $ticketId =  $stmt->fetch()['max'] + 1;
-            $stmt = $db->prepare('INSERT INTO Ticket (id, publisher, department, publishdate, priority, subject, text)  VALUES (?, ?, ?, ?, ?, ?, ?)');
-            $stmt->execute(array($ticketId, $publisher, $department, $publishDate->format('Y-m-d H:i:s'), $priority, $subject,  $text));
-            TicketStatus::createTicketStatus($db, $ticketId, null, $publishDate, TicketStatus::UNASSIGNED);
+            $stmt = $db->prepare('INSERT INTO Ticket (id, publisher, department, publishdate, subject, text)  VALUES (?, ?, ?, ?, ?, ?)');
+            $stmt->execute(array($ticketId, $publisher, $department, $publishDate->format('Y-m-d H:i:s'), $subject,  $text));
+            TicketStatus::createTicketStatus($db, $ticketId, null, $publishDate, TicketStatus::NORMAL, TicketStatus::UNASSIGNED);
         }
         public static function getAllTicketsFromDepartment (PDO $db, string $department) : array {
             $stmt = $db->prepare('SELECT * FROM Ticket WHERE department=?');
@@ -71,11 +66,11 @@
             return $ticketArray;
         }
         public static function getFilteredTickets(PDO $db, string $department, Preferences $filters, string $query = '') : array {
-            $array = array_filter(array($filters->normal ? 'Normal' : null , $filters->high ? 'High': null, $filters->urgent ? 'Urgent' : null), fn($val) => $val !== null);
-            $statusArray = array_filter(array($filters->unassigned ? 'Unassigned' : null, $filters->inProgress ? 'In progress' : null, $filters->done ? 'Done' : null), fn($val) => $val !== null);
-            $stmt = $db->prepare('SELECT * FROM Ticket WHERE department = ? AND priority IN (' . join(',', array_fill(0, sizeof($array), '?')) . ') AND (publishDate BETWEEN ? AND ?) AND (subject LIKE ? OR text LIKE ?) AND id IN (SELECT id from TicketStatus WHERE status IN (' . join(',', array_fill(0, sizeof($statusArray), '?')) . '))');
+            $priorityArray = array_filter(array($filters->normal ? 'Normal' : null , $filters->high ? 'High': null, $filters->urgent ? 'Urgent' : null), fn($val) => $val !== null);
+            $statusArray = array_filter(array($filters->unassigned ? 'Unassigned' : null, $filters->assigned ? 'Assigned' : null, $filters->done ? 'Done' : null), fn($val) => $val !== null);
+            $stmt = $db->prepare('SELECT * FROM Ticket WHERE department = ? AND (publishDate BETWEEN ? AND ?) AND (subject LIKE ? OR text LIKE ?) AND id IN (SELECT ticketId FROM LatestStatus WHERE status IN (' . join(',', array_fill(0, sizeof($statusArray), '?')) . ') AND priority IN (' . join(',', array_fill(0, sizeof($priorityArray), '?')) . '))');
             $query = '%' . str_replace(array('\\', '_', '%'), array('\\\\', '\\_', '\\%'), $query) . '%';
-            $stmt->execute(array($department, ...$array, $filters->from, $filters->to, $query, $query, ...$statusArray));
+            $stmt->execute(array($department, $filters->from, $filters->to, $query, $query, ...$statusArray, ...$priorityArray));
             $tickets = $stmt->fetchAll();
             $ticketArray = array();
             foreach ($tickets as $ticket) {

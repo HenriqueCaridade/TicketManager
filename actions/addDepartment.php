@@ -6,7 +6,11 @@
 
     $session = Session::getSession();
     $db = getDatabaseConnection();
-    if (!isset($_POST['name']) || !isset($_POST['abbrev'])) die(header('Location: ../index.php?page=departments'));
+    if (!isset($_POST['name']) || !isset($_POST['abbrev'])) {
+        $session->addToast(Session::ERROR, 'Missing parameters.');
+        die(header('Location: ../index.php?page=departments'));
+    }
     Department::addDepartment($db, $_POST['name'], $_POST['abbrev']);
+    $session->addToast(Session::SUCCESS, 'Added Department Successfully!');
     die(header('Location: ../index.php?page=departments'));
 ?>

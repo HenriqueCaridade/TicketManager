@@ -30,7 +30,7 @@
         }
 
         public static function getTicketComments(PDO $db, int $id) : array {
-            $stmt = $db->prepare('SELECT * FROM TicketComment WHERE ticketId=? ORDER BY date');
+            $stmt = $db->prepare('SELECT * FROM TicketComment WHERE ticketId=? ORDER BY date DESC');
             $stmt->execute(array($id));;
             $comments = $stmt->fetchAll();
             $commentArray = array();

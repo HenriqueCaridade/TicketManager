@@ -10,11 +10,11 @@
         $session->addToast(Session::ERROR, 'Something went wrong.');
         die(header('Location: ../index.php?page=dashboard'));
     }
-    if (!isset($_POST['department'])) {
-        $session->addToast(Session::ERROR, 'Department Not Received.');
+    if (!isset($_POST['status'])) {
+        $session->addToast(Session::ERROR, 'Missing status.');
         die(header('Location: ../index.php?page=ticket&id=' . $_POST['id']));
     }
-    Ticket::changeDepartment($db, $_POST['id'], $_POST['department']);
-    $session->addToast(Session::SUCCESS, 'Changed Department Successfully!');
+    // TODO
+    $session->addToast(Session::SUCCESS, 'Changed Status Successfully!');
     die(header('Location: ../index.php?page=ticket&id=' . $_POST['id']));
 ?>

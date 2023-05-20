@@ -5,7 +5,11 @@
 
     $session = Session::getSession();
     $db = getDatabaseConnection();
-    if (!isset($_POST['department']) || !isset($_POST['subject']) || !isset($_POST['text'])) die(header('Location: ../index.php?page=dashboard'));
-    Ticket::createTicket($db, $_SESSION[Session::USERNAME], $_POST['department'], new DateTime(), Ticket::P_NORMAL, $_POST['subject'], $_POST['text']);
+    if (!isset($_POST['department']) || !isset($_POST['subject']) || !isset($_POST['text'])) {
+        $session->addToast(Session::ERROR, 'Missing parameters.');
+        die(header('Location: ../index.php?page=dashboard'));
+    }
+    Ticket::createTicket($db, $_SESSION[Session::USERNAME], $_POST['department'], new DateTime(), $_POST['subject'], $_POST['text']);
+    $session->addToast(Session::SUCCESS, 'Added Ticket Successfully!');
     die(header('Location: ../index.php?page=dashboard'));
 ?>
