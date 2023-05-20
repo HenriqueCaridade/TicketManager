@@ -23,24 +23,27 @@ CREATE TABLE IF NOT EXISTS Department (
 
 --------
 
-CREATE TABLE IF NOT EXISTS Ticket (
+CREATE TABLE IF NOT EXISTS TicketModel (
     id INTEGER PRIMARY KEY NOT NULL,
     publisher STRING NOT NULL REFERENCES User(username),
-    department STRING NOT NULL REFERENCES Department(username),
-    publishDate DATETIME NOT NULL,
+    date DATETIME NOT NULL,
     subject STRING NOT NULL,
-    text STRING NOT NULL
+    text STRING NOT NULL,
+    department STRING NOT NULL REFERENCES Department(username),
+    priority STRING NOT NULL CHECK (priority IN ('Normal', 'High', 'Urgent')) DEFAULT 'Normal',
+    status STRING NOT NULL CHECK (status IN ('Not done', 'Done')) DEFAULT 'Not done',
+    agentUsername STRING REFERENCES User(username) DEFAULT NULL
 );
 
 --------
 
-CREATE TABLE IF NOT EXISTS TicketStatus (
+CREATE TABLE IF NOT EXISTS TicketChange (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     ticketId INTEGER NOT NULL REFERENCES Ticket(id),
-    agentUsername STRING REFERENCES User(username),
     date DATETIME NOT NULL,
-    priority STRING NOT NULL CHECK (priority IN('Normal', 'High', 'Urgent')),
-    status STRING NOT NULL CHECK (status IN('Unassigned', 'Assigned', 'Done'))
+    type STRING NOT NULL CHECK (type IN ('department', 'priority', 'status', 'assign')),
+    oldVal STRING,
+    newVal STRING
 );
 
 --------
@@ -78,7 +81,7 @@ CREATE TABLE IF NOT EXISTS AgentInDepartment (
 
 -------
 
-CREATE TABLE IF NOT EXISTS Preferences (
+CREATE TABLE IF NOT EXISTS Filters (
     username STRING PRIMARY KEY REFERENCES User(username) NOT NULL,
     filterNormal BOOLEAN NOT NULL DEFAULT TRUE,
     filterHigh BOOLEAN NOT NULL DEFAULT TRUE,
@@ -90,16 +93,65 @@ CREATE TABLE IF NOT EXISTS Preferences (
     filterDateTo DATETIME NOT NULL DEFAULT '2030-01-01 00:00:00'
 );
 
-CREATE VIEW LatestStatus AS SELECT id, ticketId, agentUsername, max(date) as date, priority, status FROM TicketStatus GROUP BY ticketId;
+CREATE VIEW IF NOT EXISTS Ticket AS SELECT * FROM TicketModel;
 
 --------------
 -- TRIGGERS --
 --------------
 
+CREATE TRIGGER IF NOT EXISTS TicketInsert
+INSTEAD OF INSERT ON Ticket
+BEGIN
+    INSERT INTO TicketModel (id, publisher, date, subject, text, department) VALUES (NEW.id, NEW.publisher, NEW.date, NEW.subject, NEW.text, NEW.department);
+END;
+
+CREATE TRIGGER IF NOT EXISTS TicketDelete
+INSTEAD OF DELETE ON Ticket
+BEGIN
+    DELETE FROM TicketModel WHERE id = OLD.id;
+END;
+
+
+CREATE TRIGGER IF NOT EXISTS TicketChangeDepartment
+INSTEAD OF UPDATE ON Ticket
+WHEN OLD.department <> NEW.department
+BEGIN
+    UPDATE TicketModel SET department = NEW.department WHERE id = OLD.id;
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'department', OLD.department, NEW.department);
+END;
+
+CREATE TRIGGER IF NOT EXISTS TicketChangePriority
+INSTEAD OF UPDATE ON Ticket
+WHEN OLD.priority <> NEW.priority
+BEGIN
+    UPDATE TicketModel SET priority = NEW.priority WHERE id = OLD.id;
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'priority', OLD.priority, NEW.priority);
+END;
+
+CREATE TRIGGER IF NOT EXISTS TicketChangeStatus
+INSTEAD OF UPDATE ON Ticket
+WHEN OLD.status <> NEW.status
+BEGIN
+    UPDATE TicketModel SET status = NEW.status WHERE id = OLD.id;
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'status', OLD.status, NEW.status);
+END;
+
+CREATE TRIGGER IF NOT EXISTS TicketChangeAgent
+INSTEAD OF UPDATE ON Ticket
+WHEN (OLD.agentUsername IS NULL AND NEW.agentUsername IS NOT NULL)
+OR (OLD.agentUsername IS NOT NULL AND NEW.agentUsername IS NULL)
+OR OLD.agentUsername <> NEW.agentUsername
+BEGIN
+    UPDATE TicketModel SET agentUsername = NEW.agentUsername WHERE id = OLD.id;
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'assign', OLD.agentUsername, NEW.agentUsername);
+END;
+
+------
+
 CREATE TRIGGER IF NOT EXISTS UserPreferences
 AFTER INSERT ON User
 BEGIN
-    INSERT INTO Preferences(username) VALUES (NEW.username);
+    INSERT INTO Filters(username) VALUES (NEW.username);
 END;
 
 -------
@@ -107,7 +159,7 @@ END;
 CREATE TRIGGER IF NOT EXISTS DeleteUser
 BEFORE DELETE ON User
 BEGIN
-    DELETE FROM Preferences WHERE username = OLD.username;
+    DELETE FROM Filters WHERE username = OLD.username;
     DELETE FROM AgentInDepartment WHERE username = OLD.username;
 END;
 
@@ -116,16 +168,16 @@ END;
 CREATE TRIGGER IF NOT EXISTS DeleteDepartment
 BEFORE DELETE ON Department
 BEGIN
-    DELETE FROM Ticket WHERE department = OLD.name;
+    DELETE FROM TicketModel WHERE department = OLD.name;
     DELETE FROM AgentInDepartment WHERE department = OLD.name;
 END;
 
 -------
 
 CREATE TRIGGER IF NOT EXISTS DeleteTicket
-BEFORE DELETE ON Ticket
+BEFORE DELETE ON TicketModel
 BEGIN
-    DELETE FROM TicketStatus WHERE ticketId = OLD.id;
+    DELETE FROM TicketChange WHERE ticketId = OLD.id;
     DELETE FROM TicketComment WHERE ticketId = OLD.id;
     DELETE FROM Hashtag WHERE ticketId = OLD.id;
 END;

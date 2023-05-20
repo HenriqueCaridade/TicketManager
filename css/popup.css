@@ -34,6 +34,11 @@
     border-radius: 0.6em;
     z-index: 11;
 }
+
+#popup-form form {
+    margin-block-end: 0;
+}
+
 #popup-form button {
     padding: 1em;
     min-width: 6em;

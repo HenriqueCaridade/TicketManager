@@ -6,13 +6,13 @@
         <span class="icon"><i class="fa-solid fa-ticket"></i></span>
         <span class="text">My Tickets</span>
     </a>
-    <?php if($session->getRights(User::USERTYPE_AGENT) ) { ?>
+    <?php if($session->getMyRights(User::USERTYPE_AGENT) ) { ?>
         <a href="./index.php?page=departments" <?php if ($currentPage == 'departments') echo 'class="selected"';?>>
             <span class="icon"><i class="fa-solid fa-box-archive"></i></span>
             <span class="text">Departments</span>
         </a>
     <?php } ?>
-    <?php if($session->getRights(User::USERTYPE_ADMIN) ) { ?>
+    <?php if($session->getMyRights(User::USERTYPE_ADMIN) ) { ?>
         <a href="./index.php?page=users" <?php if ($currentPage == 'users') echo 'class="selected"';?>>
             <span class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></span>
             <span class="text">Users</span>

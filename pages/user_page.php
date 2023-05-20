@@ -47,19 +47,19 @@
         <div class="account-item">
             <span class="account-label">User Type</span>
             <div class="account-box"><?=htmlentities($user->userType)?></div>
-            <?php if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
+            <?php if ($session->getMyRights(User::USERTYPE_ADMIN)) { ?>
                 <a class="usertype-change option" data-username="<?=htmlentities($user->username)?>" data-user-type="<?=htmlentities($user->userType)?>"> 
                     Change...
                 </a>
             <?php }?>
         </div>
-        <?php if ($user->userType !== User::USERTYPE_CLIENT) {
+        <?php if (Session::getRights($user->userType, User::USERTYPE_AGENT)) {
             $user = Agent::getAgent($db, $getArray['username']);    
         ?>
         <div class="account-item">
             <span class="account-label">Departments</span>
             <div class="account-box"><?=$user->departmentString?></div>
-            <?php if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
+            <?php if ($session->getMyRights(User::USERTYPE_ADMIN)) { ?>
                 <a class="agent-department-change option" data-username="<?=htmlentities($user->username)?>">
                     Change...
                 </a>

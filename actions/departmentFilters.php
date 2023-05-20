@@ -1,6 +1,6 @@
 <?php
     require_once(dirname(__DIR__) . "/classes/session.php");
-    require_once(dirname(__DIR__) . "/classes/preferences.php");
+    require_once(dirname(__DIR__) . "/classes/filters.php");
     require_once(dirname(__DIR__) . "/database/connection.php");
     $session = Session::getSession();
     $db = getDatabaseConnection();
@@ -10,9 +10,8 @@
     $unassigned = !is_null($_POST['status1']);
     $assigned   = !is_null($_POST['status2']);
     $done       = !is_null($_POST['status3']);
-    $from       = Preferences::datetimeLocalToDatetime($_POST['dateFrom']);
-    $to         = Preferences::datetimeLocalToDatetime($_POST['dateTo']);
-    Preferences::updatePreferences($db, $_SESSION[Session::USERNAME], $normal, $high, $urgent, $unassigned, $assigned, $done, $from, $to);
-    $session->addToast(Session::SUCCESS, 'Updated Preferences Successfully!');
+    $from       = Filters::datetimeLocalToDatetime($_POST['dateFrom']);
+    $to         = Filters::datetimeLocalToDatetime($_POST['dateTo']);
+    Filters::updateFilters($db, $_SESSION[Session::USERNAME], $normal, $high, $urgent, $unassigned, $assigned, $done, $from, $to);
     die(header('Location: ../index.php?page=departments'));
 ?>
