@@ -79,3 +79,27 @@ label.filter-item {
     resize: none;
     height: 6em;
 }
+
+/*Department filters*/
+#popup-item-filter{
+    margin: auto;
+    width:40%;
+    white-space: nowrap;
+}
+.popup-item-filter-item  {
+    text-align: left;
+    display: block;
+}
+.popup-item-filter-item *  {
+    left: 0;
+    display: inline-block;
+}
+.popup-item-filter-item label  {
+    left: 0;
+}
+#filter-title{
+    font-weight: 600;
+}
+#filter-checkmark {
+    accent-color: var(--accent-color);
+}

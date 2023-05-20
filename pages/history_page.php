@@ -33,7 +33,7 @@
 ?>
 <main class="main-sidebar">
     <div class="page">
-        <?php drawStatuses($ticket->statuses); ?>
+        <?php drawTicketStatuses($ticket->statuses); ?>
     </div>
 </main>
 <?php

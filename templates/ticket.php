@@ -1,14 +1,16 @@
 <?php
     require_once(dirname(__DIR__) . "/classes/ticket.php");
     require_once(dirname(__DIR__) . "/templates/profile.php");
+    require_once(dirname(__DIR__) . "/templates/priority.php");
+    require_once(dirname(__DIR__) . "/templates/status.php");
     function _drawTicket(Ticket $ticket) {
 ?>
 <tr class="ticket">
     <td class="ticket-username"><?php drawProfile($ticket->publisher, true); ?></td>
     <td class="ticket-subject"><?=htmlentities($ticket->subject)?></td>
     <td class="ticket-department"><?=htmlentities($ticket->department)?></td>
-    <td class="ticket-priority"><?=htmlentities($ticket->priority)?></td>
-    <td class="ticket-status"><?=htmlentities($ticket->status->status)?></td>
+    <td class="ticket-priority"><?php drawPriority($ticket->priority); ?></td>
+    <td class="ticket-status"><?php drawStatus($ticket->status->status); ?></td>
     <td class="ticket-edit">
         <form class="ticket-page-form" action="./index.php" method="get">
             <input type="hidden" name="page" value="ticket">
@@ -48,8 +50,8 @@
         <tr class="ticket">
             <td class="ticket-username"><?php drawProfile($ticket->publisher, true); ?></td>
             <td class="ticket-subject"><?=htmlentities($ticket->subject)?></td>
-            <td class="ticket-priority"><?=htmlentities($ticket->priority)?></td>
-            <td class="ticket-status"><?=htmlentities($ticket->status->status)?></td>
+            <td class="ticket-priority"><?php drawPriority($ticket->priority); ?></td>
+            <td class="ticket-status"><?php drawStatus($ticket->status->status); ?></td>
             <td class="ticket-edit">
                 <form class="ticket-form" action="./index.php" method="get">
                     <input type="hidden" name="page" value="ticket">
