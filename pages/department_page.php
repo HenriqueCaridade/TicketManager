@@ -4,6 +4,7 @@
     require_once(dirname(__DIR__) . "/templates/footer.php");
     require_once(dirname(__DIR__) . "/templates/sidebar.php");
     require_once(dirname(__DIR__) . "/templates/ticket.php");
+    require_once(dirname(__DIR__) . "/templates/toast.php");
     // Database
     require_once(dirname(__DIR__) . "/database/connection.php");
     // Classes
@@ -37,7 +38,7 @@
         drawSidebar($session, 'departments');
 ?>
 <main class="main-sidebar">
-    <div class="page">
+    <div class="page center-toast">
         <h1 class="title">Departments</h1>
         <input id="department-search" type="search" placeholder="Search ticket..." value="<?=$query?>">
         <button id="department-filters"><i class="fa-solid fa-filter"></i></button>
@@ -45,14 +46,16 @@
             <?php
             foreach ($departments as $department) {
                 $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences, $query);
-                ?> <h1> <?=htmlentities($department->name); ?></h1> <?php
-                drawTicketsDepartment($tickets);
+                //$tickets = Ticket::getAllTicketsFromDepartment($db, $department->name);
+                drawTicketsDepartment($tickets, $department->name);
             }?>
         </div>
         <?php if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
             <div class="big-button"><button id="department-add-button">Add Department</button></div>
             <div class="big-button"><button id="department-remove-button" class="red">Remove Department</button></div>
-        <?php } ?>
+        <?php }
+            drawToasts($session);
+        ?>
     </div>
     <div id='popup'></div>
 </main>

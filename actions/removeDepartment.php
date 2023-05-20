@@ -6,7 +6,11 @@
 
     $session = Session::getSession();
     $db = getDatabaseConnection();
-    if (!isset($_POST['department'])) die(header('Location: ../index.php?page=departments'));;
+    if (!isset($_POST['department'])) {
+        $session->addToast(Session::ERROR, 'Missing department.');
+        die(header('Location: ../index.php?page=departments'));
+    }
     Department::removeDepartment($db, $_POST['department']);
+    $session->addToast(Session::SUCCESS, 'Department Removed Successfully!');
     die(header('Location: ../index.php?page=departments'));
 ?>

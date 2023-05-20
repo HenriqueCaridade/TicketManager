@@ -7,7 +7,7 @@
 ?>
 <div id="popup-darken" onclick="closePopup()"></div>
 <div id="popup-form">
-    <form action="../actions/client.php" method="post">
+    <form action="../actions/changeUserType.php" method="post">
         <div class="popup-item">
             <span><?=htmlentities($_POST['username'])?>'s User Type: </span>
             <select name="userType" required>

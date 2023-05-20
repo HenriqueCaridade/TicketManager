@@ -20,9 +20,7 @@
     $preferences = Preferences::getPreferences($db, $_SESSION[Session::USERNAME]);
 
     foreach ($departments as $department) {
-        
         $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences, $_POST['query']);
-        ?> <h1> <?=htmlentities($department->name); ?></h1> <?php
-        drawTicketsDepartment($tickets);
+        drawTicketsDepartment($tickets, $department->name);
     }
 ?>

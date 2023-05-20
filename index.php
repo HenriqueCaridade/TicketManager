@@ -17,7 +17,8 @@
             default: die(header('Location: ./index.php?page=login'));
         }
     } else {
-        die(header('Location: ./index.php?page=login'));
+        if ($session->isLoggedIn()) die(header('Location: ./index.php?page=dashboard'));
+        else die(header('Location: ./index.php?page=login'));
     }
     drawPage($_GET);
 ?>

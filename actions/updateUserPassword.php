@@ -25,9 +25,10 @@
         $session->addToast(Session::ERROR, $validation);
         die(header('Location: ../index.php?page=settings'));
     }
-    $user->updateUserPassword($db, $_SESSION[Session::USERNAME], $_POST['password1']);
 
-    $session->addToast(Session::SUCCESS, 'Password changed successfully!');
+    User::updateUserPassword($db, $_SESSION[Session::USERNAME], $_POST['password1']);
+
     $session->clearInput();
+    $session->addToast(Session::SUCCESS, 'Password changed successfully!');
     die(header('Location: ../index.php?page=settings'));
 ?>

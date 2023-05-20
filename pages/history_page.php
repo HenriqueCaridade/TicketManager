@@ -23,7 +23,6 @@
         if (!isset($getArray['id'])) {
             die(header('Location: index.php?page=dashboard'));
         }
-
         
         $db = getDatabaseConnection();
         $ticket = Ticket::getTicket($db, intval($getArray['id']));

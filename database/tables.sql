@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS Ticket (
     publisher STRING NOT NULL REFERENCES User(username),
     department STRING NOT NULL REFERENCES Department(username),
     publishDate DATETIME NOT NULL,
-    priority STRING NOT NULL CHECK (priority IN('Normal', 'High', 'Urgent')),
     subject STRING NOT NULL,
     text STRING NOT NULL
 );
@@ -40,7 +39,8 @@ CREATE TABLE IF NOT EXISTS TicketStatus (
     ticketId INTEGER NOT NULL REFERENCES Ticket(id),
     agentUsername STRING REFERENCES User(username),
     date DATETIME NOT NULL,
-    status STRING NOT NULL CHECK (status IN('Unassigned', 'In progress', 'Done'))
+    priority STRING NOT NULL CHECK (priority IN('Normal', 'High', 'Urgent')),
+    status STRING NOT NULL CHECK (status IN('Unassigned', 'Assigned', 'Done'))
 );
 
 --------
@@ -83,12 +83,14 @@ CREATE TABLE IF NOT EXISTS Preferences (
     filterNormal BOOLEAN NOT NULL DEFAULT TRUE,
     filterHigh BOOLEAN NOT NULL DEFAULT TRUE,
     filterUrgent BOOLEAN NOT NULL DEFAULT TRUE,
-    filterUnassigned  BOOLEAN NOT NULL DEFAULT TRUE,
-    filterInProgress  BOOLEAN NOT NULL DEFAULT TRUE,
-    filterDone  BOOLEAN NOT NULL DEFAULT TRUE,
+    filterUnassigned BOOLEAN NOT NULL DEFAULT TRUE,
+    filterAssigned BOOLEAN NOT NULL DEFAULT TRUE,
+    filterDone BOOLEAN NOT NULL DEFAULT TRUE,
     filterDateFrom DATETIME NOT NULL DEFAULT '2020-01-01 00:00:00',
     filterDateTo DATETIME NOT NULL DEFAULT '2030-01-01 00:00:00'
 );
+
+CREATE VIEW LatestStatus AS SELECT id, ticketId, agentUsername, max(date) as date, priority, status FROM TicketStatus GROUP BY ticketId;
 
 --------------
 -- TRIGGERS --

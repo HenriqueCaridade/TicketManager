@@ -18,7 +18,7 @@
         drawHeader(false);
 ?>
 <main>
-    <div id="login" class="page">
+    <div id="login" class="logres-page">
         <h1 id="login-title" class="login title">Login</h1>
         <form action="../actions/login.php" method="post">
             <div class="login-item">

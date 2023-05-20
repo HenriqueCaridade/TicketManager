@@ -104,8 +104,8 @@
                    User::validatorPassword($password) ?? 
                    User::validatorUserType($userType);
         }
-        public static function validateUpdateParameters(PDO $db, string $username, string $name, string $email) : ?string {
-            return User::validatorUsername($username, $db) ??
+        public static function validateUpdateParameters(PDO $db, string $oldUsername, string $username, string $name, string $email) : ?string {
+            return ($oldUsername === $username ? null : User::validatorUsername($username, $db)) ??
                    User::validatorName($name) ??
                    User::validatorEmail($email);
         }

@@ -1,21 +1,22 @@
 <?php
-    require_once(dirname(__DIR__) . "/templates/department.php");
+    require_once(dirname(__DIR__) . "/templates/priority.php");
     require_once(dirname(__DIR__) . "/database/connection.php");
     require_once(dirname(__DIR__) . "/classes/user.php");
-    require_once(dirname(__DIR__) . "/classes/department.php");
+    require_once(dirname(__DIR__) . "/classes/ticketStatus.php");
     $db = getDatabaseConnection();
-    $departments = Department::getAllDepartments($db);
 ?>
 <div id="popup-darken" onclick="closePopup()"></div>
 <div id="popup-form">
     <div class="popup-item">
         <span> Ticket ID: <?=htmlentities($_POST['id'])?></span>
     </div>
-    <form action="../actions/changeTicketDepartment.php" method="post">
-        <div class="popup-item">
-            <span>Department</span>
-            <?php drawDepartments($departments, $_POST['department']); ?>
-        </div>
+    <form action="../actions/changeTicketPriority.php" method="post">
+        <?php foreach (array(TicketStatus::NORMAL, TicketStatus::HIGH, TicketStatus::URGENT) as $priority) {?>
+            <div class="popup-item">
+                <input class="priority-item" type="radio" name="priority" value="<?=$priority?>" <?php if ($_POST['priority'] === $priority) { ?> checked <?php } ?>>
+                <?php drawPriority($priority); ?>
+            </div>
+        <?php } ?>
         <div class="popup-item">
             <button type="submit" class="submit-button">Change</button>
         </div>
