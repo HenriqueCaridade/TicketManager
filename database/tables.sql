@@ -35,6 +35,8 @@ CREATE TABLE IF NOT EXISTS TicketModel (
     agentUsername STRING REFERENCES User(username) DEFAULT NULL
 );
 
+CREATE VIEW IF NOT EXISTS Ticket AS SELECT * FROM TicketModel;
+
 --------
 
 CREATE TABLE IF NOT EXISTS TicketChange (
@@ -60,8 +62,7 @@ CREATE TABLE IF NOT EXISTS TicketComment (
 
 CREATE TABLE IF NOT EXISTS Hashtag (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    ticketId INTEGER NOT NULL REFERENCES Ticket(id),
-    hashtag STRING NOT NULL
+    value STRING NOT NULL
 );
 
 --------
@@ -79,6 +80,13 @@ CREATE TABLE IF NOT EXISTS AgentInDepartment (
     department STRING NOT NULL REFERENCES Department(name)
 );
 
+--------
+
+CREATE TABLE IF NOT EXISTS HashtagOfTicket (
+    hashtagId INTEGER NOT NULL REFERENCES hashtagId(id),
+    ticketId INTEGER NOT NULL REFERENCES Ticket(id)
+);
+
 -------
 
 CREATE TABLE IF NOT EXISTS Filters (
@@ -92,8 +100,6 @@ CREATE TABLE IF NOT EXISTS Filters (
     filterDateFrom DATETIME NOT NULL DEFAULT '2020-01-01 00:00:00',
     filterDateTo DATETIME NOT NULL DEFAULT '2030-01-01 00:00:00'
 );
-
-CREATE VIEW IF NOT EXISTS Ticket AS SELECT * FROM TicketModel;
 
 --------------
 -- TRIGGERS --
@@ -148,7 +154,7 @@ END;
 
 ------
 
-CREATE TRIGGER IF NOT EXISTS UserPreferences
+CREATE TRIGGER IF NOT EXISTS UserFilters
 AFTER INSERT ON User
 BEGIN
     INSERT INTO Filters(username) VALUES (NEW.username);
@@ -179,5 +185,5 @@ BEFORE DELETE ON TicketModel
 BEGIN
     DELETE FROM TicketChange WHERE ticketId = OLD.id;
     DELETE FROM TicketComment WHERE ticketId = OLD.id;
-    DELETE FROM Hashtag WHERE ticketId = OLD.id;
+    DELETE FROM HashtagOfTicket WHERE ticketId = OLD.id;
 END;

@@ -35,7 +35,7 @@
 ?>
 <main class="main-sidebar">
     <div id="user-page" class="page">
-        <h1 id="user-page-title" class="title"><?php drawProfile($user->username, true) ?></h1>
+        <h1 id="user-page-title" class="title" style=""><?php drawProfile($user->username, true) ?></h1>
         <div class="account-item">
             <span class="account-label">Name</span>
             <div class="account-box"><?=htmlentities($user->name)?></div>

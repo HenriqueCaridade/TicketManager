@@ -47,10 +47,11 @@
             <div class="login-item">
                 <input type="checkbox" onclick="toggleShowPasswords()">Show Passwords
             </div>
-            <a class="register-item" href="login_page.php">I already have an account.</a>
+            <a class="register-item" href="./index.php?page=login">I already have an account.</a>
             <div class="register-item">
                 <input class="button" type="submit" value="Register">
             </div>
+            <input type="hidden" name="csrf" value="<?=$session->getCSRF()?>">
         </form>
         <?php
             drawToasts($session);

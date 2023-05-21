@@ -6,8 +6,8 @@
     require_once(dirname(__DIR__) . "/classes/filters.php");
     require_once(dirname(__DIR__) . "/templates/priority.php");
     require_once(dirname(__DIR__) . "/templates/status.php");
-
     $session = Session::getSession();
+    
     $db = getDatabaseConnection();
     $departments = Department::getAllDepartments($db);
     $preferences = Filters::getFilters($db, $_SESSION[Session::USERNAME]);
@@ -59,6 +59,7 @@
         <div class="popup-item">
             <button type="submit" class="submit-button">Submit</button>
         </div>
+        <input type="hidden" name="csrf" value="<?=$session->getCSRF()?>">
     </form>
     <button type="button" class="red" onclick="closePopup()">Close</button>
 </div>

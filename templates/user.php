@@ -36,6 +36,7 @@ function _drawAgent(Agent $agent) { ?>
 }
 
 function drawClients(array $clients) {  ?>
+<div class="scroll-wrapper">
     <table id="clients">
         <thead>
             <tr>
@@ -53,10 +54,12 @@ function drawClients(array $clients) {  ?>
             ?>
         </tbody>
     </table>
+</div>
 <?php
     }
 
 function drawAgents(array $agents) {  ?>
+<div class="scroll-wrapper">
     <table id="agents">
         <thead>
             <tr>
@@ -75,6 +78,7 @@ function drawAgents(array $agents) {  ?>
             ?>
         </tbody>
     </table>
+</div>
 <?php
     }
 ?>

@@ -1,22 +1,22 @@
 <?php
-    require_once(dirname(__DIR__) . "/templates/department.php");
+    require_once(dirname(__DIR__) . "/templates/hashtag.php");
     require_once(dirname(__DIR__) . "/database/connection.php");
-    require_once(dirname(__DIR__) . "/classes/department.php");
+    require_once(dirname(__DIR__) . "/classes/hashtag.php");
     require_once(dirname(__DIR__) . "/classes/session.php");
     $session = Session::getSession();
     
     $db = getDatabaseConnection();
-    $departments = Department::getAllDepartments($db);
+    $hashtags = Hashtag::getAllHashtags($db);
 ?>
 <div id="popup-darken" onclick="closePopup()"></div>
 <div id="popup-form">
-    <form action="../actions/removeDepartment.php" method="post">
+    <form action="../actions/removeHashtag.php" method="post">
         <div class="popup-item">
-            <span>Remove Department</span>
+            <span>Remove Hashtag</span>
         </div>
         <div class="popup-item">
-            <span>Department:</span>
-            <?php drawDepartments($departments); ?>
+            <span>Hashtag:</span>
+            <?php drawHashtags($hashtags); ?>
         </div>
         <div class="popup-item">
             <button type="submit" class="submit-button">Delete</button>

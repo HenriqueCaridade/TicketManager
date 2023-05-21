@@ -1,7 +1,10 @@
 <?php
     require_once(dirname(__DIR__) . "/classes/user.php");
+    require_once(dirname(__DIR__) . "/classes/session.php");
+    $session = Session::getSession();
+    
     if (!isset($_POST['username']) || !isset($_POST['userType'])) {
-        echo '<p>failed</p>';
+        echo '<p> An Error occurred! </p>';
         die();
     }
 ?>
@@ -21,5 +24,6 @@
         </div>
         <input type="hidden" name='username' value="<?=htmlentities($_POST['username'])?>"> 
         <button type="button" class="red" onclick="closePopup()">Close</button>
+        <input type="hidden" name="csrf" value="<?=$session->getCSRF()?>">
     </form>
 </div>

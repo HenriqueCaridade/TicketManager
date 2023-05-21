@@ -2,6 +2,7 @@
     declare(strict_types=1);
     require_once(dirname(__DIR__) . "/classes/ticketChange.php");
     require_once(dirname(__DIR__) . "/classes/ticketComment.php");
+    require_once(dirname(__DIR__) . "/classes/hashtag.php");
     require_once(dirname(__DIR__) . "/classes/filters.php");
     class Ticket {
         const NORMAL = 'Normal';
@@ -22,6 +23,8 @@
         public ?string $agentUsername;
         public array $changes;
         public array $comments;
+        public array $hashtags;
+        public string $hashtagString;
         
         private function __construct(PDO $db, int $id, string $publisher, DateTime $date, string $subject, string $text, string $department, string $priority, string $status, ?string $agentUsername) {
             $this->id = $id;
@@ -39,6 +42,17 @@
             $this->agentUsername = $agentUsername;
             $this->changes = TicketChange::getTicketChanges($db, $id);
             $this->comments = TicketComment::getTicketComments($db, $id);
+            $this->hashtags = Hashtag::getHastagsFromTicket($db, $id);
+            $i = 0;
+            $str = "";
+            foreach ($this->hashtags as $hashtag) {
+                if ($i++ != 0) $str = $str . ', ';
+                $str = $str . htmlentities($hashtag->value);
+            }
+            if ($i == 0) { // No Departments
+                $str = 'None';
+            }
+            $this->hashtagString = $str;
         }
         private static function fromArray(PDO $db, array $ticket) : Ticket {
             return new Ticket($db, (int) $ticket['id'], $ticket['publisher'], new DateTime($ticket['date']), $ticket['subject'], $ticket['text'], $ticket['department'], $ticket['priority'], $ticket['status'], $ticket['agentUsername']);
@@ -120,6 +134,16 @@
                 $stmt = $db->prepare('UPDATE Ticket SET agentUsername = ?, date = ? WHERE id = ?');
                 $stmt->execute(array(null, (new DateTime())->format('Y-m-d H:i:s'), $id));
             }
+        }
+
+        public static function addHashtag(PDO $db, int $id, int $hashtagId) : void {
+            $stmt = $db->prepare('INSERT INTO HashtagOfTicket (hashtagId, ticketId) VALUES (?, ?)');
+            $stmt->execute(array($hashtagId, $id));
+        }
+
+        public static function removeHashtag(PDO $db, int $id, int $hashtagId) : void {
+            $stmt = $db->prepare('DELETE FROM HashtagOfTicket WHERE hashtagId = ? AND ticketId = ?');
+            $stmt->execute(array($hashtagId, $id));
         }
     }
 ?>

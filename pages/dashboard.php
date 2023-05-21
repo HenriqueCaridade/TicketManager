@@ -59,6 +59,7 @@
                 <div class="popup-item">
                     <button type="submit" class="submit-button">Submit</button>
                 </div>
+                <input type="hidden" name="csrf" value="<?=$session->getCSRF()?>">
             </form>
             <button type="button" class="red" onclick="closePopup()">Close</button>
         </div>

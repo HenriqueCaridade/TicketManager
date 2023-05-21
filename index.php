@@ -8,6 +8,7 @@
             case 'register': include_once("./pages/register_page.php"); break;
             case 'dashboard': include_once("./pages/dashboard.php"); break;
             case 'departments': include_once("./pages/department_page.php"); break;
+            case 'hashtags': include_once("./pages/hashtag_page.php"); break;
             case 'users': include_once("./pages/users_page.php"); break;
             case 'settings': include_once("./pages/settings.php"); break;
             case 'account': include_once("./pages/user_page.php"); break;

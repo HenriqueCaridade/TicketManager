@@ -1,6 +1,5 @@
 <?php
     require_once(dirname(__DIR__) . "/templates/profile.php");
-    require_once(dirname(__DIR__) . "/classes/ticket.php");
     require_once(dirname(__DIR__) . "/classes/department.php");
     function _drawDepartment(Department $department, ?string $selected=null) {
 ?>

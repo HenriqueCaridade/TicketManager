@@ -46,8 +46,8 @@
     <?php
     }
 
-    function drawTicketChanges(array $statuses){
-        foreach ($statuses as $status) _drawTicketChange($status);
+    function drawTicketChanges(array $changes){
+        foreach ($changes as $change) _drawTicketChange($change);
     }
 
     function drawStatus(string $status, ?string $agentUsername=null) {

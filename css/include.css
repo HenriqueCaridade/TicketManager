@@ -13,11 +13,12 @@
     --unselected-color: #a0a0a0ff;
 
     /* General Constants */
-    --header-height: 5rem;
-    --footer-height: 3rem;
+    --header-height: 5em;
+    --footer-height: 2em;
 
-    --sidebar-width: 14rem;
+    --sidebar-width: 14em;
+    --sidebar-mobile-width: 3em;
     --sidebar-padding: 15px;
 
-    --margin-sides: 10rem;
+    --margin-sides: 10em;
 }

@@ -17,6 +17,10 @@
             <span class="icon"><i class="fa-solid fa-screwdriver-wrench"></i></span>
             <span class="text">Users</span>
         </a>
+        <a href="./index.php?page=hashtags" <?php if ($currentPage == 'hashtags') echo 'class="selected"';?>>
+            <span class="icon"><i class="fa-solid fa-hashtag"></i></span>
+            <span class="text">Hashtags</span>
+        </a>
     <?php } ?>
     <a href="./index.php?page=settings" <?php if ($currentPage == 'settings') echo 'class="selected"';?>>
         <span class="icon"><i class="fa-solid fa-gear"></i></span>
