@@ -3,8 +3,11 @@
     require_once(dirname(__DIR__) . "/classes/ticketChange.php");
 
     function _drawTicketChange(TicketChange $status) {
-        // TODO
-        echo '<p>Status TODO </p>';
+    ?>
+    <div class="ticket-history-change">
+        <span class="ticket-history-date"><?=htmlentities($status->getFormatedDate())?>{}
+    </div>
+    <?php
     }
 
     function drawTicketChanges(array $statuses){

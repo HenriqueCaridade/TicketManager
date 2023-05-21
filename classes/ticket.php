@@ -43,6 +43,9 @@
         private static function fromArray(PDO $db, array $ticket) : Ticket {
             return new Ticket($db, (int) $ticket['id'], $ticket['publisher'], new DateTime($ticket['date']), $ticket['subject'], $ticket['text'], $ticket['department'], $ticket['priority'], $ticket['status'], $ticket['agentUsername']);
         }
+        public function getFormatedDate() : string {
+            return $this->date->format('Y-m-d H:i:s');
+        }
         public static function getTicket(PDO $db, int $id) : ?Ticket {
             $stmt = $db->prepare('SELECT * FROM Ticket WHERE id=?');
             $stmt->execute(array($id));
