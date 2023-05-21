@@ -24,7 +24,7 @@
         $agents = Agent::getAgentsFiltered($db, $query);
 
         // Draw Page
-        drawHeader();
+        drawHeader($session);
         drawSidebar($session, 'users');
 ?>
 <main class="main-sidebar">

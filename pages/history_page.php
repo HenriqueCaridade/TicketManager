@@ -22,12 +22,12 @@
         
         if (!isset($getArray['id'])) {
             die(header('Location: index.php?page=dashboard'));
-        }s
+        }
         
         $db = getDatabaseConnection();
         $ticket = Ticket::getTicket($db, intval($getArray['id']));
         
-        drawHeader();
+        drawHeader($session);
         drawSidebar($session);
 ?>
 <main class="main-sidebar">

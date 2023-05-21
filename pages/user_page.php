@@ -30,7 +30,7 @@
         $user = User::getUser($db, $getArray['username']);
 
         // Draw Page
-        drawHeader();
+        drawHeader($session);
         drawSidebar($session);
 ?>
 <main class="main-sidebar">

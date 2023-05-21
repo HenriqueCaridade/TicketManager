@@ -171,7 +171,7 @@
 
         public static function passwordMatchesUser(PDO $db, string $username, string $password) : bool {
             $user = User::getUserPasswordAndSalt($db, $username);
-            if ($user === null) { $_SESSION['test'] = 'bad'; return false; }
+            if ($user === null) return false;
             return User::passwordMatchesHash($password, $user['password'], $user['salt']);
         }
         protected static function passwordMatchesHash(string $password, string $HSPassword, string $salt) : bool {

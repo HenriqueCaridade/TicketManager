@@ -21,7 +21,7 @@
     function drawPage(array $getArray) {
         global $session, $prevCurrPassword, $prevPassword1, $prevPassword2;
         // Draw Page
-        drawHeader();
+        drawHeader($session);
         drawSidebar($session, 'settings');
 ?>
 <main class="main-sidebar">

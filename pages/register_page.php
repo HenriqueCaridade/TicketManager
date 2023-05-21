@@ -18,7 +18,7 @@
         $prevPassword2 = htmlentities($session->getSavedInput(Session::R_PASSWORD2) ?? "");
         
         // Draw Page
-        drawHeader(false);
+        drawHeader();
 ?>
 <main>
     <div id="register" class="logres-page">

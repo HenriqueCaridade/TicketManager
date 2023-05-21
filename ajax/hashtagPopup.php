@@ -18,7 +18,7 @@
 <div id="popup-darken" onclick="closePopup()"></div>
 <div id="popup-form">
     <div class="popup-item">
-        <span><?=htmlentities($_POST['username'])?>'s Departments: </span>
+        <span>Ticket <?=htmlentities($_POST['id'])?>'s Hashtags: </span>
     </div>
     <form action="../actions/addHashtagToTicket.php" method="post">
         <div class="popup-item">

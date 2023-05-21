@@ -20,10 +20,12 @@
     
     $db = getDatabaseConnection();
     $ticket = Ticket::getTicket($db, $_POST['id']);
-    $agent = Agent::getAgent($db, $ticket->agentUsername);
-    if (!in_array($_POST['department'], $user->departments)) {
-        $session->addToast(Session::ERROR, 'The Assigned agent isn\'t in the ' . $_POST['department'] . ' Department.');
-        die(header('Location: ../index.php?page=ticket&id=' . $_POST['id']));
+    if ($ticket->agentUsername !== null){
+        $agent = Agent::getAgent($db, $ticket->agentUsername); 
+        if (!in_array($_POST['department'], $user->departments)) {
+            $session->addToast(Session::ERROR, 'The Assigned agent isn\'t in the ' . $_POST['department'] . ' Department.');
+            die(header('Location: ../index.php?page=ticket&id=' . $_POST['id']));
+        }
     }
 
     Ticket::changeDepartment($db, $_POST['id'], $_POST['department']);

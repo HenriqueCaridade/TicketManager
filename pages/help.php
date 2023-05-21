@@ -5,7 +5,6 @@
     require_once(dirname(__DIR__) . "/templates/sidebar.php");
     require_once(dirname(__DIR__) . "/templates/faq.php");
     require_once(dirname(__DIR__) . "/templates/toast.php");
-
     // Database
     require_once(dirname(__DIR__) . "/database/connection.php");
     // Classes
@@ -26,11 +25,11 @@
         $faqs = FAQ::getAll($db);
         
         // Draw Page
-        drawHeader();
+        drawHeader($session);
         drawSidebar($session, 'help');
 ?>
 <main class="main-sidebar">
-    <div id="faq" class="page">
+    <div id="faq" class="page center-toast">
         <h1 id="faq-title" class="title">Frequently Asked Questions (FAQ)</h1>
         <?php
             foreach ($faqs as $faq) drawFAQ($faq);
@@ -44,6 +43,6 @@
     <div id='popup'></div>
 </main>
 <?php  
-        drawFooter();
+        //drawFooter();
     }
 ?>

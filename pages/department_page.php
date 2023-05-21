@@ -34,7 +34,7 @@
         $query = $session->getSavedInput(Session::S_DEPARTMENT) ?? '';
 
         // Draw Page
-        drawHeader();
+        drawHeader($session);
         drawSidebar($session, 'departments');
 ?>
 <main class="main-sidebar">

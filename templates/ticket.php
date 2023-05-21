@@ -51,6 +51,7 @@
             <td class="ticket-id"><?=htmlentities($ticket->id)?></td>
             <td class="ticket-username"><?php drawProfile($ticket->publisher, true); ?></td>
             <td class="ticket-subject"><?=htmlentities($ticket->subject)?></td>
+            <td class="ticket-hashtag"><?=$ticket->hashtagString; ?></td>
             <td class="ticket-priority"><?php drawPriority($ticket->priority); ?></td>
             <td class="ticket-status"><?php drawStatus($ticket->status, $ticket->agentUsername); ?></td>
             <td class="ticket-edit">
@@ -73,6 +74,7 @@
                     <th style="width: 0;">Id</th>
                     <th style="width: 0;">User</th>
                     <th>Ticket</th>
+                    <th style="width: 0;">Hashtags</th>
                     <th style="width: 0;">Priority</th>
                     <th style="width: 0;">Status</th>
                     <th style="width: 0;">See Ticket</th>
