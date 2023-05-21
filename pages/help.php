@@ -43,6 +43,6 @@
     <div id='popup'></div>
 </main>
 <?php  
-        //drawFooter();
+        drawFooter();
     }
 ?>

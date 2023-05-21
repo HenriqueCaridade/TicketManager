@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS TicketModel (
     date DATETIME NOT NULL,
     subject STRING NOT NULL,
     text STRING NOT NULL,
-    department STRING NOT NULL REFERENCES Department(username),
+    department STRING NOT NULL REFERENCES Department(name),
     priority STRING NOT NULL CHECK (priority IN ('Normal', 'High', 'Urgent')) DEFAULT 'Normal',
     status STRING NOT NULL CHECK (status IN ('Not Done', 'Done')) DEFAULT 'Not Done',
     agentUsername STRING REFERENCES User(username) DEFAULT NULL
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS AgentInDepartment (
 --------
 
 CREATE TABLE IF NOT EXISTS HashtagOfTicket (
-    hashtagId INTEGER NOT NULL REFERENCES hashtagId(id),
+    hashtagId INTEGER NOT NULL REFERENCES Hashtag(id),
     ticketId INTEGER NOT NULL REFERENCES Ticket(id)
 );
 
@@ -160,13 +160,21 @@ BEGIN
     INSERT INTO Filters(username) VALUES (NEW.username);
 END;
 
+CREATE TRIGGER IF NOT EXISTS updateUsers
+AFTER UPDATE ON User
+BEGIN
+    UPDATE Filters SET username = (NEW.username) WHERE username = (OLD.username);
+    UPDATE TicketModel SET agentUsername = (NEW.username) WHERE agentUsername = (OLD.username);
+    UPDATE AgentInDepartment SET agentUsername = (NEW.username) WHERE agentUsername = (OLD.username);
+ END;
 -------
 
 CREATE TRIGGER IF NOT EXISTS DeleteUser
 BEFORE DELETE ON User
 BEGIN
     DELETE FROM Filters WHERE username = OLD.username;
-    DELETE FROM AgentInDepartment WHERE username = OLD.username;
+    DELETE FROM AgentInDepartment WHERE agentUsername = OLD.username;
+    DELETE FROM TicketModel WHERE agentUsername = OLD.username;
 END;
 
 -------
@@ -187,3 +195,4 @@ BEGIN
     DELETE FROM TicketComment WHERE ticketId = OLD.id;
     DELETE FROM HashtagOfTicket WHERE ticketId = OLD.id;
 END;
+
