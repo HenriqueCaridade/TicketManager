@@ -10,6 +10,6 @@
     }
 
     $db = getDatabaseConnection();
-    TicketComment::removeTicketComment($db, $_POST['comment-id']);
-    die(header('Location: ../index.php?page=ticket&id=' . $_POST['ticket-id']));
+    TicketComment::removeTicketComment($db, $_POST['commentId']);
+    die(header('Location: ../index.php?page=ticket&id=' . $_POST['ticketId']));
 ?>

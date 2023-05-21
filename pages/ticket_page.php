@@ -48,7 +48,7 @@
         </div>
         <div class="ticket-item">
             <span class="ticket-label">Publish Date</span>
-            <div class="ticket-box"><?=htmlentities($ticket->date->format("H:i:s d-m-Y"))?></div>
+            <div class="ticket-box"><?=htmlentities($ticket->getFormattedDate())?></div>
         </div>
         <div class="ticket-item">
             <span class="ticket-label">Department</span>

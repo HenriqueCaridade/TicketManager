@@ -14,7 +14,7 @@
         </div>
         <div class="popup-item">
             <span>Abbreviation</span>
-            <input type="text" name="abbrev" maxlength="5" required>
+            <input type="text" name="abbrev" maxlength="10" required>
         </div>
         <div class="popup-item">
             <button type="submit" class="submit-button">Add</button>

@@ -11,13 +11,13 @@
                 <?php if($session->getMyRights(User::USERTYPE_ADMIN) || $_SESSION[Session::USERNAME] === $comment->user){ ?>
                     <form class="comment-remove comment-item" action="./actions/removeComment.php" method="post">
                         <button type='submit'><i class="fa-solid fa-trash"></i></button>
-                        <input type="hidden" name="comment-id" value="<?=$comment->id?>">
-                        <input type="hidden" name='ticket-id' value="<?=$comment->ticketId?>">
+                        <input type="hidden" name="commentId" value="<?=$comment->id?>">
+                        <input type="hidden" name='ticketId' value="<?=$comment->ticketId?>">
                         <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
                     </form>
                 <?php } ?>
             </div>
-            <div class="comment-text"> <?= htmlentities($comment->text)?></div>
+            <div class="comment-text"> <?=$comment->text?></div>
         </div>
         <hr>
     <?php }
@@ -29,7 +29,7 @@
         <div class="big-button">
             <button id="comment-add-button" type="submit" class="submit-button">Comment</button>
         </div>
-        <input type="hidden" name='ticket-id' value="<?=$ticket->id?>">
+        <input type="hidden" name='ticketId' value="<?=$ticket->id?>">
         <input type="hidden" name='author' value="<?=$_SESSION[Session::USERNAME]?>">
         <input type="hidden" name='csrf' value="<?=$session->getCSRF()?>">
     </form>
