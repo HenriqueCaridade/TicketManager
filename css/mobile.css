@@ -1,0 +1,46 @@
+@media only screen and (max-width: 1200px) {
+    /* For smaller screens */
+    .page {
+        position: relative;
+        font-size: 0.8em;
+        margin: 0;
+    }
+
+    body {
+        font-size: 0.8rem;
+    }
+        
+    table {
+        font-size: 1em;
+    }
+    button {
+        font-size: 1em;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    /* For mobile phones */
+    .sidebar {
+        width: var(--sidebar-mobile-width);
+    }
+    .sidebar > a > span.icon {
+        display: block;
+        white-space: nowrap;
+        position: absolute;
+        left: 0.5em;
+    } 
+    .sidebar > a > span.text {
+        display: block;
+        white-space: nowrap;
+        width: 0;
+        overflow: hidden;
+    } 
+    main.main-sidebar {
+        overflow: hidden;
+        margin-left: var(--sidebar-mobile-width);
+    }
+    .page {
+        position: relative;
+        margin: 0;
+    }
+}

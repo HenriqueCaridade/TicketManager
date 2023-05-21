@@ -43,6 +43,7 @@
             <div class="update-item">
                 <input class="button" type="submit" value="Update">
             </div>
+            <input type="hidden" name="csrf" value="<?=$session->getCSRF()?>">
         </form>
         <form id="update-password" action = "../actions/updateUserPassword.php" method="post">
             <div class="update-item">
@@ -63,6 +64,7 @@
             <div class="update-item">
                 <input class="button" type="submit" value="Update Password">
             </div>
+            <input type="hidden" name="csrf" value="<?=$session->getCSRF()?>">
         </form>
         <?php
             drawToasts($session);

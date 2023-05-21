@@ -58,4 +58,21 @@ function createResizableTables(){
     }
 }
 
+function deleteResizers(){
+    for (let table of document.querySelectorAll('table')) {
+        if (table !== null) {
+            for (let col of table.querySelectorAll('th')) {
+                for (let resizer of col.getElementsByClassName('table-resizer')) {
+                    col.removeChild(resizer);
+                }
+            }
+        }
+    }
+}
+
+window.addEventListener('resize', function(){
+    deleteResizers();
+    createResizableTables();
+})
+
 createResizableTables();

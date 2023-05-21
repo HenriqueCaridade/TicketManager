@@ -6,6 +6,7 @@
     function _drawTicket(Ticket $ticket) {
 ?>
 <tr class="ticket">
+    <td class="ticket-id"><?=htmlentities($ticket->id)?></td>
     <td class="ticket-username"><?php drawProfile($ticket->publisher, true); ?></td>
     <td class="ticket-subject"><?=htmlentities($ticket->subject); ?></td>
     <td class="ticket-department"><?=htmlentities($ticket->department); ?></td>
@@ -24,30 +25,30 @@
 
     function drawTickets(array $tickets) {
 ?>
-<table id="tickets">
-    <thead>
-        <tr>
-            <th style="width: 0;">User</th>
-            <th>Ticket</th>
-            <th style="width: 0;">Department</th>
-            <th style="width: 0;">Priority</th>
-            <th style="width: 0;">Status</th>
-            <th style="width: 0;">See Ticket</th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php
-    foreach ($tickets as $ticket) {
-        _drawTicket($ticket);
-    }
-    ?>
-    </tbody>
-</table>
+<div class="scroll-wrapper">
+    <table id="tickets">
+        <thead>
+            <tr>
+                <th style="width: 0;">Id</th>
+                <th style="width: 0;">User</th>
+                <th>Ticket</th>
+                <th style="width: 0;">Department</th>
+                <th style="width: 0;">Priority</th>
+                <th style="width: 0;">Status</th>
+                <th style="width: 0;">See Ticket</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($tickets as $ticket) _drawTicket($ticket); ?>
+        </tbody>
+    </table>
+</div>
 <?php
     }
     function _drawTicketDepartment(Ticket $ticket) {
-        ?>
+?>
         <tr class="ticket">
+            <td class="ticket-id"><?=htmlentities($ticket->id)?></td>
             <td class="ticket-username"><?php drawProfile($ticket->publisher, true); ?></td>
             <td class="ticket-subject"><?=htmlentities($ticket->subject)?></td>
             <td class="ticket-priority"><?php drawPriority($ticket->priority); ?></td>
@@ -60,14 +61,16 @@
                 </form>
             </td>
         </tr>
-        <?php
-            }
+<?php
+    }
     function drawTicketsDepartment(array $tickets, string $department) {
-        ?>
-        <h1> <?=htmlentities($department); ?></h1>
+?>
+    <h1> <?=htmlentities($department); ?></h1>
+    <div class="scroll-wrapper">
         <table id="tickets">
             <thead>
                 <tr>
+                    <th style="width: 0;">Id</th>
                     <th style="width: 0;">User</th>
                     <th>Ticket</th>
                     <th style="width: 0;">Priority</th>
@@ -76,13 +79,10 @@
                 </tr>
             </thead>
             <tbody>
-            <?php
-            foreach ($tickets as $ticket) {
-                _drawTicketDepartment($ticket);
-            }
-            ?>
+            <?php foreach ($tickets as $ticket) _drawTicketDepartment($ticket); ?>
             </tbody>
         </table>
-        <?php
-            }
+    </div>
+<?php
+    }
 ?>

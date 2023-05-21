@@ -25,7 +25,9 @@
     <link rel="stylesheet" href="../css/table.css">
     <link rel="stylesheet" href="../css/search.css">
     <link rel="stylesheet" href="../css/ticket.css">
+    <link rel="stylesheet" href="../css/change.css">
     <link rel="stylesheet" href="../css/comment.css">
+    <link rel="stylesheet" href="../css/mobile.css">
     <title>Tick.et</title>
 </head>
 <body>

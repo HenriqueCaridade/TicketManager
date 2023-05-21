@@ -5,8 +5,8 @@
     require_once(dirname(__DIR__) . "/classes/session.php");
     require_once(dirname(__DIR__) . "/classes/filters.php");
     require_once(dirname(__DIR__) . "/templates/ticket.php");
-    
     $session = Session::getSession();
+    
     $query = $_POST['query'] ?? "";
     $session->saveInput(Session::S_DEPARTMENT, $query);
     $db = getDatabaseConnection();

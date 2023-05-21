@@ -78,6 +78,47 @@ for (let ticket of document.getElementsByClassName('ticket-status-change')) {
     });
 }
 
+for (let ticket of document.getElementsByClassName('ticket-hashtag-change')) {
+    ticket.addEventListener('click', function(ev){
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        console.log(ticket.dataset);
+        xhttp.open("POST", '../ajax/hashtagPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send(`id=${ticket.dataset.id}`);
+    });
+}
+
+
+const hashtagAdd = document.getElementById('hashtag-add-button');
+const hashtagRemove = document.getElementById('hashtag-remove-button');
+if (hashtagAdd !== null && hashtagRemove !== null) {
+    hashtagAdd.addEventListener('click', function() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/addHashtagPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send();
+    });
+    hashtagRemove.addEventListener('click', function() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/removeHashtagPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send();
+    });
+}
+
+
 const departmentAdd = document.getElementById('department-add-button');
 const departmentRemove = document.getElementById('department-remove-button');
 if (departmentAdd !== null && departmentRemove !== null) {

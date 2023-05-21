@@ -1,11 +1,16 @@
 <?php
-    function drawFAQ(string $question, string $answer) {
+    require_once(dirname(__DIR__) . "/classes/faq.php");
+
+    function drawFAQ(FAQ $faq) {
 ?>
-<div class="faq-item faq-collapsed">
-    <button class="faq-question"><?=htmlentities($question)?></button>
+<div id="<?=$faq->id?>" class="faq-item faq-collapsed">
+    <button class="faq-question">
+        #<?=$faq->id?>:
+        <?=htmlentities($faq->question)?>
+    </button>
     <div class="faq-answer-block">
         <div class="faq-answer">
-            <?=htmlentities($answer)?>
+            <?=htmlentities($faq->answer)?>
         </div>
     </div>
 </div>

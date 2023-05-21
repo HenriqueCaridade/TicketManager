@@ -36,7 +36,7 @@
 ?>
 <main class="main-sidebar">
     <div id="ticket-page" class="page">
-        <h1 id="ticket-page-title" class="title"><?=htmlentities($ticket->subject)?></h1>
+        <h1 id="ticket-page-title" class="title"><?=htmlentities($ticket->subject)?><span id="ticket-page-id">#<?=htmlentities($ticket->id)?></span></h1>
         <div class="ticket-item">
             <span class="ticket-label">Publisher</span>
             <div class="ticket-box"><?=htmlentities($ticket->publisher)?></div>
@@ -73,6 +73,15 @@
             <div class="ticket-box"><?php drawStatus($ticket->status, $ticket->agentUsername); ?></div>
             <?php if ($session->getMyRights(User::USERTYPE_AGENT)) { ?>
                 <a class="ticket-status-change option" data-id="<?=$ticket->id?>" data-status="<?=$ticket->status?>"> 
+                    Change...
+                </a>
+            <?php } ?>
+        </div>
+        <div class="ticket-item">
+            <span class="ticket-label">Hashtags</span>
+            <div class="ticket-box"><?=htmlentities($ticket->hashtagString); ?></div>
+            <?php if ($session->getMyRights(User::USERTYPE_AGENT)) { ?>
+                <a class="ticket-hashtag-change option" data-id="<?=$ticket->id?>"> 
                     Change...
                 </a>
             <?php } ?>

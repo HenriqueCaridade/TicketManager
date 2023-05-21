@@ -3,7 +3,6 @@
     require_once(dirname(__DIR__) . "/templates/user.php");
     require_once(dirname(__DIR__) . "/classes/user.php");
     require_once(dirname(__DIR__) . "/classes/session.php");
-
     $session = Session::getSession();
     
     if (!isset($_POST['query'])) {

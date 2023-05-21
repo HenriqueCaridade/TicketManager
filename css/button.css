@@ -1,12 +1,12 @@
 
-button:not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit):not(.ticket-submit) {
+button:not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit):not(.ticket-submit):not(.other-profile-submit) {
     padding: 0.8em;
     color: var(--primary-background-color);
     border: none;
     padding: 0.5em;
     border-radius: 2em;
 }
-button:not(.red):not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit):not(.ticket-submit) {
+button:not(.red):not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit):not(.ticket-submit):not(.other-profile-submit) {
     background-color: var(--accent-color);
 }
 
@@ -20,8 +20,8 @@ div.big-button {
     text-align: center;
 }
 
-button#ticket-open-button, button#department-add-button, button#department-remove-button {
-    width: 30rem;
+button#ticket-open-button, button#department-add-button, button#department-remove-button,  button#hashtag-add-button, button#hashtag-remove-button  {
+    width: 30em;
     min-width: 15em;
     padding: 1em;
 }
@@ -30,7 +30,7 @@ button.ticket-page-submit, button.ticket-submit, button.user-page-submit {
     background-color: transparent;
     border: none;
     color: var(--accent-color);
-    font-size: 1rem;
+    font-size: 1em;
     padding: 0;
     width: 100%;
     text-align: left;
@@ -41,15 +41,21 @@ form.ticket-page-form{
 button.profile-submit {
     background-color: transparent;
     border: none;
-    font-size: 4rem;
+    font-size: 4em;
+    padding: 0;
+}
+button.other-profile-submit {
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
     padding: 0;
 }
 form.profile-form {
     position: absolute;
-    top: 0.5rem;
-    right: 1rem;
+    top: 0.5em;
+    right: 1em;
 }
 
-form.ticket-page-form, form.ticket-form, form.user-page-form, form.profile-form {
+form.ticket-page-form, form.ticket-form, form.user-page-form, form.profile-form, form.other-profile-form {
     margin-block-end: 0;
 }

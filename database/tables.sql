@@ -31,9 +31,11 @@ CREATE TABLE IF NOT EXISTS TicketModel (
     text STRING NOT NULL,
     department STRING NOT NULL REFERENCES Department(username),
     priority STRING NOT NULL CHECK (priority IN ('Normal', 'High', 'Urgent')) DEFAULT 'Normal',
-    status STRING NOT NULL CHECK (status IN ('Not done', 'Done')) DEFAULT 'Not done',
+    status STRING NOT NULL CHECK (status IN ('Not Done', 'Done')) DEFAULT 'Not Done',
     agentUsername STRING REFERENCES User(username) DEFAULT NULL
 );
+
+CREATE VIEW IF NOT EXISTS Ticket AS SELECT * FROM TicketModel;
 
 --------
 
@@ -41,7 +43,7 @@ CREATE TABLE IF NOT EXISTS TicketChange (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     ticketId INTEGER NOT NULL REFERENCES Ticket(id),
     date DATETIME NOT NULL,
-    type STRING NOT NULL CHECK (type IN ('department', 'priority', 'status', 'assign')),
+    type STRING NOT NULL CHECK (type IN ('Department', 'Priority', 'Status', 'Assign')),
     oldVal STRING,
     newVal STRING
 );
@@ -60,8 +62,7 @@ CREATE TABLE IF NOT EXISTS TicketComment (
 
 CREATE TABLE IF NOT EXISTS Hashtag (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    ticketId INTEGER NOT NULL REFERENCES Ticket(id),
-    hashtag STRING NOT NULL
+    value STRING NOT NULL
 );
 
 --------
@@ -79,6 +80,13 @@ CREATE TABLE IF NOT EXISTS AgentInDepartment (
     department STRING NOT NULL REFERENCES Department(name)
 );
 
+--------
+
+CREATE TABLE IF NOT EXISTS HashtagOfTicket (
+    hashtagId INTEGER NOT NULL REFERENCES hashtagId(id),
+    ticketId INTEGER NOT NULL REFERENCES Ticket(id)
+);
+
 -------
 
 CREATE TABLE IF NOT EXISTS Filters (
@@ -92,8 +100,6 @@ CREATE TABLE IF NOT EXISTS Filters (
     filterDateFrom DATETIME NOT NULL DEFAULT '2020-01-01 00:00:00',
     filterDateTo DATETIME NOT NULL DEFAULT '2030-01-01 00:00:00'
 );
-
-CREATE VIEW IF NOT EXISTS Ticket AS SELECT * FROM TicketModel;
 
 --------------
 -- TRIGGERS --
@@ -117,7 +123,7 @@ INSTEAD OF UPDATE ON Ticket
 WHEN OLD.department <> NEW.department
 BEGIN
     UPDATE TicketModel SET department = NEW.department WHERE id = OLD.id;
-    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'department', OLD.department, NEW.department);
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'Department', OLD.department, NEW.department);
 END;
 
 CREATE TRIGGER IF NOT EXISTS TicketChangePriority
@@ -125,7 +131,7 @@ INSTEAD OF UPDATE ON Ticket
 WHEN OLD.priority <> NEW.priority
 BEGIN
     UPDATE TicketModel SET priority = NEW.priority WHERE id = OLD.id;
-    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'priority', OLD.priority, NEW.priority);
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'Priority', OLD.priority, NEW.priority);
 END;
 
 CREATE TRIGGER IF NOT EXISTS TicketChangeStatus
@@ -133,7 +139,7 @@ INSTEAD OF UPDATE ON Ticket
 WHEN OLD.status <> NEW.status
 BEGIN
     UPDATE TicketModel SET status = NEW.status WHERE id = OLD.id;
-    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'status', OLD.status, NEW.status);
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'Status', OLD.status, NEW.status);
 END;
 
 CREATE TRIGGER IF NOT EXISTS TicketChangeAgent
@@ -143,12 +149,12 @@ OR (OLD.agentUsername IS NOT NULL AND NEW.agentUsername IS NULL)
 OR OLD.agentUsername <> NEW.agentUsername
 BEGIN
     UPDATE TicketModel SET agentUsername = NEW.agentUsername WHERE id = OLD.id;
-    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'assign', OLD.agentUsername, NEW.agentUsername);
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'Assign', OLD.agentUsername, NEW.agentUsername);
 END;
 
 ------
 
-CREATE TRIGGER IF NOT EXISTS UserPreferences
+CREATE TRIGGER IF NOT EXISTS UserFilters
 AFTER INSERT ON User
 BEGIN
     INSERT INTO Filters(username) VALUES (NEW.username);
@@ -179,5 +185,5 @@ BEFORE DELETE ON TicketModel
 BEGIN
     DELETE FROM TicketChange WHERE ticketId = OLD.id;
     DELETE FROM TicketComment WHERE ticketId = OLD.id;
-    DELETE FROM Hashtag WHERE ticketId = OLD.id;
+    DELETE FROM HashtagOfTicket WHERE ticketId = OLD.id;
 END;

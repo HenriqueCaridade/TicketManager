@@ -31,7 +31,7 @@
     <div id="faq" class="page">
         <h1 id="faq-title" class="title">Frequently Asked Questions (FAQ)</h1>
         <?php
-            foreach ($faqs as $faq) drawFAQ($faq->question, $faq->answer);
+            foreach ($faqs as $faq) drawFAQ($faq);
         ?>
     </div>
 </main>

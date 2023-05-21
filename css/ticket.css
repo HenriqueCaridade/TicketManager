@@ -22,3 +22,8 @@
 .option {
     display: inline-block;
 }
+
+#ticket-page-id {
+    font-size: 2rem;
+    color: var(--unselected-color);
+}

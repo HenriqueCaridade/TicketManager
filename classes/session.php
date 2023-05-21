@@ -45,8 +45,14 @@
         public array $pendingToasts;
         private function __construct() {
             session_start();
+            if (!isset($_SESSION['csrf'])) {
+                $_SESSION['csrf'] = Session::generate_random_token();
+            }
             $this->pendingToasts = $_SESSION[Session::TOAST] ?? array();
             unset($_SESSION[Session::TOAST]);
+        }
+        public function getCSRF() {
+            return $_SESSION['csrf'];
         }
         public function __destruct() {
             $_SESSION[Session::TOAST] = $this->pendingToasts;
@@ -117,5 +123,8 @@
                 return $userType === User::USERTYPE_ADMIN;
             }
         }
+        private static function generate_random_token() {
+            return bin2hex(openssl_random_pseudo_bytes(32));
+          }
     }    
 ?>
