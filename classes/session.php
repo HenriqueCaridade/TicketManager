@@ -102,15 +102,19 @@
             unset($this->pendingToasts[Session::SUCCESS]);
             return $ret;
         }
-        public function getRights(string $userType){
-            if($userType === User::USERTYPE_CLIENT){
+        public function getMyRights(string $rights){
+            return Session::getRights($_SESSION[Session::USERTYPE], $rights);
+        }
+
+        public static function getRights(string $userType, string $rights) {
+            if($rights === User::USERTYPE_CLIENT){
                 return true;
             }
-            if($userType === User::USERTYPE_AGENT){
-                return $_SESSION[Session::USERTYPE] === User::USERTYPE_AGENT or $_SESSION[Session::USERTYPE] === User::USERTYPE_ADMIN;
+            if($rights === User::USERTYPE_AGENT){
+                return $userType === User::USERTYPE_AGENT or $userType === User::USERTYPE_ADMIN;
             }
-            if($userType === User::USERTYPE_ADMIN){
-                return $_SESSION[Session::USERTYPE] === User::USERTYPE_ADMIN;
+            if($rights === User::USERTYPE_ADMIN){
+                return $userType === User::USERTYPE_ADMIN;
             }
         }
     }    

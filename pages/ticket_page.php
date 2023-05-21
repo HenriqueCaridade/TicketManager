@@ -48,12 +48,12 @@
         </div>
         <div class="ticket-item">
             <span class="ticket-label">Publish Date</span>
-            <div class="ticket-box"><?=htmlentities($ticket->publishDate->format("H:i:s d-m-Y"))?></div>
+            <div class="ticket-box"><?=htmlentities($ticket->date->format("H:i:s d-m-Y"))?></div>
         </div>
         <div class="ticket-item">
             <span class="ticket-label">Department</span>
             <div class="ticket-box"><?=htmlentities($ticket->department)?></div>
-            <?php if ($session->getRights(User::USERTYPE_AGENT)) { ?>
+            <?php if ($session->getMyRights(User::USERTYPE_AGENT)) { ?>
                 <a class="ticket-department-change option" data-id="<?=$ticket->id?>" data-department="<?=$ticket->department?>"> 
                     Change...
                 </a>
@@ -61,18 +61,18 @@
         </div>
         <div class="ticket-item">
             <span class="ticket-label">Priority</span>
-            <div class="ticket-box"><?php drawPriority($ticket->status->priority); ?></div>
-            <?php if ($session->getRights(User::USERTYPE_AGENT)) { ?>
-                <a class="ticket-priority-change option" data-id="<?=$ticket->id?>" data-priority="<?=$ticket->status->priority?>"> 
+            <div class="ticket-box"><?php drawPriority($ticket->priority); ?></div>
+            <?php if ($session->getMyRights(User::USERTYPE_AGENT)) { ?>
+                <a class="ticket-priority-change option" data-id="<?=$ticket->id?>" data-priority="<?=$ticket->priority?>"> 
                     Change...
                 </a>
             <?php } ?>
         </div>
         <div class="ticket-item">
             <span class="ticket-label">Status</span>
-            <div class="ticket-box"><?php drawStatus($ticket->status->status, $ticket->status->agentUsername); ?></div>
-            <?php if ($session->getRights(User::USERTYPE_AGENT)) { ?>
-                <a class="ticket-status-change option" data-id="<?=$ticket->id?>" data-status="<?=$ticket->status->status?>"> 
+            <div class="ticket-box"><?php drawStatus($ticket->status, $ticket->agentUsername); ?></div>
+            <?php if ($session->getMyRights(User::USERTYPE_AGENT)) { ?>
+                <a class="ticket-status-change option" data-id="<?=$ticket->id?>" data-status="<?=$ticket->status?>"> 
                     Change...
                 </a>
             <?php } ?>

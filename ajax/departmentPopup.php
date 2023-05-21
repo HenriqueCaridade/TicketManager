@@ -4,8 +4,8 @@
     require_once(dirname(__DIR__) . "/classes/user.php");
     require_once(dirname(__DIR__) . "/classes/department.php");
     if (!isset($_POST['username'])) {
-        var_dump($_POST);
-        die();
+        $session->addToast(Session::ERROR, 'Missing parameters.');
+        die(header('Location: ../index.php?page=dashboard'));
     }
     $db = getDatabaseConnection();
     $agentDepartments = Department::getDepartmentsFromAgent($db, $_POST['username']);

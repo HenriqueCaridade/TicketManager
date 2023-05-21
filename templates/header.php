@@ -32,7 +32,7 @@
         <span id="logo">Tick.<span id="logo-highlight">et</span></span>
         <?php if ($drawProfile) { ?>
             <form class="profile-form" action="./index.php" method="get">
-                <input type="hidden" name="page" value="user">
+                <input type="hidden" name="page" value="account">
                 <input type="hidden" name="username" value="<?=$_SESSION[Session::USERNAME]?>">
                 <button type='submit' class="profile-submit"><i class="fa-solid fa-circle-user"></i></button>
             </form>

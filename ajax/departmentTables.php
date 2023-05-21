@@ -3,24 +3,20 @@
     require_once(dirname(__DIR__) . "/classes/department.php");
     require_once(dirname(__DIR__) . "/classes/ticket.php");
     require_once(dirname(__DIR__) . "/classes/session.php");
-    require_once(dirname(__DIR__) . "/classes/preferences.php");
+    require_once(dirname(__DIR__) . "/classes/filters.php");
     require_once(dirname(__DIR__) . "/templates/ticket.php");
     
     $session = Session::getSession();
-
-    if (!isset($_POST['query'])) {
-        echo '<p> An Error Occured! </p>';
-        die();
-    }
-    $session->saveInput(Session::S_DEPARTMENT, $_POST['query']);
+    $query = $_POST['query'] ?? "";
+    $session->saveInput(Session::S_DEPARTMENT, $query);
     $db = getDatabaseConnection();
-    $departments = ($session->getRights(User::USERTYPE_ADMIN)) ?
+    $departments = ($session->getMyRights(User::USERTYPE_ADMIN)) ?
         Department::getAllDepartments($db) :
         Department::getDepartmentsFromAgent($db, $_SESSION[Session::USERNAME]);
-    $preferences = Preferences::getPreferences($db, $_SESSION[Session::USERNAME]);
+    $preferences = Filters::getFilters($db, $_SESSION[Session::USERNAME]);
 
     foreach ($departments as $department) {
-        $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences, $_POST['query']);
+        $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences, $query);
         drawTicketsDepartment($tickets, $department->name);
     }
 ?>

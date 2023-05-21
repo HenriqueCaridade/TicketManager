@@ -5,7 +5,6 @@
     require_once(dirname(__DIR__) . "/classes/department.php");
 
     $session = Session::getSession();
-    $db = getDatabaseConnection();
     if (!isset($_POST['id'])) {
         $session->addToast(Session::ERROR, 'Something went wrong.');
         die(header('Location: ../index.php?page=dashboard'));
@@ -14,7 +13,8 @@
         $session->addToast(Session::ERROR, 'Missing priority.');
         die(header('Location: ../index.php?page=ticket&id=' . $_POST['id']));
     }
-    // TODO
+    $db = getDatabaseConnection();
+    Ticket::changePriority($db, $_POST['id'], $_POST['priority']);
     $session->addToast(Session::SUCCESS, 'Changed Priority Successfully!');
     die(header('Location: ../index.php?page=ticket&id=' . $_POST['id']));
 ?>

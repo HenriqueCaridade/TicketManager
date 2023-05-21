@@ -11,7 +11,7 @@
     require_once(dirname(__DIR__) . "/classes/session.php");
     require_once(dirname(__DIR__) . "/classes/department.php");
     require_once(dirname(__DIR__) . "/classes/ticket.php");
-    require_once(dirname(__DIR__) . "/classes/preferences.php");
+    require_once(dirname(__DIR__) . "/classes/filters.php");
     // Session
     $session = Session::getSession();
     
@@ -19,7 +19,7 @@
         $session->addToast(Session::ERROR, 'You are not logged in!');
         die(header('Location: ./index.php?page=login'));
     }
-    if (!$session->getRights(User::USERTYPE_AGENT)) {
+    if (!$session->getMyRights(User::USERTYPE_AGENT)) {
         die(header('Location: ./index.php?page=dashboard'));
     }
 
@@ -27,10 +27,10 @@
         global $session;
 
         $db = getDatabaseConnection();
-        $departments = ($session->getRights(User::USERTYPE_ADMIN)) ?
+        $departments = ($session->getMyRights(User::USERTYPE_ADMIN)) ?
             Department::getAllDepartments($db) :
             Department::getDepartmentsFromAgent($db, $_SESSION[Session::USERNAME]);
-        $preferences = Preferences::getPreferences($db, $_SESSION[Session::USERNAME]);
+        $preferences = Filters::getFilters($db, $_SESSION[Session::USERNAME]);
         $query = $session->getSavedInput(Session::S_DEPARTMENT) ?? '';
 
         // Draw Page
@@ -46,11 +46,10 @@
             <?php
             foreach ($departments as $department) {
                 $tickets = Ticket::getFilteredTickets($db, $department->name, $preferences, $query);
-                //$tickets = Ticket::getAllTicketsFromDepartment($db, $department->name);
                 drawTicketsDepartment($tickets, $department->name);
             }?>
         </div>
-        <?php if ($session->getRights(User::USERTYPE_ADMIN)) { ?>
+        <?php if ($session->getMyRights(User::USERTYPE_ADMIN)) { ?>
             <div class="big-button"><button id="department-add-button">Add Department</button></div>
             <div class="big-button"><button id="department-remove-button" class="red">Remove Department</button></div>
         <?php }

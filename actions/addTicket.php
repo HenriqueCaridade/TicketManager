@@ -9,7 +9,7 @@
         $session->addToast(Session::ERROR, 'Missing parameters.');
         die(header('Location: ../index.php?page=dashboard'));
     }
-    Ticket::createTicket($db, $_SESSION[Session::USERNAME], $_POST['department'], new DateTime(), $_POST['subject'], $_POST['text']);
+    Ticket::createTicket($db, $_SESSION[Session::USERNAME], new DateTime(), $_POST['subject'], $_POST['text'], $_POST['department']);
     $session->addToast(Session::SUCCESS, 'Added Ticket Successfully!');
     die(header('Location: ../index.php?page=dashboard'));
 ?>

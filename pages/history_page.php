@@ -9,7 +9,7 @@
     // Session
     require_once(dirname(__DIR__) . "/classes/session.php");
     require_once(dirname(__DIR__) . "/classes/ticket.php");
-    require_once(dirname(__DIR__) . "/classes/ticketStatus.php");
+    require_once(dirname(__DIR__) . "/classes/ticketChange.php");
     $session = Session::getSession();
 
     if (!$session->isLoggedIn()) {
@@ -32,7 +32,7 @@
 ?>
 <main class="main-sidebar">
     <div class="page">
-        <?php drawTicketStatuses($ticket->statuses); ?>
+        <?php drawTicketChanges($ticket->changes); ?>
     </div>
 </main>
 <?php

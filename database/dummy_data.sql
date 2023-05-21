@@ -12,14 +12,18 @@ INSERT INTO User VALUES ('dummy3'  , 'Dummy Three'      , 'dummy.three@gmail.com
 INSERT INTO Department VALUES ('Technology', 'Tech');
 INSERT INTO Department VALUES ('Ecommerce', 'Ecom');
 
-INSERT INTO Ticket (id, publisher, department, publishDate, subject, text) VALUES (1, 'dummy1', 'Technology', '2020-01-01 01:02:03', 'My ticket1.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.');
-INSERT INTO Ticket (id, publisher, department, publishDate, subject, text) VALUES (2, 'dummy1', 'Technology', '2020-01-02 04:05:06', 'My ticket2.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.');
-INSERT INTO Ticket (id, publisher, department, publishDate, subject, text) VALUES (3, 'dummy1', 'Technology', '2020-01-03 07:08:09', 'My ticket3.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.');
+INSERT INTO Ticket (id, publisher, date, subject, text, department) VALUES (1, 'dummy1', '2020-01-01 01:02:03', 'My ticket1.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.', 'Technology');
+INSERT INTO Ticket (id, publisher, date, subject, text, department) VALUES (2, 'dummy2', '2020-01-02 04:05:06', 'My ticket2.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.', 'Technology');
+INSERT INTO Ticket (id, publisher, date, subject, text, department) VALUES (3, 'dummy3', '2020-01-03 07:08:09', 'My ticket3.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.', 'Technology');
+INSERT INTO Ticket (id, publisher, date, subject, text, department) VALUES (4, 'agent1', '2020-01-10 10:00:00', 'Agent ticket :D.', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci incidunt corporis veniam earum nobis officia dignissimos, ullam quasi nam id delectus cumque iusto dolor assumenda libero repellendus aliquid! Laudantium, ex.', 'Ecommerce');
 
-INSERT INTO TicketStatus (ticketId, agentUsername, date, priority, status) VALUES (1, NULL    , '2020-01-01 01:02:03', 'Normal', 'Unassigned');
-INSERT INTO TicketStatus (ticketId, agentUsername, date, priority, status) VALUES (2, 'agent1', '2020-01-02 04:05:06', 'High'  , 'Assigned');
-INSERT INTO TicketStatus (ticketId, agentUsername, date, priority, status) VALUES (3, 'agent2', '2020-01-03 07:08:09', 'Urgent', 'Done');
-INSERT INTO TicketStatus (ticketId, agentUsername, date, priority, status) VALUES (1, 'agent3', '2020-01-02 01:02:03', 'Normal', 'Assigned');
+UPDATE Ticket SET priority = 'High', date = '2021-01-02 04:05:06' WHERE id = 2;
+UPDATE Ticket SET priority = 'Urgent', date = '2021-01-03 07:08:09' WHERE id = 3;
+UPDATE Ticket SET agentUsername = 'agent1', date = '2021-01-03 04:05:06' WHERE id = 2;
+UPDATE Ticket SET agentUsername = 'agent2', date = '2021-01-03 07:08:09'WHERE id = 3;
+UPDATE Ticket SET status = 'Done', date = '2021-01-04 07:08:09' WHERE id = 3;
+UPDATE Ticket SET agentUsername = 'agent2', date = '2021-01-03 07:08:09' WHERE id = 2;
+UPDATE Ticket SET agentUsername = 'agent2', date = '2021-01-03 07:08:09' WHERE id = 4;
 
 INSERT INTO FAQ (question, answer) VALUES ("I can't login what should I do?", "Contact one of the Admins!");
 INSERT INTO FAQ (question, answer) VALUES ("I don't remember my password", "Contact one of the Admins!");
