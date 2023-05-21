@@ -16,4 +16,22 @@
 </div>
 <?php
     }
+    function _drawFAQ(FAQ $faq) {
+        ?>
+            <option value = '<?=htmlentities($faq->id)?>'> <?=htmlentities($faq->id)?></option>
+        <?php
+            }
+        
+            function _drawFAQs(array $faqs) {
+        ?>
+        <select name="faq">
+            <?php
+            foreach ($faqs as $faq) {
+                _drawFAQ($faq);
+            }
+            ?>
+        </select>
+        <?php
+            }
+        ?>
 ?>

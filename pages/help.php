@@ -4,6 +4,8 @@
     require_once(dirname(__DIR__) . "/templates/footer.php");
     require_once(dirname(__DIR__) . "/templates/sidebar.php");
     require_once(dirname(__DIR__) . "/templates/faq.php");
+    require_once(dirname(__DIR__) . "/templates/toast.php");
+
     // Database
     require_once(dirname(__DIR__) . "/database/connection.php");
     // Classes
@@ -32,8 +34,14 @@
         <h1 id="faq-title" class="title">Frequently Asked Questions (FAQ)</h1>
         <?php
             foreach ($faqs as $faq) drawFAQ($faq);
+            if ($session->getMyRights(User::USERTYPE_ADMIN)) { ?>
+                <div class="big-button"><button id="faq-add-button">Add FAQ</button></div>
+                <div class="big-button"><button id="faq-remove-button" class="red">Remove FAQ</button></div>
+        <?php } 
+        drawToasts($session);
         ?>
     </div>
+    <div id='popup'></div>
 </main>
 <?php  
         drawFooter();
