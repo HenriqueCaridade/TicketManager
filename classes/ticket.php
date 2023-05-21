@@ -98,9 +98,14 @@
         public static function getFilteredTickets(PDO $db, string $department, Filters $filters, string $query = '') : array {
             $priorityArray = array_filter(array($filters->normal ? 'Normal' : null , $filters->high ? 'High' : null, $filters->urgent ? 'Urgent' : null), fn($val) => $val !== null);
             $cond = Filters::getFiltersCondition($filters);
-            $stmt = $db->prepare('SELECT * FROM Ticket WHERE department = ? AND (date BETWEEN ? AND ?) AND ' . $cond . ' AND (subject LIKE ? OR text LIKE ?) AND priority IN (' . join(',', array_fill(0, sizeof($priorityArray), '?')) . ')');
-            $query = '%' . str_replace(array('\\', '_', '%'), array('\\\\', '\\_', '\\%'), $query) . '%';
-            $stmt->execute(array($department, $filters->from, $filters->to, $query, $query, ...$priorityArray));
+            $words = explode(" ", $query);
+            $hashtags = array_filter($words, fn($val) => $val[0] === '#');
+            $hashtags = array_map(fn($val) => substr($val, 1), $hashtags);
+            $words = array_filter($words, fn($val) => $val[0] !== '#');
+            $query = join(" ", $words);
+            $stmt = $db->prepare('SELECT * FROM Ticket WHERE department = ? AND (date BETWEEN ? AND ?) AND ' . $cond . ' AND (subject LIKE ? OR text LIKE ? OR publisher LIKE ? OR agentUsername LIKE ?) AND priority IN (' . join(',', array_fill(0, sizeof($priorityArray), '?')) . ') ' . (empty($hashtags) ? '' : 'AND id IN (SELECT ticketId FROM HashtagOfTicket WHERE hashtagId IN (SELECT id FROM Hashtag WHERE value IN (' . join(',', array_fill(0, sizeof($hashtags), '?')) . ')))'));
+            $query = '%' . str_replace(array('\\', '_', '%', ' '), array('\\\\', '\\_', '\\%', '%'), $query) . '%';
+            $stmt->execute(array($department, $filters->from, $filters->to, $query, $query, $query, $query, ...$priorityArray, ...$hashtags));
             $tickets = $stmt->fetchAll();
             $ticketArray = array();
             foreach ($tickets as $ticket) {

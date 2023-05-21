@@ -9,7 +9,6 @@
 </div>
 <?php
     }
-
     function drawToasts(Session $session) { ?>
     <div id="toasts">
     <?php

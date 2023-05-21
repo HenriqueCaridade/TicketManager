@@ -22,7 +22,7 @@ div.big-button {
     text-align: center;
 }
 
-button#ticket-open-button, button#department-add-button, button#department-remove-button,  button#hashtag-add-button, button#hashtag-remove-button, button#comment-add-button {
+button#ticket-open-button, button#department-add-button, button#department-remove-button,  button#hashtag-add-button, button#hashtag-remove-button, button#comment-add-button, button#faq-add-button, button#faq-remove-button {
     width: 30em;
     min-width: 15em;
     padding: 0.8em;

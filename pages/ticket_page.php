@@ -31,7 +31,7 @@
         $ticket = Ticket::getTicket($db, intval($getArray['id']));
 
         // Draw Page
-        drawHeader();
+        drawHeader($session);
         drawSidebar($session);
 ?>
 <main class="main-sidebar">
@@ -79,7 +79,7 @@
         </div>
         <div class="ticket-item">
             <span class="ticket-label">Hashtags</span>
-            <div class="ticket-box"><?=htmlentities($ticket->hashtagString); ?></div>
+            <div class="ticket-box"><?=$ticket->hashtagString?></div>
             <?php if ($session->getMyRights(User::USERTYPE_AGENT)) { ?>
                 <a class="ticket-hashtag-change option" data-id="<?=$ticket->id?>"> 
                     Change...
@@ -95,9 +95,9 @@
         </div>
         <?php drawToasts($session); ?>
         <hr>
-        <p><?=htmlentities($ticket->text)?></p>
+        <p><?=htmlentities($ticket->text); ?></p>
         <hr>
-        <?php drawComments($ticket, $session) ?>
+        <?php drawComments($ticket, $session); ?>
     </div>
     <div id="popup"></div>
 </main>

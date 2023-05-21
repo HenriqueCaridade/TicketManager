@@ -171,3 +171,28 @@ if (departmentFilters !== null) {
         xhttp.send();
     });
 }
+
+const faqAdd = document.getElementById('faq-add-button');
+const faqRemove = document.getElementById('faq-remove-button');
+if (faqAdd !== null && faqRemove !== null) {
+    faqAdd.addEventListener('click', function() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/addFaqPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send();
+    });
+    faqRemove.addEventListener('click', function() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById('popup').innerHTML = this.responseText;
+            openPopup();
+        };
+        xhttp.open("POST", '../ajax/removeFaqPopup.php', false);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.send();
+    });
+}

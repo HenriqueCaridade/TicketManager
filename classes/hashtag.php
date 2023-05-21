@@ -2,6 +2,8 @@
     declare(strict_types=1);
 
     class Hashtag {
+        protected const MIN_HASHTAG_LENGTH = 1;
+        protected const MAX_HASHTAG_LENGTH = 16;
 
         public int $id;
         public string $value;
@@ -41,9 +43,24 @@
             $stmt->execute(array($value));
         }
 
-        public static function removeHashtag(PDO $db, string $id) : void {
-            $stmt = $db->prepare('DELETE FROM Hashtag WHERE name = ?');
+        public static function removeHashtag(PDO $db, int $id) : void {
+            $stmt = $db->prepare('DELETE FROM Hashtag WHERE id = ?');
             $stmt->execute(array($id));
+        }
+
+        public static function validatorHashtag(string $value) : ?string {
+            $length = strlen($value);
+            if ($length < Hashtag::MIN_HASHTAG_LENGTH)
+                return 'Hashtag must be at least ' . Hashtag::MIN_HASHTAG_LENGTH . ' long.';
+            if ($length > Hashtag::MAX_HASHTAG_LENGTH)
+                return 'Hashtag must be at most ' . Hashtag::MAX_HASHTAG_LENGTH . ' long.';
+            if (preg_match('/\s/', $value) === 1)
+                return 'Hashtag must not have spaces.';
+            if (preg_match('/\W/', $value) === 1)
+                return 'Hashtag must not have special characters.';
+            if (preg_match('/[A-Z]/', $value) === 1)
+                return 'Hashtag must not have upper case letters.';
+            return null; 
         }
     }
 ?>

@@ -24,6 +24,10 @@
             $stmt = $db->prepare('INSERT INTO FAQ (question, answer) VALUES (?, ?)');
             $stmt->execute(array($question, $answer));
         }
+        public static function removeFAQ(PDO $db, int $id ) : void {
+            $stmt = $db->prepare('DELETE FROM FAQ WHERE id = ?');
+            $stmt->execute(array($id));
+        }
 
         public static function getAll(PDO $db) : array {
             $stmt = $db->prepare('SELECT * FROM FAQ');

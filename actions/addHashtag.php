@@ -12,6 +12,12 @@
         $session->addToast(Session::ERROR, 'Missing parameters.');
         die(header('Location: ../index.php?page=hashtags'));
     }
+
+    $validation = Hashtag::validatorHashtag($_POST['value']);
+    if ($validation !== null) { // Error
+        $session->addToast(Session::ERROR, $validation);
+        die(header('Location: ../index.php?page=hashtags'));
+    }
     
     $db = getDatabaseConnection();
     Hashtag::addHashtag($db, $_POST['value']);

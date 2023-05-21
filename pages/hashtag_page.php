@@ -18,10 +18,6 @@
         $session->addToast(Session::ERROR, 'You are not logged in!');
         die(header('Location: ./index.php?page=login'));
     }
-    if (!$session->getMyRights(User::USERTYPE_ADMIN)) {
-        die(header('Location: ./index.php?page=dashboard'));
-    }
-
     function drawPage(array $getArray) {
         global $session;
 
@@ -29,7 +25,7 @@
         $hashtags = Hashtag::getAllHashtags($db);
 
         // Draw Page
-        drawHeader();
+        drawHeader($session);
         drawSidebar($session, 'hashtags');
 ?>
 <main class="main-sidebar">

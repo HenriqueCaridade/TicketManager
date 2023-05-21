@@ -28,7 +28,7 @@
         $departments = Department::getAllDepartments($db);
 
         // Draw Page
-        drawHeader();
+        drawHeader($session);
         drawSidebar($session, 'dashboard');
 ?>
 <main class="main-sidebar">

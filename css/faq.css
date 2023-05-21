@@ -3,7 +3,6 @@
 button.faq-question { 
     margin-top: 1rem;
     padding: 1rem;
-    transition: 0.4s;
     width: 100%;
     text-align: left;
     font-size: 1.4rem;
@@ -29,6 +28,7 @@ button.faq-question {
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
     background-color: var(--secondary-background-color);
+    transition: 0.4s;
     transition: max-height 0.4s ease-out;
 }
     
