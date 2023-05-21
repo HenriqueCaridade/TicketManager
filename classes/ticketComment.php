@@ -2,7 +2,7 @@
     class TicketComment {
         public int $id;
         public int $ticketId;
-        public ?string $user; 
+        public string $user; 
         public DateTime $date;
         public string $text;
 
@@ -17,7 +17,7 @@
             return new TicketComment((int) $comment['id'], (int) $comment['ticketId'], $comment['user'], new DateTime($comment['date']), $comment['text']);
         }
         public function getFormattedDate() : string {
-            return $this->date->format('Y-m-d H:i:s');
+            return $this->date->format('H:i:s d-m-Y');
         }
         public static function getTicketComment(PDO $db, int $id) : ?TicketComment {
             $stmt = $db->prepare('SELECT * FROM TicketComment WHERE id=?');

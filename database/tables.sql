@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS TicketModel (
     text STRING NOT NULL,
     department STRING NOT NULL REFERENCES Department(username),
     priority STRING NOT NULL CHECK (priority IN ('Normal', 'High', 'Urgent')) DEFAULT 'Normal',
-    status STRING NOT NULL CHECK (status IN ('Not done', 'Done')) DEFAULT 'Not done',
+    status STRING NOT NULL CHECK (status IN ('Not Done', 'Done')) DEFAULT 'Not Done',
     agentUsername STRING REFERENCES User(username) DEFAULT NULL
 );
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS TicketChange (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     ticketId INTEGER NOT NULL REFERENCES Ticket(id),
     date DATETIME NOT NULL,
-    type STRING NOT NULL CHECK (type IN ('department', 'priority', 'status', 'assign')),
+    type STRING NOT NULL CHECK (type IN ('Department', 'Priority', 'Status', 'Assign')),
     oldVal STRING,
     newVal STRING
 );
@@ -117,7 +117,7 @@ INSTEAD OF UPDATE ON Ticket
 WHEN OLD.department <> NEW.department
 BEGIN
     UPDATE TicketModel SET department = NEW.department WHERE id = OLD.id;
-    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'department', OLD.department, NEW.department);
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'Department', OLD.department, NEW.department);
 END;
 
 CREATE TRIGGER IF NOT EXISTS TicketChangePriority
@@ -125,7 +125,7 @@ INSTEAD OF UPDATE ON Ticket
 WHEN OLD.priority <> NEW.priority
 BEGIN
     UPDATE TicketModel SET priority = NEW.priority WHERE id = OLD.id;
-    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'priority', OLD.priority, NEW.priority);
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'Priority', OLD.priority, NEW.priority);
 END;
 
 CREATE TRIGGER IF NOT EXISTS TicketChangeStatus
@@ -133,7 +133,7 @@ INSTEAD OF UPDATE ON Ticket
 WHEN OLD.status <> NEW.status
 BEGIN
     UPDATE TicketModel SET status = NEW.status WHERE id = OLD.id;
-    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'status', OLD.status, NEW.status);
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'Status', OLD.status, NEW.status);
 END;
 
 CREATE TRIGGER IF NOT EXISTS TicketChangeAgent
@@ -143,7 +143,7 @@ OR (OLD.agentUsername IS NOT NULL AND NEW.agentUsername IS NULL)
 OR OLD.agentUsername <> NEW.agentUsername
 BEGIN
     UPDATE TicketModel SET agentUsername = NEW.agentUsername WHERE id = OLD.id;
-    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'assign', OLD.agentUsername, NEW.agentUsername);
+    INSERT INTO TicketChange (ticketId, date, type, oldVal, newVal) VALUES (OLD.id, NEW.date, 'Assign', OLD.agentUsername, NEW.agentUsername);
 END;
 
 ------

@@ -32,6 +32,7 @@
 ?>
 <main class="main-sidebar">
     <div class="page">
+        <h1 class="title">History</h1>
         <?php drawTicketChanges($ticket->changes); ?>
     </div>
 </main>

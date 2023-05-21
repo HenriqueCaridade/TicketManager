@@ -54,13 +54,13 @@
                     if ($Filters->done){
                         return 'TRUE';
                     } else {
-                        return '(status = "Not done")';
+                        return '(status = "Not Done")';
                     }
                 } else {
                     if ($Filters->done){
-                        return '((status = "Not done" AND agentUsername IS NULL) OR (status = "Done" AND agentUsername IS NOT NULL))';
+                        return '((status = "Not Done" AND agentUsername IS NULL) OR (status = "Done" AND agentUsername IS NOT NULL))';
                     } else {
-                        return '(status = "Not done" AND agentUsername IS NULL)';
+                        return '(status = "Not Done" AND agentUsername IS NULL)';
                     }
                 }
             } else {
@@ -68,7 +68,7 @@
                     if ($Filters->done){
                         return '(agentUsername IS NOT NULL)';
                     } else {
-                        return '(status = "Not done" AND agentUsername IS NOT NULL)';
+                        return '(status = "Not Done" AND agentUsername IS NOT NULL)';
                     }
                 } else {
                     if ($Filters->done){

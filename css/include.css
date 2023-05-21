@@ -10,6 +10,7 @@
     --error-color: #ce5050ff;
     --warning-color: #ddc54fff;
     --success-color: #2ab75bff;
+    --unselected-color: #a0a0a0ff;
 
     /* General Constants */
     --header-height: 5rem;

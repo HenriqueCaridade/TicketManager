@@ -33,7 +33,7 @@
             $this->priority = $priority;
             if ($status === 'Done') {
                 $this->status = Ticket::DONE;
-            } else if ($status === 'Not done') {
+            } else if ($status === 'Not Done') {
                 $this->status = ($agentUsername === null) ? Ticket::UNASSIGNED : Ticket::ASSIGNED;
             }
             $this->agentUsername = $agentUsername;
@@ -44,7 +44,7 @@
             return new Ticket($db, (int) $ticket['id'], $ticket['publisher'], new DateTime($ticket['date']), $ticket['subject'], $ticket['text'], $ticket['department'], $ticket['priority'], $ticket['status'], $ticket['agentUsername']);
         }
         public function getFormattedDate() : string {
-            return $this->date->format('Y-m-d H:i:s');
+            return $this->date->format('H:i:s d-m-Y');
         }
         public static function getTicket(PDO $db, int $id) : ?Ticket {
             $stmt = $db->prepare('SELECT * FROM Ticket WHERE id=?');
@@ -110,7 +110,7 @@
                 $stmt->execute(array((new DateTime())->format('Y-m-d H:i:s'), $id));
             } else if ($status === Ticket::ASSIGNED) {
                 if ($agentUsername === null){
-                    $stmt = $db->prepare('UPDATE Ticket SET status = "Not done", date = ? WHERE id = ?');
+                    $stmt = $db->prepare('UPDATE Ticket SET status = "Not Done", date = ? WHERE id = ?');
                     $stmt->execute(array((new DateTime())->format('Y-m-d H:i:s'), $id));
                 } else {
                     $stmt = $db->prepare('UPDATE Ticket SET agentUsername = ?, date = ? WHERE id = ?');
@@ -118,7 +118,7 @@
                 }
             } else if ($status === Ticket::UNASSIGNED) {
                 $stmt = $db->prepare('UPDATE Ticket SET agentUsername = ?, date = ? WHERE id = ?');
-                $stmt->execute(array($agentUsername, (new DateTime())->format('Y-m-d H:i:s'), $id));
+                $stmt->execute(array(null, (new DateTime())->format('Y-m-d H:i:s'), $id));
             }
         }
     }

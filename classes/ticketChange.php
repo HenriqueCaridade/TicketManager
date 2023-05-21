@@ -2,6 +2,10 @@
     declare(strict_types=1);
     
     class TicketChange {
+        const DEPARTMENT = 'Department';
+        const PRIORITY = 'Priority';
+        const STATUS = 'Status';
+        const ASSIGN = 'Assign';
         public int $id;
         public int $ticketId;
         public DateTime $date;
@@ -21,7 +25,7 @@
             return new TicketChange((int) $change['id'], (int) $change['ticketId'], new DateTime($change['date']), $change['type'], $change['oldVal'], $change['newVal']);
         }
         public function getFormattedDate() : string {
-            return $this->date->format('Y-m-d H:i:s');
+            return $this->date->format('H:i:s d-m-Y');
         }
         public static function getTicketChange(PDO $db, int $id) : ?TicketChange {
             $stmt = $db->prepare('SELECT * FROM TicketChange WHERE id=?');
