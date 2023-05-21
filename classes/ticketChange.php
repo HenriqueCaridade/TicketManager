@@ -20,7 +20,7 @@
         private static function fromArray(array $change) : TicketChange {
             return new TicketChange((int) $change['id'], (int) $change['ticketId'], new DateTime($change['date']), $change['type'], $change['oldVal'], $change['newVal']);
         }
-        public function getFormatedDate() : string {
+        public function getFormattedDate() : string {
             return $this->date->format('Y-m-d H:i:s');
         }
         public static function getTicketChange(PDO $db, int $id) : ?TicketChange {

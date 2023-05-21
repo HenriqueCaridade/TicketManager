@@ -16,7 +16,7 @@
         private static function fromArray(array $comment) : TicketComment {
             return new TicketComment((int) $comment['id'], (int) $comment['ticketId'], $comment['user'], new DateTime($comment['date']), $comment['text']);
         }
-        public function getFormatedDate() : string {
+        public function getFormattedDate() : string {
             return $this->date->format('Y-m-d H:i:s');
         }
         public static function getTicketComment(PDO $db, int $id) : ?TicketComment {

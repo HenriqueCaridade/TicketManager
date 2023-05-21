@@ -5,7 +5,7 @@
     function _drawTicketChange(TicketChange $status) {
     ?>
     <div class="ticket-history-change">
-        <span class="ticket-history-date"><?=htmlentities($status->getFormatedDate())?>{}
+        <span class="ticket-history-date"><?=htmlentities($status->getFormattedDate())?>{}
     </div>
     <?php
     }
