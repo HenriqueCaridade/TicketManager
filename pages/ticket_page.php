@@ -97,7 +97,7 @@
         <hr>
         <p><?=htmlentities($ticket->text)?></p>
         <hr>
-        <?php drawComments($ticket->comments); ?>
+        <?php drawComments($ticket, $session) ?>
     </div>
     <div id="popup"></div>
 </main>

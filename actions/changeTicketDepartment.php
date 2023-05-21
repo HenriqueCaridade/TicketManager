@@ -8,7 +8,7 @@
         $session->addToast(Session::ERROR, 'Request isn\'t legitimate.');
         die(header('Location: ../index.php?page=dashboard'));
     }
-    
+
     if (!isset($_POST['id'])) {
         $session->addToast(Session::ERROR, 'Something went wrong.');
         die(header('Location: ../index.php?page=dashboard'));
@@ -19,6 +19,13 @@
     }
     
     $db = getDatabaseConnection();
+    $ticket = Ticket::getTicket($db, $_POST['id']);
+    $agent = Agent::getAgent($db, $ticket->agentUsername);
+    if (!in_array($_POST['department'], $user->departments)) {
+        $session->addToast(Session::ERROR, 'The Assigned agent isn\'t in the ' . $_POST['department'] . ' Department.');
+        die(header('Location: ../index.php?page=ticket&id=' . $_POST['id']));
+    }
+
     Ticket::changeDepartment($db, $_POST['id'], $_POST['department']);
     $session->addToast(Session::SUCCESS, 'Changed Department Successfully!');
     die(header('Location: ../index.php?page=ticket&id=' . $_POST['id']));
