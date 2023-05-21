@@ -1,20 +1,31 @@
 .comment {
-    padding: 0.5em;
     border-radius: 2em;
     font-size: 1em;
     background-color: transparent;
-    border: 2px solid black;
-    margin: 10;
+    margin-bottom: 10;
 }
 .comment-header {
     display: flex;
+    position: relative;
 }
 .comment-item {
     padding: 1rem;
 }
 #user {
     font-weight: 800;
+    padding-right: 0;
+}
+#publish-date{
+    padding-left: 0;
 }
 .comment-text {
     overflow-wrap: break-word ;
+}
+#text {
+    width: 50%;
+}
+.comment-remove {
+    margin-block-end: 0;
+    position: absolute;
+    right: 0;
 }

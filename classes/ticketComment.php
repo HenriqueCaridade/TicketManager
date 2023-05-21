@@ -31,6 +31,10 @@
             $stmt = $db->prepare('INSERT INTO TicketComment (ticketId, user, date, text) VALUES (?, ?, ?, ?)');
             $stmt->execute(array($ticketId, $user, $date->format('Y-m-d H:i:s'), $text));
         }
+        public static function removeTicketComment(PDO $db, int $id) : void {
+            $stmt = $db->prepare('DELETE FROM TicketComment WHERE id = ?');
+            $stmt->execute(array($id));
+        }
 
         public static function getTicketComments(PDO $db, int $id) : array {
             $stmt = $db->prepare('SELECT * FROM TicketComment WHERE ticketId=? ORDER BY date DESC');
