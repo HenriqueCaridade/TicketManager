@@ -3,7 +3,7 @@
 /* FOR EVERYONE BELOW */
 .register-item, .login-item, .update-item, #toasts {
     display: block;
-    max-width: 30rem;
+    max-width: 30em;
 }
 div.register-item, div.login-item, div.update-item {
     padding-top: 1em;
@@ -51,7 +51,6 @@ div#toasts {
 div.toast {
     margin: 0.5em 0;
     padding: 0.5em;
-    font-size: medium;
     border-radius: 2em;
 }
 div.toast.error {

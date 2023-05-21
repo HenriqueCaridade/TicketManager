@@ -5,6 +5,7 @@ button:not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.p
     border: none;
     padding: 0.5em;
     border-radius: 2em;
+    font-size: 1em;
 }
 button:not(.red):not(.faq-question):not(.ticket-page-submit):not(.user-page-submit):not(.profile-submit):not(.ticket-submit):not(.other-profile-submit) {
     background-color: var(--accent-color);
@@ -15,15 +16,16 @@ button.red {
 }
 
 div.big-button {
+    font-size: 1em;
     margin-top: 1em;
     width: 100%;
     text-align: center;
 }
 
-button#ticket-open-button, button#department-add-button, button#department-remove-button,  button#hashtag-add-button, button#hashtag-remove-button  {
+button#ticket-open-button, button#department-add-button, button#department-remove-button,  button#hashtag-add-button, button#hashtag-remove-button, button#comment-add-button {
     width: 30em;
     min-width: 15em;
-    padding: 1em;
+    padding: 0.8em;
 }
 
 button.ticket-page-submit, button.ticket-submit, button.user-page-submit {
