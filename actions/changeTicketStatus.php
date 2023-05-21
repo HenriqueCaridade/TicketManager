@@ -34,7 +34,7 @@
             }
             $ticket = Ticket::getTicket($db, $_POST['id']);
             $user = Agent::getAgent($db, $_POST['username']);
-            if (!in_array($ticket->department, $user->departments)) {
+            if (!in_array($ticket->department, array_map(fn($val)=> $val->name, $user->departments))) {
                 $session->addToast(Session::ERROR, 'Agent given isn\'t in the ' . $ticket->department . ' Department.');
                 die(header('Location: ../index.php?page=ticket&id=' . $_POST['id']));
             }
