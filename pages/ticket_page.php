@@ -88,7 +88,7 @@
         <hr>
         <p><?=htmlentities($ticket->text)?></p>
         <hr>
-        <?php drawComments($ticket->comments); ?>
+        <?php drawComments($ticket) ?>
     </div>
     <div id="popup"></div>
 </main>

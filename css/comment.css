@@ -1,0 +1,20 @@
+.comment {
+    padding: 0.5em;
+    border-radius: 2em;
+    font-size: 1em;
+    background-color: transparent;
+    border: 2px solid black;
+    margin: 10;
+}
+.comment-header {
+    display: flex;
+}
+.comment-item {
+    padding: 1rem;
+}
+#user {
+    font-weight: 800;
+}
+.comment-text {
+    overflow-wrap: break-word ;
+}

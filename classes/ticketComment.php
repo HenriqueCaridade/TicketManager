@@ -2,7 +2,7 @@
     class TicketComment {
         public int $id;
         public int $ticketId;
-        public ?string $user; 
+        public string $user; 
         public DateTime $date;
         public string $text;
 
