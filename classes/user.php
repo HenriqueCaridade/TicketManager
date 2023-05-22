@@ -125,7 +125,7 @@
             if (preg_match('/\W/', $username) === 1)
                 return 'Username must not have special characters.';
             if (preg_match('/[A-Z]/', $username) === 1)
-                return 'Password must not have upper case letters.';
+                return 'Username must not have upper case letters.';
             if ($db !== null && User::usernameExists($db, $username))
                 return 'Username already taken.';
             return null;
