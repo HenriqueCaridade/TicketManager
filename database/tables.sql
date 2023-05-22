@@ -164,6 +164,7 @@ CREATE TRIGGER IF NOT EXISTS updateUsers
 AFTER UPDATE ON User
 BEGIN
     UPDATE Filters SET username = (NEW.username) WHERE username = (OLD.username);
+    UPDATE TicketModel SET publisher = (NEW.username) WHERE publisher = (OLD.username);
     UPDATE TicketModel SET agentUsername = (NEW.username) WHERE agentUsername = (OLD.username);
     UPDATE AgentInDepartment SET agentUsername = (NEW.username) WHERE agentUsername = (OLD.username);
  END;
@@ -174,7 +175,8 @@ BEFORE DELETE ON User
 BEGIN
     DELETE FROM Filters WHERE username = OLD.username;
     DELETE FROM AgentInDepartment WHERE agentUsername = OLD.username;
-    DELETE FROM TicketModel WHERE agentUsername = OLD.username;
+    DELETE FROM TicketModel WHERE publisher = OLD.username;
+    UPDATE TicketModel SET agentUsername = NULL WHERE agentUsername = OLD.username;
 END;
 
 -------
